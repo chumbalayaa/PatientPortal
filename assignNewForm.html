@@ -1,3 +1,32 @@
 <!--New Form Page-->
 
-<iframe src="https://docs.google.com/forms/d/1E6E7I8eoxtId7TFGeRznkHfUwUKw7iog4CNOvYIbvUI/viewform?embedded=true" width="760" height="500" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+<form id="assignNewForm">
+	<input type="checkbox" name="formType" id="sleepForm">Sleep Form</input><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Repeat Every...</button><br/>
+	<input type="checkbox" name="formType" id="dietForm">Diet Form</input><button type="button">Repeat Every...</button><br/>
+	<input type="checkbox" name="formType" id="anxietyForm">Anxiety Form</input><button type="button">Repeat Every...</button><br/>
+	<input type="checkbox" name="formType" id="emotionForm">Emotion Form</input><button type="button">Repeat Every...</button><br/>
+</form>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
