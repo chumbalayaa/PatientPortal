@@ -40,6 +40,8 @@
 .navbar {
   min-height: 80px;
   margin-bottom: 0px;
+  border-bottom: 2px solid gray;
+  background-color: 
 }
 
 .navbar-brand {
@@ -68,6 +70,13 @@ html, body {
   padding: 2 2 2 2;
 }
 
+.navbar-default .navbar-toggle:focus,
+.navbar-default .navbar-toggle:hover {
+    background-color: #f8f8f8;
+    border-color: #f8f8f8;
+    border-color: #ddd;
+}
+
 .navmenu {
   z-index: 1;
 }
@@ -87,7 +96,7 @@ html, body {
   }
 }
 
-@media (min-width: 1500px) {
+@media (min-width: 1000000000px) {
   body {
     padding: 0;
   }

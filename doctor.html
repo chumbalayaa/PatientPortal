@@ -20,14 +20,14 @@
     <div class="navmenu navmenu-default navmenu-fixed-left">
       <a id="sideNavTitle" class="navmenu-brand" href="#">Patients</a>
       <ul class="nav navmenu-nav">
-        <li class="patient"><a href="#">Marshall Mathers</a></li>
-        <li class="patient"><a href="#">Jane Goodall</a></li>
-        <li class="patient"><a href="#">Ice T</a></li>
-        <li class="patient"><a href="#">Walter White</a></li>
-        <li class="patient"><a href="#">Slick Rick</a></li>
-        <li class="patient"><a href="#">King Joffrey (first of his name)</a></li>
-        <li class="patient"><a href="#">Don Draper</a></li>
-        <li class="patient"><a href="#">Your Mom</a></li>
+        <li class="patient"><a href="#" class="patient">Marshall Mathers</a></li>
+        <li class="patient"><a href="#" class="patient">Jane Goodall</a></li>
+        <li class="patient"><a href="#" class="patient">Ice T</a></li>
+        <li class="patient"><a href="#" class="patient">Walter White</a></li>
+        <li class="patient"><a href="#" class="patient">Slick Rick</a></li>
+        <li class="patient"><a href="#" class="patient">King Joffrey (first of his name)</a></li>
+        <li class="patient"><a href="#" class="patient">Don Draper</a></li>
+        <li class="patient"><a href="#" class="patient">Your Mom</a></li>
       </ul>
     </div>
     <!-- END SIDE NAVBAR -->
@@ -39,7 +39,7 @@
         <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
+            <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas" href="#">
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
@@ -48,9 +48,19 @@
           </div>
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <li class="patientNavbar"><a href="#">Marshall Mathers</a></li>
-              <li class="patientNavbar"><a href="#">Jane Goodall</a></li>
+            <ul class="nav navbar-nav" id="patientNavList">
+              <li class="patientNavbar" id="MarshallMathers">
+                <a href="#" style="float: left;">Marshall Mathers</a>
+                <a href="#" style="float:right;" class="navIconButton" id="xMarshallMathers">
+                  <span class="glyphicon glyphicon-remove-circle"></span>
+                </a>
+              </li>
+              <li class="patientNavbar" id="JaneGoodall">
+                <a href="#" style="float: left;">Jane Goodall</a>
+                <a href="#" style="float:right;" class="navIconButton" id="xJaneGoodall">
+                  <span class="glyphicon glyphicon-remove-circle"></span>
+                </a>
+              </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
@@ -71,10 +81,10 @@
         <div class="page-header">
           <h1>Hello, Dr. Dre</h1>
         </div>
-        <iframe id="leftPanel" src="">
-        </iframe>
-        <iframe id="rightPanel" src="">
-        </iframe>
+        <div id="leftPanel">
+        </div>
+        <div id="rightPanel">
+        </div>
       </div>
       <!-- END MAIN PAGE -->
     </div>
@@ -86,5 +96,6 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="./bootstrap/js/bootstrap.min.js"></script>
     <script src="./jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
+    <script src="./js/doctor.js"></script>
   </body>
 </html>
