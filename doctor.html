@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="./assets/circle-fades/favicon.ico">
+
+    <title>Patient Portal</title>
+
+    <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet">
+    <link href="./style/doctor.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <!-- SIDE NAVBAR -->
+    <div class="navmenu navmenu-default navmenu-fixed-left">
+      <a id="sideNavTitle" class="navmenu-brand" href="#">Patients</a>
+      <ul class="nav navmenu-nav">
+        <li class="patient"><a href="#">Marshall Mathers</a></li>
+        <li class="patient"><a href="#">Jane Goodall</a></li>
+        <li class="patient"><a href="#">Ice T</a></li>
+        <li class="patient"><a href="#">Walter White</a></li>
+        <li class="patient"><a href="#">Slick Rick</a></li>
+        <li class="patient"><a href="#">King Joffrey (first of his name)</a></li>
+        <li class="patient"><a href="#">Don Draper</a></li>
+        <li class="patient"><a href="#">Your Mom</a></li>
+      </ul>
+    </div>
+    <!-- END SIDE NAVBAR -->
+
+    <div class="canvas">
+
+      <!-- TOP NAVBAR -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Patient Portal</a>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li class="patientNavbar"><a href="#">Marshall Mathers</a></li>
+              <li class="patientNavbar"><a href="#">Jane Goodall</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dr. Dre <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Change Password</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+      <!-- END TOP NAVBAR -->
+
+
+      <!-- MAIN PAGE -->
+      <div class="container" id="mainContainer">
+        <div class="page-header">
+          <h1>Hello, Dr. Dre</h1>
+        </div>
+        <iframe id="leftPanel" src="">
+        </iframe>
+        <iframe id="rightPanel" src="">
+        </iframe>
+      </div>
+      <!-- END MAIN PAGE -->
+    </div>
+    
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="./bootstrap/js/bootstrap.min.js"></script>
+    <script src="./jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
+  </body>
+</html>
