@@ -97,11 +97,13 @@ var reassignListeners = function() {
 
 //Loading HTML into panels
 var loadLeftPanel = function(file) {
-	document.getElementById('leftPanel').innerHTML = '<object type="text/html" data="templates/'+file+'.html" ></object>';
+	//document.getElementById('leftPanel').innerHTML = '<object type="text/html" data="templates/'+file+'.html" ></object>';
+	$('#leftPanel').load(file);
 };
 
 var loadRightPanel = function(file) {
-	document.getElementById('rightPanel').innerHTML = '<object type="text/html" data="templates/'+file+'.html" ></object>';
+	//document.getElementById('rightPanel').innerHTML = '<object type="text/html" data="templates/'+file+'.html" ></object>';
+	$('#rightPanel').load(file);
 };
 
 //--------------------------------------------------------------------------------

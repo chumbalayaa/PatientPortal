@@ -16,12 +16,12 @@
   margin-top: 0px;
 }
 
-.leftPanel {
+#leftPanel {
   height: 100%;
   width: 100%;
 }
 
-.rightPanel {
+#rightPanel {
   height: 100%;
   width:100%;
 }
