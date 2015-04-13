@@ -53,7 +53,7 @@ var addPatientToNav = function(firstName, lastName) {
 		}
 		$('#patientNavList').append(
 			'<li class="patientNavbar" id="'+firstName+lastName+'"> \
-    	      <a href="#" style="float: left;">'+firstName+' '+lastName+'</a> \
+    	      <a href="#" class="patientInNav" style="float: left;">'+firstName+' '+lastName+'</a> \
     	      <a href="#" style="float:right;" class="navIconButton" id="x'+firstName+lastName+'"> \
     	        <span class="glyphicon glyphicon-remove-circle"></span> \
     	      </a> \
@@ -94,17 +94,47 @@ var reassignListeners = function() {
 //--------------------------------------------------------------------------------
 //Panel Loading
 
+var currentPatient = "";
+
 
 //Loading HTML into panels
 var loadLeftPanel = function(file) {
-	//document.getElementById('leftPanel').innerHTML = '<object type="text/html" data="templates/'+file+'.html" ></object>';
-	$('#leftPanel').load(file);
+	document.getElementById('leftPanel').innerHTML = '<object type="text/html" data="templates/'+file+'.html" ></object>';
+	//$('#leftPanel').load(file);
 };
 
 var loadRightPanel = function(file) {
-	//document.getElementById('rightPanel').innerHTML = '<object type="text/html" data="templates/'+file+'.html" ></object>';
-	$('#rightPanel').load(file);
+	document.getElementById('rightPanel').innerHTML = '<object type="text/html" data="templates/'+file+'.html" ></object>';
+	//$('#rightPanel').load(file);
 };
+
+var loadPatient = function(fullName) {
+	//var prefix = "http://localhost/Users/alexanderchumbley/Documents/PatientPortal/"
+	//loadLeftPanel("templates/"+fullName+".html");
+	//loadRightPanel('graphs.html');
+	loadLeftPanel(fullName);
+	loadRightPanel('graphs');
+};
+
+//Add click listener for when we click on a patient in the side nav
+$('.patient').click(function (e) {
+	console.log(e);
+	var name = e.target.text;
+	var nameArray = name.split(" ");
+	var fullName = nameArray[0]+nameArray[1];
+	if (currentPatient != fullName) {
+		loadPatient(fullName);	
+	}
+});
+//Add click listener for when we click on a patient in the top nav
+$('.patientInNav').click(function (e) {
+	var name = e.target.text;
+	var nameArray = name.split(" ");
+	var fullName = nameArray[0]+nameArray[1];
+	if (currentPatient != fullName) {
+		loadPatient(fullName);	
+	}
+});
 
 //--------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------

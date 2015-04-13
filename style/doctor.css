@@ -1,6 +1,23 @@
+#bigButton {
+  background-color: #f8f8f8;
+  padding-left: 20px;
+  height: 100%;
+}
+
+#bigButtonDiv {
+  float: left;
+  margin: 0 auto;
+  overflow: hidden;
+  background-color: #f8f8f8;
+  font-size: 50px;
+  min-height: 100%;
+  width: 90px;
+  z-index: 2;
+}
+
 #sideNavTitle {
-  font-size: 24px;
-  border-bottom: 1px gray solid;
+  min-height: 80px;
+  font-size: 36px;
 }
 
 .patient {
@@ -88,6 +105,7 @@ html, body {
   min-height: 100%;
   padding: 0 0 0 0;
   background: #fff;
+
 }
 
 @media (min-width: 0) {
