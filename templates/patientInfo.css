@@ -6,3 +6,8 @@
 	padding-left: 0px;
 	margin: 1px;
 }
+
+#addNewFormBtn{
+  width:20em;
+  height:3em;
+}
