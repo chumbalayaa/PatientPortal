@@ -100,18 +100,14 @@ var currentPatient = "";
 //Loading HTML into panels
 var loadLeftPanel = function(file) {
 	document.getElementById('leftPanel').innerHTML = '<object class="panelHTML" style="width:100%; height:100%;" type="text/html" data="templates/'+file+'.html" ></object>';
-	//$('#leftPanel').load(file);
+	addNewFormButtonListener(); //Adds button listener
 };
 
 var loadRightPanel = function(file) {
 	document.getElementById('rightPanel').innerHTML = '<object class="panelHTML" type="text/html" data="templates/'+file+'.html" ></object>';
-	//$('#rightPanel').load(file);
 };
 
 var loadPatient = function(fullName) {
-	//var prefix = "http://localhost/Users/alexanderchumbley/Documents/PatientPortal/"
-	//loadLeftPanel("templates/"+fullName+".html");
-	//loadRightPanel('graphs.html');
 	loadLeftPanel(fullName);
 	loadRightPanel('graphs');
 };
