@@ -37,13 +37,13 @@ $(function() {
 	$("#sleepForm").click(function(){
 		$("#form").html(forms[1].html);
 		$("#formName").html(forms[1].type);
-		alert(submitted);
+		//alert(submitted);
 	});
 
 	$("#anxietyForm").click(function(){
 		$("#form").html(forms[0].html);
 		$("#formName").html(forms[0].type);
-		alert(submitted);
+		//alert(submitted);
 	});
 
 	//Remove form
