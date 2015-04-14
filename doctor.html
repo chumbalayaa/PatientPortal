@@ -49,13 +49,13 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav" id="patientNavList">
               <li class="patientNavbar" id="MarshallMathers">
-                <a href="#" style="float: left;">Marshall Mathers</a>
+                <a href="#" class="patientInNav" style="float: left;">Marshall Mathers</a>
                 <a href="#" style="float:right;" class="navIconButton" id="xMarshallMathers">
                   <span class="glyphicon glyphicon-remove-circle"></span>
                 </a>
               </li>
               <li class="patientNavbar" id="JaneGoodall">
-                <a href="#" style="float: left;">Jane Goodall</a>
+                <a href="#" class="patientInNav" style="float: left;">Jane Goodall</a>
                 <a href="#" style="float:right;" class="navIconButton" id="xJaneGoodall">
                   <span class="glyphicon glyphicon-remove-circle"></span>
                 </a>
@@ -75,6 +75,34 @@
       <!-- END TOP NAVBAR -->
 
 
+      <div id="bigButtonDiv">
+        <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas" href="#" id="bigButton">
+          <div>
+            P
+          </div>
+          <div>
+            A
+          </div>
+          <div>
+            T
+          </div>
+          <div>
+            I
+          </div>
+          <div>
+            E
+          </div>
+          <div>
+            N
+          </div>
+          <div>
+            T
+          </div>
+          <div>
+            S
+          </div>
+        </button>
+      </div>
       <!-- MAIN PAGE -->
       <div class="container" id="mainContainer">
         <div class="page-header">
@@ -101,7 +129,7 @@
                   <form class="form-inline">
                     <div class="form-group">
                       <label for="oldPass">Old Password:</label>
-                      <input type="text" style="margin-left:5px;" class="form-control" id="oldPass">
+                      <input type="text" style="margin-left:7px;" class="form-control" id="oldPass">
                     </div>
                     <div class="form-group">
                       <label for="newPass">New Password:</label>
