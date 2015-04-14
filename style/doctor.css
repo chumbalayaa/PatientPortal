@@ -34,7 +34,7 @@
 
 #mainContainer {
   height: 100%;
-
+  float: right;
 }
 
 .page-header {
@@ -42,13 +42,20 @@
 }
 
 #leftPanel {
+  position: fixed;
   float: left;
   min-height: 100%;
   height: 100%;
   width: 40%;
 }
 
+#leftPanel.canvas-slid, #leftPanel.canvas-sliding {
+  margin-left: 100px;
+  width: 30%;
+}
+
 #rightPanel {
+  position: fixed;
   float: right;
   min-height: 100%;
   height: 100%;
