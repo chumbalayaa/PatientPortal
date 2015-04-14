@@ -103,9 +103,6 @@ var currentPatient = "";
 
 //Loading HTML into panels
 var loadLeftPanel = function(file) {
-	//document.getElementById('leftPanel').innerHTML = '<object class="panelHTML" style="width:100%; height:100%;" type="text/html" data="templates/'+file+'.html" ></object>';
-	//addNewFormButtonListener(); //Adds button listener
-	
 	//var html = new EJS({url: 'templates/'+file+'.ejs'});
 	//$("#leftPanel").innerHTML = html;
 
@@ -116,13 +113,20 @@ var loadLeftPanel = function(file) {
 			$("#leftPanel").html(response);
 		}
 	});
+	currentPatient = file;
 };
 
 var loadRightPanel = function(file) {
-	//document.getElementById('rightPanel').innerHTML = '<object class="panelHTML" type="text/html" data="templates/'+file+'.html" ></object>';
-	
 	//var html = new EJS({url: 'templates/graphs.html'});
 	//$("#leftPanel").innerHTML = html;
+
+	$.ajax({
+		url: 'templates/graphs.html',
+		context: document.body,
+		success: function(response) {
+			$("#rightPanel").html(response);
+		}
+	});	
 };
 
 var loadPatient = function(fullName) {
