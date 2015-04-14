@@ -12,6 +12,7 @@
     <link href="./bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="./jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet">
     <link href="./style/patient.css" rel="stylesheet">
+
   </head>
 
   <body>
@@ -51,42 +52,18 @@
           </div>
           <div class="row row1">
             <div class="col-xs-3 col-lg-3">
-              <h3>Emotion</h3>
+              <button class="formButton" id="anxietyForm">Anxiety</button>
             </div>
             <div class="col-xs-2 col-lg-2">
-              <p>Complete by: TODAY</p>
+              <p class="logCompleteDate">Finish by: Apr, 11 2015</p>
             </div>
           </div>
           <div class="row row1">
             <div class="col-xs-3 col-lg-3">
-              <h3>Diet</h3>
+              <button class="formButton" id="sleepForm">Sleep</button>
             </div>
             <div class="col-xs-2 col-lg-2">
-              <p>Complete by: TODAY</p>
-            </div>
-          </div>
-          <div class="row row1">
-            <div class="col-xs-3 col-lg-3">
-              <h3>Sleep</h3>
-            </div>
-            <div class="col-xs-2 col-lg-2">
-              <p>Complete by: TODAY</p>
-            </div>
-          </div>
-          <div class="row row1">
-            <div class="col-xs-3 col-lg-3">
-              <h3>PHQ</h3>
-            </div>
-            <div class="col-xs-2 col-lg-2">
-              <p>Complete by: 3/31/2015</p>
-            </div>
-          </div>
-          <div class="row row1">
-            <div class="col-xs-3 col-lg-3">
-              <h3>Anxiety</h3>
-            </div>
-            <div class="col-xs-2 col-lg-2">
-              <p>Complete by: 3/31/2015</p>
+              <p class="logCompleteDate">Finish by: Apr, 15 2015</p>
             </div>
           </div>
         </div>
@@ -94,9 +71,11 @@
     </div>
     <div class="patientPanel" id="rightPanel">
         <div class="page-header">
-            <h1>Sleep Log</h1>
+            <h1><span id="formName">Anxiety</span> Form</h1>
         </div>
         <div id="form">
+          <iframe src="https://docs.google.com/forms/d/1kDZ19hpSOj53k2yhiTATE--fsaoqgj8HUB-8CR9aOjc/viewform?embedded=true" width="500" height="500" frameborder="0" marginheight="0" marginwidth="0" id="anxietyForm" onsubmit="submitted=true;">Loading...</iframe>
+          <!--<iframe src="https://docs.google.com/forms/d/10xn9Qp9T6goWqZsXCq6GEpThAPx4J1eW8M5338kGnW4/viewform?embedded=true" width="500" height="500" frameborder="0" marginheight="0" marginwidth="0" id="sleepForm">Loading...</iframe>-->
         </div>
     </div>
     <!-- End Main Page-->
@@ -138,6 +117,7 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="./bootstrap/js/bootstrap.min.js"></script>
     <script src="./jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
-    <script src="./js/patient.js"></script>
+    <script type="text/javascript" src="./js/patient.js"></script>
+
   </body>
 </html>
