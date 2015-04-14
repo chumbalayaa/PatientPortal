@@ -110,7 +110,7 @@ var loadLeftPanel = function(file) {
 	//$("#leftPanel").innerHTML = html;
 
 	$.ajax({
-		url: '/templates/'+file+'.html',
+		url: 'templates/'+file+'.html',
 		context: document.body,
 		success: function(response) {
 			$("#leftPanel").html(response);
