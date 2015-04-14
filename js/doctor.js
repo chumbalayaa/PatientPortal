@@ -103,12 +103,26 @@ var currentPatient = "";
 
 //Loading HTML into panels
 var loadLeftPanel = function(file) {
-	document.getElementById('leftPanel').innerHTML = '<object class="panelHTML" style="width:100%; height:100%;" type="text/html" data="templates/'+file+'.html" ></object>';
-	addNewFormButtonListener(); //Adds button listener
+	//document.getElementById('leftPanel').innerHTML = '<object class="panelHTML" style="width:100%; height:100%;" type="text/html" data="templates/'+file+'.html" ></object>';
+	//addNewFormButtonListener(); //Adds button listener
+	
+	//var html = new EJS({url: 'templates/'+file+'.ejs'});
+	//$("#leftPanel").innerHTML = html;
+
+	$.ajax({
+		url: '/templates/'+file+'.html',
+		context: document.body,
+		success: function(response) {
+			$("#leftPanel").html(response);
+		}
+	});
 };
 
 var loadRightPanel = function(file) {
-	document.getElementById('rightPanel').innerHTML = '<object class="panelHTML" type="text/html" data="templates/'+file+'.html" ></object>';
+	//document.getElementById('rightPanel').innerHTML = '<object class="panelHTML" type="text/html" data="templates/'+file+'.html" ></object>';
+	
+	//var html = new EJS({url: 'templates/graphs.html'});
+	//$("#leftPanel").innerHTML = html;
 };
 
 var loadPatient = function(fullName) {
