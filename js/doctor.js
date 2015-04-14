@@ -121,7 +121,7 @@ var loadRightPanel = function(file) {
 	//$("#leftPanel").innerHTML = html;
 
 	$.ajax({
-		url: 'templates/graphs.html',
+		url: 'templates/' + file + '.html',
 		context: document.body,
 		success: function(response) {
 			$("#rightPanel").html(response);
@@ -132,6 +132,11 @@ var loadRightPanel = function(file) {
 var loadPatient = function(fullName) {
 	loadLeftPanel(fullName);
 	loadRightPanel('graphs');
+};
+
+//Load form into right panel
+var assignNewForm = function() {
+	loadRightPanel('assignNewForm');
 };
 
 //Add click listener for when we click on a patient in the side nav
@@ -156,6 +161,7 @@ var addPaitientTopNavListener = function() {
 		}
 	});
 };
+
 
 //--------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------
