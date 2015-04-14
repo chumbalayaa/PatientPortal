@@ -75,11 +75,15 @@ var assignPatientClickListener = function() {
 var unbindListeners = function() {
 	$('a.navIconButton').unbind('click');
 	$('a.patient').unbind('click');
+	$('.patientInNav').unbind('click');
+	$('.patient').unbind('click');
 };
 var reassignListeners = function() {
 	unbindListeners();
 	assignPatientClickListener();
 	assignNavbarXClickListener();
+	addPatientSideNavListener();
+	addPaitientTopNavListener();
 };
 //End patients in navbar stuff ---------------------------------------------------
 //--------------------------------------------------------------------------------
@@ -113,24 +117,27 @@ var loadPatient = function(fullName) {
 };
 
 //Add click listener for when we click on a patient in the side nav
-$('.patient').click(function (e) {
-	console.log(e);
-	var name = e.target.text;
-	var nameArray = name.split(" ");
-	var fullName = nameArray[0]+nameArray[1];
-	if (currentPatient != fullName) {
-		loadPatient(fullName);	
-	}
-});
+var addPatientSideNavListener = function() {
+	$('.patient').click(function (e) {
+		var name = e.target.text;
+		var nameArray = name.split(" ");
+		var fullName = nameArray[0]+nameArray[1];
+		if (currentPatient != fullName) {
+			loadPatient(fullName);	
+		}
+	});
+};
 //Add click listener for when we click on a patient in the top nav
-$('.patientInNav').click(function (e) {
-	var name = e.target.text;
-	var nameArray = name.split(" ");
-	var fullName = nameArray[0]+nameArray[1];
-	if (currentPatient != fullName) {
-		loadPatient(fullName);	
-	}
-});
+var addPaitientTopNavListener = function() {
+	$('.patientInNav').click(function (e) {
+		var name = e.target.text;
+		var nameArray = name.split(" ");
+		var fullName = nameArray[0]+nameArray[1];
+		if (currentPatient != fullName) {
+			loadPatient(fullName);	
+		}
+	});
+};
 
 //--------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------
