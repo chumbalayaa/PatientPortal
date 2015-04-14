@@ -7,7 +7,7 @@
 <meta http-equiv="pragma" content="no-cache" />
 <style>
 
-body {
+#first-graph {
   font: 10px sans-serif;
 }
 
@@ -17,12 +17,6 @@ body {
   stroke: #000;
   shape-rendering: crispEdges;
 }
-
-/*
-.x.axis path {
-  display: none;
-}
-*/
 
 .line {
   stroke: black;
@@ -64,8 +58,12 @@ body {
 }
 
 .focus line {
-  stroke: purple;
-  shape-rendering: crispEdges;
+  stroke: black;
+  opacity: .5;
+}
+
+.focus line.x {
+  stroke-dasharray: 3 3;
 }
 
 .focus line.y0 {
@@ -80,20 +78,42 @@ body {
   opacity: .5;
 }
 
+.focus line.flag {
+  stroke: red;
+  opacity: 1;
+}
+
 .focus line.y2 {
   stroke: green;
   stroke-dasharray: 3 3;
   opacity: .5;
 }
 
-
+.focus rect.addAnnotation {
+  stroke: black;
+  fill-opacity: .125;
+}
 .brush .extent {
   stroke: #fff;
   fill-opacity: .125;
   shape-rendering: crispEdges;
 }
+
+div.tooltip {   
+  position: absolute;           
+  text-align: center;           
+  width: 120px;                  
+  height: 56px;                 
+  padding: 2px;             
+  font: 12px sans-serif;        
+  background: lightsteelblue;   
+  border: 0px;      
+  border-radius: 8px;           
+  pointer-events: none;         
+}
+
 </style>
-<body>
+<div id="first-graph">
 <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
 <script>
 
@@ -144,13 +164,12 @@ var main_line2 = d3.svg.line()
     .x(function(d) { return main_x(d.TimeOfDay); })
     .y(function(d) { return main_y0(d.FellAsleep); }); //green line
 
-// var main_line3 = d3.svg.line()
-//     .interpolate("cardinal")
-//     .x(function(d) { return main_x(d.Uhrzeit); })
-//     .y(function(d) { return main_y1(d.Anz); }); //plots the min line?
+// displays the tooltip
+var div = d3.select("#first-graph").append("div")   
+    .attr("class", "tooltip")               
+    .style("opacity", 0);  
 
-
-var svg = d3.select("body").append("svg")
+var svg = d3.select("#first-graph").append("svg")
     .attr("width", main_width + main_margin.left + main_margin.right)
     .attr("height", main_height + main_margin.top + main_margin.bottom); //sets the bounding space 
 
@@ -163,8 +182,10 @@ svg.append("defs").append("clipPath")
 var main = svg.append("g")
     .attr("transform", "translate(" + main_margin.left + "," + main_margin.top + ")");
 
-// var mini = svg.append("g")
-//     .attr("transform", "translate(" + mini_margin.left + "," + mini_margin.top + ")");
+var div = d3.select("#first-graph")
+  .append("div")  // declare the tooltip div 
+  .attr("class", "tooltip")              // apply the 'tooltip' class
+  .style("opacity", 0);                  // set the opacity to nil
 
 d3.csv("data.txt", function(error, data) {
   data.forEach(function(d) {
@@ -218,7 +239,7 @@ d3.csv("data.txt", function(error, data) {
       .attr("y", 6)
       .attr("dy", ".71em")
       .style("text-anchor", "end")
-      .text("Time (ms)"); //builds the left y axis
+      .text("Time"); //builds the left y axis
 
   // main.append("g")
   //     .attr("class", "y axis axisRight")
@@ -230,17 +251,41 @@ d3.csv("data.txt", function(error, data) {
   //     .attr("dy", ".71em")
   //     .style("text-anchor", "end")
   //     .text("Number"); //builds the right axis
-
+  var annotationBoxSize = 18; // inversely proportional to annotation box size
+  
   var focus = main.append("g")
       .attr("class", "focus")
       .style("display", "none");
+  
+  //  addAnnotation Box
+  focus.append("rect")
+      .attr("class", "addAnnotation")
+      .attr("height", main_height/annotationBoxSize)
+      .attr("width", main_height/annotationBoxSize)
+
+  focus.append("line")
+      .attr("class", "addAnnotation")
+      .attr("stroke-width", 10)
+      .attr("x1", main_width - 6)
+      .attr("x2", main_width + 6); 
 
    // Display on the timeline
   focus.append("line")
       .attr("class", "x")
-      .attr("y1", main_y0(0) - 6)
-      .attr("y2", main_y0(0) + 6)
+      .attr("y1", 0 )
+      .attr("y2",  main_height)
 
+  focus.append("line")
+      .attr("class", "flag")
+      .attr("y1", 0 )
+      .attr("y2",  main_height)
+      .attr("transform", "translate(" + 210 + ",0)");
+
+  focus.append('text')
+      .attr("class", "x")
+      .attr("dy", "-1em")
+      .attr("y1", main_height/2 - 6 )
+      .attr("y2", main_height/2 + 6 );
   
   focus.append("line")
       .attr("class", "y0")
@@ -288,7 +333,37 @@ d3.csv("data.txt", function(error, data) {
       .attr("height", main_height)
       .on("mouseover", function() { focus.style("display", null); })
       .on("mouseout", function() { focus.style("display", "none"); })
-      .on("mousemove", mousemove);
+      .on("mousemove", mousemove)
+      .on("mousedown", mousedown)
+      .on("mouseup", mouseup);
+
+  function mousedown() {
+    var x0 = main_x.invert(d3.mouse(this)[0]),
+        i = bisectDate(data, x0, 1),
+        d0 = data[i - 1],
+        d1 = data[i],
+        d = x0 - d0.Uhrzeit > d1.Uhrzeit - x0 ? d1 : d0;
+
+    var coordinates = [0, 0];
+    coordinates = d3.mouse(this);
+     if (main_x(d.TimeOfDay) == 210) { // on the flag
+        div.transition()        
+                    .duration(200)      
+                    .style("opacity", .9);  
+        div.html("Marshall was prescribed Xanax on December 7th, 2014")  
+    }  else if (true){ // if in the add annotation box
+        div.transition()        
+                    .duration(200)      
+                    .style("opacity", .9);  
+        div.html("<div>Add your annotation below:<br><textarea name='paragraph_text' cols='15' rows='5'></textarea><input type='submit' value='Submit'>")  
+    } 
+  }
+  function mouseup() {
+    div.transition()        
+                .duration(200)      
+                .style("opacity", 0);      
+  }
+  
 
   function mousemove() {
     var x0 = main_x.invert(d3.mouse(this)[0]),
@@ -296,20 +371,37 @@ d3.csv("data.txt", function(error, data) {
         d0 = data[i - 1],
         d1 = data[i],
         d = x0 - d0.Uhrzeit > d1.Uhrzeit - x0 ? d1 : d0;
+
+    // get mous coords
+    var coordinates = [0, 0];
+    coordinates = d3.mouse(this);
+    // var x = coordinates[0];
+    // var y = coordinates[1];
     focus.select("circle.y0").attr("transform", "translate(" + main_x(d.Uhrzeit) + "," + main_y0(d.Durchschn) + ")");
     focus.select("text.y0").attr("transform", "translate(" + main_x(d.Uhrzeit) + "," + main_y0(d.Durchschn) + ")").text(formatOutput0(d));
     focus.select("circle.y1").attr("transform", "translate(" + main_x(d.Uhrzeit) + "," + main_y0(d.Anz) + ")"); //draws the circle on the top
     focus.select("text.y1").attr("transform", "translate(" + main_x(d.Uhrzeit) + "," + main_y0(d.Anz) + ")").text(formatOutput1(d)); // writes the text on the top
     focus.select("circle.y2").attr("transform", "translate(" + main_x(d.TimeOfDay) + "," + main_y0(d.FellAsleep) + ")"); //draws the circle on the top
     focus.select("text.y2").attr("transform", "translate(" + main_x(d.TimeOfDay) + "," + main_y0(d.FellAsleep) + ")").text(formatOutput2(d)); // writes the text on the top
-    focus.select(".x").attr("transform", "translate(" + main_x(d.Uhrzeit) + ",0)"); //
+    focus.select(".x").attr("transform", "translate(" + main_x(d.TimeOfDay) + ",0)");
+    console.log(main_x(d.TimeOfDay));
+    // focus.select("text.x").attr("transform", "translate(" + main_x(d.TimeOfDay) + ","+ main_height/2 +")").text('Click to add Annotation');
     focus.select(".y0").attr("transform", "translate(" + main_width * -1 + ", " + main_y0(d.Durchschn) + ")")
     .attr("x2", main_width + main_x(d.TimeOfDay)); //makes the line to the left
     focus.select(".y1").attr("transform", "translate(" + main_width * -1 + ", " + main_y0(d.TimeInBed) + ")")
     .attr("x2", main_width + main_x(d.TimeOfDay)); //makes the line
-    
     focus.select(".y2").attr("transform", "translate(" + main_width * -1 + ", " + main_y0(d.FellAsleep) + ")")
     .attr("x2", main_width + main_x(d.TimeOfDay)); //makes the line to the right
+    //building the dynamic annotation box
+
+    if (main_x(d.TimeOfDay) != 210) { // on the flag
+      var box_middle = coordinates[1]-main_height/(annotationBoxSize*2);
+      focus.select("rect.addAnnotation").attr("opacity", "1");
+      focus.select("rect.addAnnotation").attr("transform", "translate(" + main_x(d.TimeOfDay) + ","+ box_middle +")");
+      focus.select("line.addAnnotation").attr("transform", "translate(" + main_x(d.TimeOfDay) + ","+ box_middle +")");
+    } else {
+      focus.select("rect.addAnnotation").attr("opacity", "0");
+    }
   }
 });
 
