@@ -116,6 +116,7 @@ div.tooltip {
 <div id="first-graph">
 <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
 <script>
+var ANNOTATION_ON = false;
 
 var main_margin = {top: 20, right: 80, bottom: 100, left: 40},
     mini_margin = {top: 430, right: 80, bottom: 20, left: 40},
@@ -334,37 +335,61 @@ d3.csv("data.txt", function(error, data) {
       .on("mouseover", function() { focus.style("display", null); })
       .on("mouseout", function() { focus.style("display", "none"); })
       .on("mousemove", mousemove)
-      .on("mousedown", mousedown)
-      .on("mouseup", mouseup);
+      .on("mousedown", mousedown);
+      // .on("mouseup", mousedown);
 
-  function mousedown() {
-    var x0 = main_x.invert(d3.mouse(this)[0]),
-        i = bisectDate(data, x0, 1),
-        d0 = data[i - 1],
-        d1 = data[i],
-        d = x0 - d0.Uhrzeit > d1.Uhrzeit - x0 ? d1 : d0;
-
-    var coordinates = [0, 0];
-    coordinates = d3.mouse(this);
-     if (main_x(d.TimeOfDay) == 210) { // on the flag
-        div.transition()        
-                    .duration(200)      
-                    .style("opacity", .9);  
-        div.html("<b>December 5th, 2014</b><br>Marshall was prescribed Xanax.")  
-    }  else if (true){ // if in the add annotation box
-        div.transition()        
-                    .duration(200)      
-                    .style("opacity", .9);  
-        div.html("<div>Add your annotation below:<br><textarea name='paragraph_text' cols='15' rows='5'></textarea><input type='submit' value='Submit'>")  
-    } 
+  // function annotation_swap() {
+    
+  //   if (ANNOTATION_ON == true) {
+  //     alert('anno on')
+  //     ANNOTATION_ON = false;
+  //     hide_annotation();
+  //   } else {
+  //     alert('anno off')
+  //     ANNOTATION_ON = true;
+  //     show_annotation();
+  //   }
+  // }
+  function mousedown() { 
+    if (ANNOTATION_ON == false) {
+        ANNOTATION_ON = true;
+        var x0 = main_x.invert(d3.mouse(this)[0]),
+            i = bisectDate(data, x0, 1),
+            d0 = data[i - 1],
+            d1 = data[i],
+            d = x0 - d0.Uhrzeit > d1.Uhrzeit - x0 ? d1 : d0;
+        var coordinates = [0, 0];
+        coordinates = d3.mouse(this);
+         if (main_x(d.TimeOfDay) == 210) { // on the flag
+            div.transition()        
+                        .duration(200)      
+                        .style("opacity", .9);  
+            div.html("<b>December 5th, 2014</b><br>Marshall was prescribed Xanax.<input type='submit' id='hide' value='Hide'>")  
+        }  else if (true){ // if in the add annotation box
+            div.transition()        
+                        .duration(200)      
+                        .style("opacity", .9);  
+            div.html("<div>Add your annotation below:<br><textarea name='paragraph_text' cols='15' rows='5'></textarea><input type='submit' id='submit_annotation' value='Submit'>")  
+        } 
+    } else {
+       ANNOTATION_ON = false;
+       hide_annotation();
+    }
   }
-  function mouseup() {
+
+  function hide_annotation() {
     div.transition()        
                 .duration(200)      
                 .style("opacity", 0);      
   }
-  
 
+  $("#hide").click(function(evt) {
+    hide_annotation();
+  });
+
+  $("#submit_annotation").click(function(evt) {
+    hide_annotation();
+  });
   function mousemove() {
     var x0 = main_x.invert(d3.mouse(this)[0]),
         i = bisectDate(data, x0, 1),
