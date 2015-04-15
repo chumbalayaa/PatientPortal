@@ -19,16 +19,16 @@
 
     <!-- SIDE NAVBAR -->
     <div class="navmenu navmenu-default navmenu-fixed-left">
-      <a id="sideNavTitle" class="navmenu-brand" href="#">Patients</a>
+      <a id="sideNavTitle" class="navmenu-brand not-active" href="#">Patients</a>
       <ul class="nav navmenu-nav">
         <li class="patient"><a href="#" class="patient">Marshall Mathers</a></li>
         <li class="patient"><a href="#" class="patient">Jane Goodall</a></li>
-        <li class="patient"><a href="#" class="patient">Ice T</a></li>
-        <li class="patient"><a href="#" class="patient">Walter White</a></li>
-        <li class="patient"><a href="#" class="patient">Slick Rick</a></li>
-        <li class="patient"><a href="#" class="patient">King Joffrey (first of his name)</a></li>
-        <li class="patient"><a href="#" class="patient">Don Draper</a></li>
-        <li class="patient"><a href="#" class="patient">Your Mom</a></li>
+        <li class="patient"><a href="#" class="patient not-active">Ice T</a></li>
+        <li class="patient"><a href="#" class="patient not-active">Walter White</a></li>
+        <li class="patient"><a href="#" class="patient not-active">Slick Rick</a></li>
+        <li class="patient"><a href="#" class="patient not-active">King Joffrey (first of his name)</a></li>
+        <li class="patient"><a href="#" class="patient not-active">Don Draper</a></li>
+        <li class="patient"><a href="#" class="patient not-active">Your Mom</a></li>
       </ul>
     </div>
     <!-- END SIDE NAVBAR -->
@@ -107,9 +107,9 @@
       </div>
       <!-- MAIN PAGE -->
       <div class="container" id="mainContainer">
-        <div class="page-header">
+        <!--<div class="page-header">
           <h1>Hello, Dr. Dre</h1>
-        </div>
+        </div>-->
         <div id="leftPanel">
         </div>
         <div id="rightPanel">
@@ -145,6 +145,51 @@
                 </div>
             </div>
         </div>
+    </div>
+
+
+    <!-- Assign New Form Modal -->
+
+    <div class="modal fade" id="assignFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">How often should the patient fill out the form?</h4>
+          </div>
+          <div class="modal-body">
+            Frequency:
+            <select id="repeatForm" onchange="changeCustomRepeat(document.getElementById('repeatForm').value)">
+              <option value="dailySelect">Daily</option>
+              <option value="weeklySelect">Weekly</option>
+              <option value="monthlySelect">Monthly</option>
+            </select>
+            <div id="dailySelect">
+              Every <input type="number" min="0" value="1"></input> day(s)
+            </div>
+            <div id="weeklySelect" hidden>
+              Every <input type="number" min="0" value="1"></input> week(s) on:</br></br>
+              <input type="checkbox" name="dayOfWeek">S</input></br>
+              <input type="checkbox" name="dayOfWeek">M</input></br>
+              <input type="checkbox" name="dayOfWeek">T</input></br>
+              <input type="checkbox" name="dayOfWeek">W</input></br>
+              <input type="checkbox" name="dayOfWeek">R</input></br>
+              <input type="checkbox" name="dayOfWeek">F</input></br>
+              <input type="checkbox" name="dayOfWeek">S</input></br>
+            </div>
+            <div id="monthlySelect" hidden>
+              Every <input type="number" min="0" value="1"></input> months(s) by:</br>
+              <select id="monthlyRepeat">
+                <option value="byDayOfMonth">Day of the Month</option></br>
+                <option value="byDayOfWeek">Day of the Week</option></br>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
     </div>
     
 
