@@ -12,6 +12,8 @@ h1 {
 
 #first-graph {
   font: 10px sans-serif;
+  height: 100%;
+  width: 100%;
 }
 
 .axis path,
@@ -144,11 +146,16 @@ div.new-annotation {
 // var d = new Date("October 13, 2014 11:13:00");
 //var flag_locations;
 var FLAG_LOCATION = 210;
+// var containerHeight = document.getElementById('first-graph').offsetHeight
+var containerWidth = document.getElementById('first-graph').offsetWidth
+var containerHeight = containerWidth/1.6;
+alert(containerWidth);
+alert(containerHeight);
 
 var main_margin = {top: 20, right: 100, bottom: 100, left: 40},
     mini_margin = {top: 430, right: 80, bottom: 20, left: 40},
-    main_width = window.innerWidth*.4 - main_margin.left - main_margin.right,
-    main_height = window.innerHeight - main_margin.top - main_margin.bottom;
+    main_width = containerWidth - main_margin.left - main_margin.right,
+    main_height = containerHeight - main_margin.top - main_margin.bottom;
 
 var formatDate = d3.time.format("%Y%m%d"),
     parseDate = formatDate.parse,
