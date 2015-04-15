@@ -164,11 +164,9 @@ var addPaitientTopNavListener = function() {
 	});
 };
 
-var showModal = function(selectedValue){
-	if (selectedValue == "custom"){
-	  console.log('here');
-	  $('#myModal').modal('show');
-	}
+var showAssignFormModal = function(){
+	console.log('show assign form modal');
+	$('#assignFormModal').modal('show');
 };
 
 var changeCustomRepeat = function(selectedValue){
