@@ -145,10 +145,10 @@ div.new-annotation {
 //var flag_locations;
 var FLAG_LOCATION = 210;
 
-var main_margin = {top: 20, right: 80, bottom: 100, left: 40},
+var main_margin = {top: 20, right: 100, bottom: 100, left: 40},
     mini_margin = {top: 430, right: 80, bottom: 20, left: 40},
-    main_width = 960 - main_margin.left - main_margin.right,
-    main_height = 500 - main_margin.top - main_margin.bottom;
+    main_width = window.innerWidth*.4 - main_margin.left - main_margin.right,
+    main_height = window.innerHeight - main_margin.top - main_margin.bottom;
 
 var formatDate = d3.time.format("%Y%m%d"),
     parseDate = formatDate.parse,
