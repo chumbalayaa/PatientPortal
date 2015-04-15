@@ -137,7 +137,7 @@ var loadPatient = function(fullName) {
 //Load form into right panel
 var assignNewForm = function() {
 	console.log('assigning new form!');
-	loadRightPanel('assignNewForm');
+	loadRightPanel('templates/assignNewForm');
 };
 
 
