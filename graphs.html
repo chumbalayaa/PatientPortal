@@ -6,6 +6,7 @@
 <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 <meta http-equiv="pragma" content="no-cache" />
 <style>
+
 h1 {
   text-align: center;
 }
@@ -93,8 +94,14 @@ h1 {
   stroke-dasharray: 3 3;
   opacity: .5;
 }
+.focus line.annotationBox {
+  stroke: black;
+  stroke-width: 2;
+  opacity: 1;
+  stroke-linecap: round;
+}
 
-.focus rect.addAnnotation {
+.focus rect.annotationBox {
   stroke: black;
   fill-opacity: .125;
 }
@@ -138,7 +145,6 @@ div.new-annotation {
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
 //TODO
-// Feedback on click
 // Add the plus sign
 // Add the names on the end of the lines 
 
@@ -176,7 +182,7 @@ var main_y0 = d3.scale.linear()
 
 var main_xAxis = d3.svg.axis()
     .scale(main_x)
-    .tickFormat(d3.time.format("%x"))
+    .tickFormat(d3.time.format("%b%e"))
     .orient("bottom");
 
 var main_yAxisLeft = d3.svg.axis()
@@ -237,6 +243,7 @@ d3.csv("data/data.txt", function(error, data) {
     d.Anz = +d.TimeInBed; //Qty
 
     d.TimeOfDay = parseDate(d.TimeOfDay); //TimeOfDay
+    // d.Datetime = parseDate(d.TimeOfDay);
     d.WakeUpTime = +d.WakeUpTime;
     d.TimeInBed = +d.TimeInBed; //Qty
     d.FellAsleep = +d.FellAsleep;
@@ -301,12 +308,31 @@ d3.csv("data/data.txt", function(error, data) {
       .attr("class", "focus")
       .style("display", "none");
   
+  /*
+    Annotation Box 
+   */
   //  addAnnotation Box
-  focus.append("rect")
-      .attr("class", "addAnnotation")
+  var annotationBox = focus.append("g")
+      .attr("class", "annotationBox");
+
+  annotationBox.append("rect")
+      .attr("class", "annotationBox")
       .attr("height", main_height/annotationBoxSize)
       .attr("width", main_height/annotationBoxSize)
 
+  annotationBox.append("line")
+      .attr("x1",  (main_height/annotationBoxSize)/2)
+      .attr("x2", (main_height/annotationBoxSize)/2)
+      .attr("y1", annotationBoxSize/12)
+      .attr("y2", +main_height/annotationBoxSize - annotationBoxSize/12)
+      .attr("class", "annotationBox");
+
+  annotationBox.append("line")
+      .attr("x1",  annotationBoxSize/12)
+      .attr("x2", (main_height/annotationBoxSize) - annotationBoxSize/12)
+      .attr("y1", (main_height/annotationBoxSize)/2)
+      .attr("y2", (main_height/annotationBoxSize)/2)
+      .attr("class", "annotationBox");      
   // focus.append("line")
   //     .attr("class", "addAnnotation")
   //     .attr("stroke-width", 10)
@@ -318,12 +344,6 @@ d3.csv("data/data.txt", function(error, data) {
       .attr("class", "x")
       .attr("y1", 0 )
       .attr("y2",  main_height)
-// Shows the flag/ vertical red line
-  // focus.append("line")
-  //     .attr("class", "flag")
-  //     .attr("y1", 0 )
-  //     .attr("y2",  main_height)
-  //     .attr("transform", "translate(" + FLAG_LOCATION + ",0)");
 
   focus.append('text')
       .attr("class", "x")
@@ -526,12 +546,15 @@ d3.csv("data/data.txt", function(error, data) {
     //building the dynamic annotation box
     if (!isFlag(main_x(d.TimeOfDay))) { //not on the flag
       var box_middle = coordinates[1]-main_height/(annotationBoxSize*2);
-      focus.select("rect.addAnnotation").attr("opacity", "1");
-      focus.select("rect.addAnnotation").attr("transform", "translate(" + main_x(d.TimeOfDay) + ","+ box_middle +")");
-      focus.select("line.addAnnotation").attr("transform", "translate(" + main_x(d.TimeOfDay) + ","+ box_middle +")");
+      annotationBox.attr("opacity", "1");
+      annotationBox.attr("transform", "translate(" + main_x(d.TimeOfDay) + ","+ box_middle +")")
+
+      // focus.select("rect.addAnnotation").attr("opacity", "1");
+      // focus.select("rect.addAnnotation").attr("transform", "translate(" + main_x(d.TimeOfDay) + ","+ box_middle +")");
+      // focus.select("line.addAnnotation").attr("transform", "translate(" + main_x(d.TimeOfDay) + ","+ box_middle +")");
       hideAnnotation()
     } else { // on the flag
-      focus.select("rect.addAnnotation").attr("opacity", "0");
+      annotationBox.attr("opacity", "0");
       annotation.transition()        
                         .duration(200)      
                         .style("opacity", .9);  
