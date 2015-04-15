@@ -164,6 +164,25 @@ var addPaitientTopNavListener = function() {
 	});
 };
 
+var showModal = function(selectedValue){
+	if (selectedValue == "custom"){
+	  console.log('here');
+	  $('#myModal').modal('show');
+	}
+};
+
+var changeCustomRepeat = function(selectedValue){
+	var possibleValues = ["dailySelect", "weeklySelect", "monthlySelect"];
+	for (i = 0; i < possibleValues.length; i ++){
+	  if (possibleValues[i] == selectedValue){
+	    $("#" +possibleValues[i]).show();
+	  }
+	  else{
+	    $("#" +possibleValues[i]).hide();
+	  };
+	}
+};
+
 //--------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------
 //################################################################################
