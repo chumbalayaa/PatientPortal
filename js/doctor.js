@@ -174,4 +174,5 @@ var addPaitientTopNavListener = function() {
 
 $( document ).ready(function() {
     reassignListeners();
+    loadPatient("MarshallMathers");
 });
