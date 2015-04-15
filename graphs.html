@@ -135,7 +135,15 @@ div.new-annotation {
 <script type="text/javascript" src="libs/d3/d3.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
-var ANNOTATION_ON = false;
+//TODO
+// Feedback on click
+// Add the plus sign
+// Add the names on the end of the lines 
+
+// var ANNOTATION_ON = false;
+// var d = new Date("October 13, 2014 11:13:00");
+//var flag_locations;
+var FLAG_LOCATION = 210;
 
 var main_margin = {top: 20, right: 80, bottom: 100, left: 40},
     mini_margin = {top: 430, right: 80, bottom: 20, left: 40},
@@ -148,6 +156,9 @@ var formatDate = d3.time.format("%Y%m%d"),
     formatOutput0 = function(d) { return  d.WakeUpTime + " O'Clock"; }, // The focus text
     formatOutput1 = function(d) { return  d.TimeInBed + " O'Clock"; };
     formatOutput2 = function(d) { return  d.FellAsleep + " O'Clock"; };
+
+var annotations = [[parseDate("20141205"), "<b>".concat(parseDate("20141205").toDateString()).concat("</b><br>Marshall was prescribed Xanax.")]]//[[date, html],...]
+
 //
 var main_x = d3.time.scale()
     .range([0, main_width]);
@@ -304,7 +315,7 @@ d3.csv("data/data.txt", function(error, data) {
       .attr("class", "flag")
       .attr("y1", 0 )
       .attr("y2",  main_height)
-      .attr("transform", "translate(" + 210 + ",0)");
+      .attr("transform", "translate(" + FLAG_LOCATION + ",0)");
 
   focus.append('text')
       .attr("class", "x")
@@ -371,9 +382,27 @@ d3.csv("data/data.txt", function(error, data) {
       }
   }
 
+  function genFlagLocations(){
+    var result = [];
+    for (var i =0; i< annotations.length; i++){
+      result.push(main_x(annotations[i]))
+    }
+    return result;
+  }
+  //returns whether a flag is at the given x-coordinate
+  function isFlag(x_coord) {
+    for (var i =0; i< annotations.length; i++){
+      if (x_coord == main_x(annotations[i][0])) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   function mousedown() { 
-    if (ANNOTATION_ON == false) {
-        ANNOTATION_ON = true;
+    // if (ANNOTATION_ON == false) {
+    //     ANNOTATION_ON = true;
         var x0 = main_x.invert(d3.mouse(this)[0]),
             i = bisectDate(data, x0, 1),
             d0 = data[i - 1],
@@ -382,33 +411,62 @@ d3.csv("data/data.txt", function(error, data) {
         var coordinates = [0, 0];
         coordinates = d3.mouse(this);
         
-         if (main_x(d.TimeOfDay) == 210) { // on the flag
+         if (isFlag(main_x(d.TimeOfDay))) { // on the flag
             // new_annotation.transition()        
             //             .duration(200)      
             //             .style("opacity", .9);  
             // new_annotation.html("<b>December 5th, 2014</b><br>Marshall was prescribed Xanax.<input  type='submit' id='hide' value='Hide'>")  
-        }  else if (isInBox(coordinates, d)){ // if in the add annotation box
-            // console.log(isInBox(coordinates, d));
+        }  else /*if (isInBox(coordinates, d))*/{ // if in the add annotation box
             new_annotation.transition()        
                         .duration(200)      
                         .style("opacity", .9);  
-            new_annotation.html("<div>Add your annotation below:<br><textarea name='paragraph_text' cols='15' rows='5'></textarea><input type='submit' id='submit_annotation'  value='Submit'>");
+            new_annotation.html("<div>Add your annotation below:<br><textarea id='annotation-text' name='paragraph_text' cols='15' rows='5'></textarea><br><input type='submit' id='submit_annotation'  value='Submit'><br><input type='submit' id='cancel_annotation'  value='Cancel'>");
+            
+            var date = d.TimeOfDay;
 
             var submit_annotation = document.getElementById("submit_annotation");
             submit_annotation.onclick = function(evt){
+               var added_annotation = $('#annotation-text').val()
+               alert(added_annotation);
+               annotations.push([date, "<b>".concat(date).concat("</b><br>").concat(added_annotation)]);
+               console.log(annotations);
+               new_annotation.transition()        
+                          .duration(200)      
+                          .style("opacity", 0);
+            }; 
+
+            var cancel_annotation = document.getElementById("cancel_annotation");
+            cancel_annotation.onclick = function(evt){
                new_annotation.transition()        
                           .duration(200)      
                           .style("opacity", 0);
             }; 
         } 
-    } else {
-       ANNOTATION_ON = false;
-       //hide_annotation();
-    }
+    // } else {
+    //    ANNOTATION_ON = false;
+    //    //hide_annotation();
+    // }
   }
 
-  function hide_annotation() {
-    
+  function addAnnotation() {
+
+  }
+
+  function getAnnotation(date) {
+    for (var i =0; i< annotations.length; i++){
+      console.log("annotations")
+      console.log(annotations[i][0]);
+      console.log("datt")
+      console.log(date);
+      if (annotations[i][0].getTime() == date.getTime()) {
+
+        return annotations[i][1]
+      }
+    }
+    return "ERROR"
+  }
+
+  function hideAnnotation() {
     annotation.transition()        
                 .duration(200)      
                 .style("opacity", 0);      
@@ -426,6 +484,7 @@ d3.csv("data/data.txt", function(error, data) {
     var coordinates = [0, 0];
     coordinates = d3.mouse(this);
     // var x = coordinates[0];
+    // Ti
     // var y = coordinates[1];
     focus.select("circle.y0").attr("transform", "translate(" + main_x(d.Uhrzeit) + "," + main_y0(d.Durchschn) + ")");
     focus.select("text.y0").attr("transform", "translate(" + main_x(d.Uhrzeit) + "," + main_y0(d.Durchschn) + ")").text(formatOutput0(d));
@@ -434,7 +493,6 @@ d3.csv("data/data.txt", function(error, data) {
     focus.select("circle.y2").attr("transform", "translate(" + main_x(d.TimeOfDay) + "," + main_y0(d.FellAsleep) + ")"); //draws the circle on the top
     focus.select("text.y2").attr("transform", "translate(" + main_x(d.TimeOfDay) + "," + main_y0(d.FellAsleep) + ")").text(formatOutput2(d)); // writes the text on the top
     focus.select(".x").attr("transform", "translate(" + main_x(d.TimeOfDay) + ",0)");
-    console.log(main_x(d.TimeOfDay));
     // focus.select("text.x").attr("transform", "translate(" + main_x(d.TimeOfDay) + ","+ main_height/2 +")").text('Click to add Annotation');
     focus.select(".y0").attr("transform", "translate(" + main_width * -1 + ", " + main_y0(d.Durchschn) + ")")
     .attr("x2", main_width + main_x(d.TimeOfDay)); //makes the line to the left
@@ -442,20 +500,21 @@ d3.csv("data/data.txt", function(error, data) {
     .attr("x2", main_width + main_x(d.TimeOfDay)); //makes the line
     focus.select(".y2").attr("transform", "translate(" + main_width * -1 + ", " + main_y0(d.FellAsleep) + ")")
     .attr("x2", main_width + main_x(d.TimeOfDay)); //makes the line to the right
+    
     //building the dynamic annotation box
-
-    if (main_x(d.TimeOfDay) != 210) { //not on the flag
+    if (!isFlag(main_x(d.TimeOfDay))) { //not on the flag
       var box_middle = coordinates[1]-main_height/(annotationBoxSize*2);
       focus.select("rect.addAnnotation").attr("opacity", "1");
       focus.select("rect.addAnnotation").attr("transform", "translate(" + main_x(d.TimeOfDay) + ","+ box_middle +")");
       focus.select("line.addAnnotation").attr("transform", "translate(" + main_x(d.TimeOfDay) + ","+ box_middle +")");
-      hide_annotation()
+      hideAnnotation()
     } else { // on the flag
       focus.select("rect.addAnnotation").attr("opacity", "0");
       annotation.transition()        
                         .duration(200)      
                         .style("opacity", .9);  
-      annotation.html("<b>December 5th, 2014</b><br>Marshall was prescribed Xanax.") 
+
+      annotation.html(getAnnotation(d.TimeOfDay));//"<b>December 5th, 2014</b><br>Marshall was prescribed Xanax.") 
     }
   }
 });
