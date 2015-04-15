@@ -45,8 +45,6 @@
 }
 
 #leftPanel {
-  top: 0px;
-  left: 0px;
   display: inline-block;
   min-height: 100%;
   height: 100%;
