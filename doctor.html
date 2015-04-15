@@ -159,33 +159,33 @@
           </div>
           <div class="modal-body">
             <form id="assignNewForm" class="form-horizontal">
-              <div class="form-group">
-              <input type="checkbox" name="formType" class="checkbox">Sleep Form</input>
-                <select id="sleepForm">
+              <div class="row">
+              <input type="checkbox" name="formType" class="col-md-2">Sleep Form</input>
+                <select id="sleepForm" class="col-md-2">
                   <option value="daily">Daily</option>
                   <option value="weekly">Weekly</option>
                   <option value="monthly">Monthly</option>
                 </select></br>
               </div>
-              <div class="form-group">
-              <input type="checkbox" name="formType">Diet Form</input>
-                <select id="dietForm">
+              <div class="row">
+              <input type="checkbox" name="formType" class="col-md-2">Diet Form</input>
+                <select id="dietForm" class="col-md-2">
                   <option value="daily">Daily</option>
                   <option value="weekly">Weekly</option>
                   <option value="monthly">Monthly</option>
                 </select></br>
               </div>
-              <div class="form-group">
-              <input type="checkbox" name="formType">Anxiety Form</input>
-                <select id="anxietyForm">
+              <div class="row">
+              <input type="checkbox" name="formType" class="col-md-2">Anxiety Form</input>
+                <select id="anxietyForm" class="col-md-2">
                   <option value="daily">Daily</option>
                   <option value="weekly">Weekly</option>
                   <option value="monthly">Monthly</option>
                 </select></br>
               </div>
-              <div class="form-group">
-              <input type="checkbox" name="formType">Emotion Form</input>
-                <select id="emotionForm">
+              <div class="row">
+              <input type="checkbox" name="formType" class="col-md-2">Emotion Form</input>
+                <select id="emotionForm" class="col-md-2">
                   <option value="daily">Daily</option>
                   <option value="weekly">Weekly</option>
                   <option value="monthly">Monthly</option>
@@ -195,7 +195,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="document.getElementById('assignNewForm').reset(); console.log('reset')">Save changes</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="document.getElementById('assignNewForm').reset();">Save changes</button>
           </div>
         </div>
       </div>
