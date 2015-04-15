@@ -134,13 +134,6 @@ var loadPatient = function(fullName) {
 	loadRightPanel('graphs');
 };
 
-//Load form into right panel
-var assignNewForm = function() {
-	console.log('assigning new form!');
-	loadRightPanel('assignNewForm');
-};
-
-
 //Add click listener for when we click on a patient in the side nav
 var addPatientSideNavListener = function() {
 	$('.patient').click(function (e) {
@@ -169,17 +162,7 @@ var showAssignFormModal = function(){
 	$('#assignFormModal').modal('show');
 };
 
-var changeCustomRepeat = function(selectedValue){
-	var possibleValues = ["dailySelect", "weeklySelect", "monthlySelect"];
-	for (i = 0; i < possibleValues.length; i ++){
-	  if (possibleValues[i] == selectedValue){
-	    $("#" +possibleValues[i]).show();
-	  }
-	  else{
-	    $("#" +possibleValues[i]).hide();
-	  };
-	}
-};
+
 
 //--------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------
