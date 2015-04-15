@@ -156,39 +156,99 @@
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title" id="myModalLabel">How often should the patient fill out the form?</h4>
+            <h4 class="modal-title" id="myModalLabel">Assign a Form</h4>
           </div>
           <div class="modal-body">
-            <form id="assignNewForm">
-              <input type="checkbox" name="formType" >Sleep Form</input>
-                <select id="sleepForm">
-                  <option value="daily">Daily</option>
-                  <option value="weekly">Weekly</option>
-                  <option value="monthly">Monthly</option>
-                </select></br>
-              <input type="checkbox" name="formType">Diet Form</input>
-                <select id="dietForm">
-                  <option value="daily">Daily</option>
-                  <option value="weekly">Weekly</option>
-                  <option value="monthly">Monthly</option>
-                </select></br>
-              <input type="checkbox" name="formType">Anxiety Form</input>
-                <select id="anxietyForm">
-                  <option value="daily">Daily</option>
-                  <option value="weekly">Weekly</option>
-                  <option value="monthly">Monthly</option>
-                </select></br>
-              <input type="checkbox" name="formType">Emotion Form</input>
-                <select id="emotionForm">
-                  <option value="daily">Daily</option>
-                  <option value="weekly">Weekly</option>
-                  <option value="monthly">Monthly</option>
-                </select></br>
+            <form id="assignNewForm" class="form-horizontal">
+
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <div class="checkbox">
+                      <input type="checkbox" name="formType">Sleep Form</input>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <select id="sleepForm">
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                      </select></br>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <div class="checkbox">
+                      <input type="checkbox" name="formType">Diet Form</input>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <select id="dietForm">
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                      </select></br>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <div class="checkbox">
+                      <input type="checkbox" name="formType">Anxiety Form</input>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <select id="anxietyForm">
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                      </select></br>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <div class="checkbox">
+                      <input type="checkbox" name="formType">Emotion Form</input>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <div class="col-md-3">
+                      <select id="emotionForm">
+                        <option value="daily">Daily</option>
+                        <option value="weekly">Weekly</option>
+                        <option value="monthly">Monthly</option>
+                      </select></br>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="document.getElementById('assignNewForm').reset(); console.log('reset')">Save changes</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="document.getElementById('assignNewForm').reset();">Save changes</button>
           </div>
         </div>
       </div>
@@ -206,3 +266,27 @@
     <script src="./js/doctor.js"></script>
   </body>
 </html>
+
+
+
+
+
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <div class="col-md-2">
+        <input type="radio" class="form-control" name="hent" value="timesmaling">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 text-left-imp">
+    <div class="form-group">
+      <div class="col-md-2">
+        <input type="radio" class="form-control" name="hent" value="tredjetimesmaling">
+      </div>
+    </div>
+  </div>
+</div>
+
+
