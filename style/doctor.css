@@ -6,6 +6,11 @@
   overflow: hidden;
 }
 
+.not-active {
+   pointer-events: none;
+   cursor: default;
+}
+
 #bigButton {
   background-color: #f8f8f8;
   padding-left: 20px;
