@@ -158,35 +158,36 @@
             <h4 class="modal-title" id="myModalLabel">How often should the patient fill out the form?</h4>
           </div>
           <div class="modal-body">
-            Frequency:
-            <select id="repeatForm" onchange="changeCustomRepeat(document.getElementById('repeatForm').value)">
-              <option value="dailySelect">Daily</option>
-              <option value="weeklySelect">Weekly</option>
-              <option value="monthlySelect">Monthly</option>
-            </select>
-            <div id="dailySelect">
-              Every <input type="number" min="0" value="1"></input> day(s)
-            </div>
-            <div id="weeklySelect" hidden>
-              Every <input type="number" min="0" value="1"></input> week(s) on:</br></br>
-              <input type="checkbox" name="dayOfWeek">S</input></br>
-              <input type="checkbox" name="dayOfWeek">M</input></br>
-              <input type="checkbox" name="dayOfWeek">T</input></br>
-              <input type="checkbox" name="dayOfWeek">W</input></br>
-              <input type="checkbox" name="dayOfWeek">R</input></br>
-              <input type="checkbox" name="dayOfWeek">F</input></br>
-              <input type="checkbox" name="dayOfWeek">S</input></br>
-            </div>
-            <div id="monthlySelect" hidden>
-              Every <input type="number" min="0" value="1"></input> months(s) by:</br>
-              <select id="monthlyRepeat">
-                <option value="byDayOfMonth">Day of the Month</option></br>
-                <option value="byDayOfWeek">Day of the Week</option></br>
-            </div>
+            <form id="assignNewForm">
+              <input type="checkbox" name="formType" >Sleep Form</input>
+                <select id="sleepForm">
+                  <option value="daily">Daily</option>
+                  <option value="weekly">Weekly</option>
+                  <option value="monthly">Monthly</option>
+                </select></br>
+              <input type="checkbox" name="formType">Diet Form</input>
+                <select id="dietForm">
+                  <option value="daily">Daily</option>
+                  <option value="weekly">Weekly</option>
+                  <option value="monthly">Monthly</option>
+                </select></br>
+              <input type="checkbox" name="formType">Anxiety Form</input>
+                <select id="anxietyForm">
+                  <option value="daily">Daily</option>
+                  <option value="weekly">Weekly</option>
+                  <option value="monthly">Monthly</option>
+                </select></br>
+              <input type="checkbox" name="formType">Emotion Form</input>
+                <select id="emotionForm">
+                  <option value="daily">Daily</option>
+                  <option value="weekly">Weekly</option>
+                  <option value="monthly">Monthly</option>
+                </select></br>
+            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-primary" data-dismiss-"modal">Save changes</button>
           </div>
         </div>
       </div>
