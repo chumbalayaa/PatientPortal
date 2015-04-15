@@ -6,6 +6,9 @@
 <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
 <meta http-equiv="pragma" content="no-cache" />
 <style>
+h1 {
+  text-align: center;
+}
 
 #first-graph {
   font: 10px sans-serif;
@@ -127,9 +130,9 @@ div.new-annotation {
 
 </style>
 <div id="first-graph">
- 
+ <h1> Marshall's Sleep Log</h1>
 </div>
-<script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
+<script type="text/javascript" src="libs/d3/d3.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script>
 var ANNOTATION_ON = false;
@@ -209,7 +212,7 @@ var main = svg.append("g")
 //   .attr("class", "tooltip")              // apply the 'tooltip' class
 //   .style("opacity", 0);                  // set the opacity to nil
 
-d3.csv("data.txt", function(error, data) {
+d3.csv("data/data.txt", function(error, data) {
   data.forEach(function(d) {
     d.Uhrzeit = parseDate(d.TimeOfDay); //TimeOfDay
     d.Durchschn = +d.WakeUpTime; //Avg
@@ -273,7 +276,7 @@ d3.csv("data.txt", function(error, data) {
   //     .attr("dy", ".71em")
   //     .style("text-anchor", "end")
   //     .text("Number"); //builds the right axis
-  var annotationBoxSize = 18; // inversely proportional to annotation box size
+  var annotationBoxSize = 30; // inversely proportional to annotation box size
   
   var focus = main.append("g")
       .attr("class", "focus")
@@ -358,12 +361,15 @@ d3.csv("data.txt", function(error, data) {
       .on("mousemove", mousemove)
       .on("mousedown", mousedown);
 
-  // var submit_annotation = document.getElementById("submit_annotation");
-  // submit_annotation.onclick = function(evt){
-  //    new_annotation.transition()        
-  //               .duration(200)      
-  //               .style("opacity", 0);
-  // };
+  function isInBox(coordinates, d){
+      var min = main_x(d.TimeOfDay);
+      var max = main_x(d.TimeOfDay)+ main_height/annotationBoxSize;
+      if ((coordinates[0]>min) && (coordinates[0]<max)) {
+        return true;
+      } else {
+        return false;
+      }
+  }
 
   function mousedown() { 
     if (ANNOTATION_ON == false) {
@@ -381,7 +387,8 @@ d3.csv("data.txt", function(error, data) {
             //             .duration(200)      
             //             .style("opacity", .9);  
             // new_annotation.html("<b>December 5th, 2014</b><br>Marshall was prescribed Xanax.<input  type='submit' id='hide' value='Hide'>")  
-        }  else if (true){ // if in the add annotation box
+        }  else if (isInBox(coordinates, d)){ // if in the add annotation box
+            // console.log(isInBox(coordinates, d));
             new_annotation.transition()        
                         .duration(200)      
                         .style("opacity", .9);  
@@ -407,10 +414,6 @@ d3.csv("data.txt", function(error, data) {
                 .style("opacity", 0);      
   }
 
-  // $("#submit_annotation").click(function(evt) {
-  //   alert('h')
-  //   hide_annotation();
-  // });
 
   function mousemove() {
     var x0 = main_x.invert(d3.mouse(this)[0]),
