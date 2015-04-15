@@ -164,10 +164,6 @@ var addPaitientTopNavListener = function() {
 	});
 };
 
-var showAssignFormModal = function(){
-	console.log('show assign form modal!');
-	$('#assignFormModal').modal('show');
-};
 
 
 
