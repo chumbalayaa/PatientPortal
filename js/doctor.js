@@ -134,6 +134,13 @@ var loadPatient = function(fullName) {
 	loadRightPanel('graphs');
 };
 
+//Load form into right panel
+var assignNewForm = function() {
+	console.log('assigning new form!');
+	loadRightPanel('assignNewForm');
+};
+
+
 //Add click listener for when we click on a patient in the side nav
 var addPatientSideNavListener = function() {
 	$('.patient').click(function (e) {
