@@ -240,7 +240,7 @@ var main = svg.append("g")
 //   .attr("class", "tooltip")              // apply the 'tooltip' class
 //   .style("opacity", 0);                  // set the opacity to nil
 
-d3.csv("data/data.txt", function(error, data) {
+d3.csv("data/dataJaneGoodall.txt", function(error, data) {
   data.forEach(function(d) {
     d.Uhrzeit = parseDate(d.TimeOfDay); //TimeOfDay
     d.Durchschn = +d.WakeUpTime; //Avg
@@ -271,6 +271,29 @@ svg.append("text")
   main_y0.domain(d3.extent(d3.extent(data, function(d) { return d.FellAsleep; }).concat( d3.extent(data, function(d) { return d.WakeUpTime; })))); // builds the left axis that the BLUE line is plotted on
   main_y1.domain(d3.extent(data, function(d) { return d.Anz; })); //builds the right axis that the red line is plotted on
 
+
+
+  svg.append("text")
+    .attr("transform", "translate(" + (main_width+3) + "," + main_y0(data[data.length-1].WakeUpTime) + ")")
+    .attr("dy", ".35em")
+    .attr("text-anchor", "start")
+    .style("fill", "steelblue")
+    .text("Wake Up Time");
+
+  
+  svg.append("text")
+    .attr("transform", "translate(" + (main_width+3) + "," + main_y0(data[data.length-1].TimeInBed) + ")")
+    .attr("dy", ".35em")
+    .attr("text-anchor", "start")
+    .style("fill", "indianred")
+    .text("Time In Bed");
+
+  svg.append("text")
+    .attr("transform", "translate(" + (main_width+3) + "," + main_y0(data[data.length-1].FellAsleep) + ")")
+    .attr("dy", ".35em")
+    .attr("text-anchor", "start")
+    .style("fill", "#92CCA6")
+    .text("Fell Asleep");
   main.append("path")
       .datum(data)
       .attr("clip-path", "url(#clip)")
@@ -437,7 +460,9 @@ svg.append("text")
         return false;
       }
   }
-
+  function timeToText(time){
+    
+  }
   function genFlagLocations(){
     var result = [];
     for (var i =0; i< annotations.length; i++){
