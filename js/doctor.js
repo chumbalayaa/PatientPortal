@@ -115,10 +115,10 @@ var loadLeftPanel = function(file) {
 	});
 	currentPatient = file;
 	if (currentPatient == "MarshallMathers") {
-		$('#patientName').text = "Marshall Mathers";
+		$('#patientName').html("Marshall Mathers");
 	}
 	else {
-		$('#patientName').text = "Jane Goodall";
+		$('#patientName').html("Jane Goodall");
 	}
 };
 
@@ -164,7 +164,13 @@ var addPaitientTopNavListener = function() {
 		var name = e.target.text;
 		var nameArray = name.split(" ");
 		var fullName = nameArray[0]+nameArray[1];
-		$("#patientName").html(fullName);
+		//$("#patientName").html(fullName);
+		// if (fullName == "MarshallMathers") {
+		// 	$('#patientName').html("Marshall Mathers");
+		// }
+		// else {
+		// 	$('#patientName').html("Jane Goodall");
+		// }
 		if (currentPatient != fullName) {
 			loadPatient(fullName);	
 		}
