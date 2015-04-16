@@ -14,7 +14,7 @@ a.not-active {
 #bigButton {
   background-color: #f8f8f8;
   padding-left: 20px;
-  height: 85%;
+  height: 100%;
 }
 
 #bigButtonDiv {
@@ -43,7 +43,7 @@ a.not-active {
   padding: 0 0 0 0;
   margin: 0 0 0 0;
   margin-left: 25px;
-  width: 100%;
+  width: 85%;
 }
 
 .page-header {
