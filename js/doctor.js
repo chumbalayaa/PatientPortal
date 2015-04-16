@@ -161,10 +161,10 @@ var addPatientSideNavListener = function() {
 //Add click listener for when we click on a patient in the top nav
 var addPaitientTopNavListener = function() {
 	$('.patientInNav').click(function (e) {
-		alert('balls-peen');
 		var name = e.target.text;
 		var nameArray = name.split(" ");
 		var fullName = nameArray[0]+nameArray[1];
+		$("#patientName").html(fullName);
 		if (currentPatient != fullName) {
 			loadPatient(fullName);	
 		}
