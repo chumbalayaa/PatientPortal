@@ -5,18 +5,18 @@
 #leftPanel {
   float:left;
   height: 100%;
-  width: 35%;
+  width: 40%;
   border: 2px solid gray;
-  margin-left: 10%;
+  margin-left: 5%;
   margin-top: 2%;
 }
 
 #rightPanel {
   float: right;
   height: 100%;
-  width: 35%;
+  width: 40%;
   border: 2px solid gray;
-  margin-right: 10%;
+  margin-right: 5%;
   margin-top: 2%;
 }
 
