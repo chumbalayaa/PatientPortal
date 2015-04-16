@@ -265,8 +265,8 @@ svg.append("text")
     return a.Uhrzeit - b.Uhrzeit;
   });
 
-  alert(main_y0(data[0].FellAsleep))
-  alert(data[0].TimeOfDay)
+  // alert(main_y0(data[0].FellAsleep))
+  // alert(data[0].TimeOfDay)
   main_x.domain([data[0].Uhrzeit, data[data.length - 1].Uhrzeit]); //builds the x-axis
   main_y0.domain(d3.extent(d3.extent(data, function(d) { return d.FellAsleep; }).concat( d3.extent(data, function(d) { return d.WakeUpTime; })))); // builds the left axis that the BLUE line is plotted on
   main_y1.domain(d3.extent(data, function(d) { return d.Anz; })); //builds the right axis that the red line is plotted on
