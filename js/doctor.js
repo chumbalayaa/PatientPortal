@@ -114,6 +114,12 @@ var loadLeftPanel = function(file) {
 		}
 	});
 	currentPatient = file;
+	if (currentPatient == "MarshallMathers") {
+		$('#patientName').text = "Marshall Mathers";
+	}
+	else {
+		$('#patientName').text = "Jane Goodall";
+	}
 };
 
 var loadRightPanel = function(file) {

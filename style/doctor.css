@@ -46,12 +46,11 @@ a.not-active {
 }
 
 .page-header {
-  text-align: left;
+  text-align: center;
   margin-top: 0px;
 }
 
 #leftPanel {
-  margin-top: 50px;
   display: inline-block;
   min-height: 100%;
   height: 100%;
