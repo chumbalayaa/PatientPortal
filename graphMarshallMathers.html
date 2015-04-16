@@ -166,9 +166,9 @@ var main_margin = {top: 20, right: 100, bottom: 100, left: 40},
 var formatDate = d3.time.format("%Y%m%d"),
     parseDate = formatDate.parse,
     bisectDate = d3.bisector(function(d) { return d.Uhrzeit; }).left,
-    formatOutput0 = function(d) { return  d.WakeUpTime + " O'Clock"; }, // The focus text
-    formatOutput1 = function(d) { return  d.TimeInBed + " O'Clock"; };
-    formatOutput2 = function(d) { return  d.FellAsleep + " O'Clock"; };
+    formatOutput0 = function(d) { return  timeToText(d.WakeUpTime) + " O'Clock"; }, // The focus text
+    formatOutput1 = function(d) { return  timeToText(d.TimeInBed) + " O'Clock"; };
+    formatOutput2 = function(d) { return  timeToText(d.FellAsleep) + " O'Clock"; };
 
 var annotations = [[parseDate("20141205"), "<b>".concat(parseDate("20141205").toDateString()).concat("</b><br>Marshall was prescribed Xanax.")]]//[[date, html],...]
 
@@ -449,6 +449,12 @@ d3.csv("data/data.txt", function(error, data) {
       .attr("y2", main_height)
       .attr("stroke-width", 2)
       .attr("stroke", "red");
+  }
+
+  function timeToText(time){
+    var hour = Math.floor(time);
+    var min =  ("0" + Math.floor((time - hour)*60)).slice(-2);
+    return hour.toString().concat(":").concat(min);
   }
 
   function isInBox(coordinates, d){
