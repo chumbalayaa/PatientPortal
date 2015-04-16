@@ -5,6 +5,7 @@
 var patientsInNavBar = ["MarshallMathers", "JaneGoodall"];
 
 
+
 //Take patient names out of the navbar - UI
 var assignNavbarXClickListener = function() {
 	$('a.navIconButton').click(function (e) {
