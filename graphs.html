@@ -139,7 +139,7 @@ div.new-annotation {
 
 </style>
 <div id="first-graph">
- <h1> Marshall's Sleep Log</h1>
+ <h1> Sleep Graph</h1>
 </div>
 <script type="text/javascript" src="libs/d3/d3.min.js"></script>
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
@@ -208,6 +208,8 @@ var main_line2 = d3.svg.line()
     .x(function(d) { return main_x(d.TimeOfDay); })
     .y(function(d) { return main_y0(d.FellAsleep); }); //green line
 
+  // main_line2.append("text").text("here")
+
 // displays the tooltip
 var annotation = d3.select("#first-graph").append("div")   
     .attr("class", "tooltip")               
@@ -221,6 +223,8 @@ var new_annotation = d3.select("#first-graph").append("div")
 var svg = d3.select("#first-graph").append("svg")
     .attr("width", main_width + main_margin.left + main_margin.right)
     .attr("height", main_height + main_margin.top + main_margin.bottom); //sets the bounding space 
+
+
 
 svg.append("defs").append("clipPath")
     .attr("id", "clip")
@@ -249,10 +253,20 @@ d3.csv("data/data.txt", function(error, data) {
     d.FellAsleep = +d.FellAsleep;
   });
 
+svg.append("text")
+    .attr("transform", "translate(" + (main_width+3) + "," + -200 + ")")
+    .attr("dy", ".35em")
+    .attr("text-anchor", "start")
+    .style("fill", "steelblue")
+    .text("Close");
+
+
   data.sort(function(a, b) {
     return a.Uhrzeit - b.Uhrzeit;
   });
 
+  alert(main_y0(data[0].FellAsleep))
+  alert(data[0].TimeOfDay)
   main_x.domain([data[0].Uhrzeit, data[data.length - 1].Uhrzeit]); //builds the x-axis
   main_y0.domain(d3.extent(d3.extent(data, function(d) { return d.FellAsleep; }).concat( d3.extent(data, function(d) { return d.WakeUpTime; })))); // builds the left axis that the BLUE line is plotted on
   main_y1.domain(d3.extent(data, function(d) { return d.Anz; })); //builds the right axis that the red line is plotted on
