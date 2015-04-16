@@ -116,12 +116,12 @@ html, body {
   padding: 2 2 2 2;
 }
 
-.navbar-default .navbar-toggle:focus,
+/*.navbar-default .navbar-toggle:focus,
 .navbar-default .navbar-toggle:hover {
     background-color: #f8f8f8;
     border-color: #f8f8f8;
     border-color: #ddd;
-}
+}*/
 
 .navmenu {
   z-index: 1;

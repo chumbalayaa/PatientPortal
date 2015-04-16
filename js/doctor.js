@@ -137,7 +137,7 @@ var loadRightPanel = function(file) {
 
 var loadPatient = function(fullName) {
 	loadLeftPanel(fullName);
-	loadRightPanel('graphs');
+	loadRightPanel('graph'+fullName);
 };
 
 
