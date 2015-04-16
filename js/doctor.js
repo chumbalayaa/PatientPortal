@@ -2,8 +2,7 @@
 //################################################################################
 //--------------------------------------------------------------------------------
 //Patient in navbar stuff --------------------------------------------------------
-//var patientsInNavBar = ["MarshallMathers", "JaneGoodall"];
-var patientsInNavBar = [];
+var patientsInNavBar = ["MarshallMathers", "JaneGoodall"];
 
 
 
