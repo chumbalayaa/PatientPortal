@@ -2,7 +2,9 @@
 //################################################################################
 //--------------------------------------------------------------------------------
 //Patient in navbar stuff --------------------------------------------------------
-var patientsInNavBar = ["MarshallMathers", "JaneGoodall"];
+//var patientsInNavBar = ["MarshallMathers", "JaneGoodall"];
+var patientsInNavBar = [];
+
 
 
 //Take patient names out of the navbar - UI
