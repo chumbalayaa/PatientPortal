@@ -1,0 +1,3 @@
+TimeOfDay,LowMood,HighMood,Irritability,TookMedication,DrankAlcohol
+20141201,-3,2,2,1, 0
+20141202,1,2,2,0, 1
