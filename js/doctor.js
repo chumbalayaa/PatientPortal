@@ -143,7 +143,7 @@ var populateBio = function(fullName) {
 	$('#height').html('<span class="text-primary">Height:</span> '+bio['height']);
 	$('#weight').html('<span class="text-primary">Weight:</span> '+bio['weight']+ ' lbs');
 	$('#bloodPressure').html('<span class="text-primary">Blood Pressure:</span> '+bio['bloodPressure']);
-	$('#heartRate').html('<span class="text-primary">Heart Rate: </span> '+bio['heartRate']);
+	$('#heartRate').html('<span class="text-primary">Heart Rate: </span> '+bio['heartRate']+'bpm');
 	$('#recentUpdates').html('<h6>Recent Updates:</h6>'+bio['recentUpdates']);
 	$('#overview').html('<h6>Overview:</h6>'+bio['overview']);
 };
