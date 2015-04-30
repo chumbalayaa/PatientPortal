@@ -44,19 +44,21 @@ $(function() {
 		// $("#form").html(forms[1].html);
 		// $("#formName").html(forms[1].type);
 		//alert(submitted);
-		loadRightPanel('./forms/test-form')
+		loadRightPanel('./forms/sleep-form')
 	});
 
 	$("#anxietyForm").click(function(){
-		$("#form").html(forms[0].html);
-		$("#formName").html(forms[0].type);
+		// $("#form").html(forms[0].html);
+		// $("#formName").html(forms[0].type);
 		//alert(submitted);
+		loadRightPanel('./forms/anxiety-form')
 	});
 
 	$("#moodForm").click(function(){
-		$("#form").html(forms[2].html);
-		$("#formName").html(forms[2].type);
+		// $("#form").html(forms[2].html);
+		// $("#formName").html(forms[2].type);
 		alert('sorry, havent gotten around making the correct form quite yet 8===D');
+		loadRightPanel('./forms/mood-form')
 	});
 
 	//Remove form
@@ -68,8 +70,6 @@ $(function() {
 	};
 
 	var loadRightPanel = function(file) {
-		//var html = new EJS({url: 'templates/graphs.html'});
-		//$("#leftPanel").innerHTML = html;
 
 		$.ajax({
 			url: file+'.html',
