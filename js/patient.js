@@ -44,7 +44,7 @@ $(function() {
 		// $("#form").html(forms[1].html);
 		// $("#formName").html(forms[1].type);
 		//alert(submitted);
-		loadRightPanel('./forms/test-form')
+		loadRightPanel('./forms/sleep-form')
 	});
 
 	$("#anxietyForm").click(function(){
