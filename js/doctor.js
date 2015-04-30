@@ -202,7 +202,33 @@ var addPaitientTopNavListener = function() {
 	});
 };
 
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+//################################################################################
+//################################################################################
+//Editing Bio code
+var editBio = function(fullName, newBio) {
+	Patients[fullName]['bio'] = newBio;
+};
 
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+//################################################################################
+//################################################################################
+//Adding new patient code
+var addNewPatient = function(firstName, lastName) {
+	var fullName = firstName+lastName;
+	patientJSON = {fullName: 
+					'firstName': firstName,
+					'lastName': lastName,
+					'bio': basicBio};
+	Patients.push({fullName: patientJSON});
+	addPatientToSideNav(firstName, lastName);
+};
+
+var addPatientToSideNav = function(firstName, lastName) {
+	$('#sideNavPatientList').append('<li class="patient"><a href="#" class="patient">'+firstName+' '+lastName+'</a></li>')
+};
 
 
 //--------------------------------------------------------------------------------
