@@ -2,7 +2,15 @@
 // e.g. jane_goodall mood
 function make_graph(patientName, graphType) {
     var div_name = patientName.concat('_').concat(graphType);
+    console.log(div_name);
     $("#main").append('<div id="'.concat(div_name).concat('"></div>'));
+    
+
+    // append the correct type of labels
+    labels = ["Fell Asleep", "Time in Bed", "Wake Up Time"]
+
+
+
     var FLAG_LOCATION = 210; // dont know what this does
     var containerWidth = document.getElementById('main').offsetWidth
     var containerHeight = containerWidth/1.6;
@@ -93,8 +101,9 @@ function make_graph(patientName, graphType) {
     var main = svg.append("g")
         .attr("transform", "translate(" + main_margin.left + "," + main_margin.top + ")");
 
-
-    d3.csv("data/jane_goodall_sleep.txt", function(error, data) {
+    
+    
+    d3.csv("data/".concat(div_name).concat(".txt"), function(error, data) {
       data.forEach(function(d) {
 
         d.TimeOfDay = parseDate(d.TimeOfDay); //TimeOfDay
@@ -442,7 +451,7 @@ function make_graph(patientName, graphType) {
     });
 }
 
-make_graph("patientName", "graphType");
+make_graph("jane_goodall", "sleep");
 
 
-make_graph("patientName", "graphT");
+make_graph("marshall_mathers", "sleep");

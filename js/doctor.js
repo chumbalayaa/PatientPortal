@@ -103,18 +103,17 @@ var currentPatient = "";
 
 
 //Loading HTML into panels
-var loadLeftPanel = function(file) {
-	//var html = new EJS({url: 'templates/'+file+'.ejs'});
-	//$("#leftPanel").innerHTML = html;
-
+var loadLeftPanel = function(fullName) {
 	$.ajax({
-		url: 'templates/'+file+'.html',
+		url: 'templates/patientBio.html',
 		context: document.body,
 		success: function(response) {
 			$("#leftPanel").html(response);
+			console.log(fullName);
+			populateBio(fullName);
 		}
 	});
-	currentPatient = file;
+	currentPatient = fullName;
 	if (currentPatient == "MarshallMathers") {
 		$('#patientName').html("Marshall Mathers");
 	}
@@ -124,9 +123,6 @@ var loadLeftPanel = function(file) {
 };
 
 var loadRightPanel = function(file) {
-	//var html = new EJS({url: 'templates/graphs.html'});
-	//$("#leftPanel").innerHTML = html;
-
 	$.ajax({
 		url: file+'.html',
 		context: document.body,
@@ -139,6 +135,17 @@ var loadRightPanel = function(file) {
 var loadPatient = function(fullName) {
 	loadLeftPanel(fullName);
 	loadRightPanel('graph'+fullName);
+};
+
+var populateBio = function(fullName) {
+	var bio = Patients[fullName]['bio'];
+	$('#patientPicture').attr('src', bio['photo']);
+	$('#height').html('<span class="text-primary">Height:</span> '+bio['height']);
+	$('#weight').html('<span class="text-primary">Weight:</span> '+bio['weight']+ ' lbs');
+	$('#bloodPressure').html('<span class="text-primary">Blood Pressure:</span> '+bio['bloodPressure']);
+	$('#heartRate').html('<span class="text-primary">Heart Rate: </span> '+bio['heartRate']+'bpm');
+	$('#recentUpdates').html('<h6>Recent Updates:</h6>'+bio['recentUpdates']);
+	$('#overview').html('<h6>Overview:</h6>'+bio['overview']);
 };
 
 
