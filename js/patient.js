@@ -70,8 +70,6 @@ $(function() {
 	};
 
 	var loadRightPanel = function(file) {
-		//var html = new EJS({url: 'templates/graphs.html'});
-		//$("#leftPanel").innerHTML = html;
 
 		$.ajax({
 			url: file+'.html',
