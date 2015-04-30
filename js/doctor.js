@@ -4,7 +4,24 @@
 //Patient in navbar stuff --------------------------------------------------------
 var patientsInNavBar = [];
 
+//
+var sideNav = false;
 
+var slideSide = function() {
+	if (sideNav) {
+		sideNav = false;
+		$('#sideNavToggle').empty();
+		$('#sideNavToggle').html('<span class="glyphicon glyphicon-chevron-right"></span><br> \
+              					  <span class="glyphicon glyphicon-chevron-right"></span><br> \
+              					  <span class="glyphicon glyphicon-chevron-right"></span>');
+	} else {
+		sideNav = true;
+		$('#sideNavToggle').empty();
+		$('#sideNavToggle').html('<span class="glyphicon glyphicon-chevron-left"></span><br> \
+              					  <span class="glyphicon glyphicon-chevron-left"></span><br> \
+              					  <span class="glyphicon glyphicon-chevron-left"></span>');
+	}
+}
 
 //Take patient names out of the navbar - UI
 var assignNavbarXClickListener = function() {
