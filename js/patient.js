@@ -38,12 +38,13 @@ $(function() {
 					html:'<iframe src="https://docs.google.com/forms/d/1Hk_DksNNvJ-OTJFhRNiVQhMroPHMcHi9PlMlElhqpV4/viewform?embedded=true" width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>'
 				}];
 
-	var submitted=false;
+	//var submitted=false;
 
 	$("#sleepForm").click(function(){
-		$("#form").html(forms[1].html);
-		$("#formName").html(forms[1].type);
+		// $("#form").html(forms[1].html);
+		// $("#formName").html(forms[1].type);
 		//alert(submitted);
+		loadRightPanel('./forms/test-form')
 	});
 
 	$("#anxietyForm").click(function(){
@@ -64,6 +65,19 @@ $(function() {
 		if(i != -1) {
 			forms.splice(i, 1);
 		}
+	};
+
+	var loadRightPanel = function(file) {
+		//var html = new EJS({url: 'templates/graphs.html'});
+		//$("#leftPanel").innerHTML = html;
+
+		$.ajax({
+			url: file+'.html',
+			context: document.body,
+			success: function(response) {
+				$("#form").html(response);
+			}
+		});	
 	};
 
 	//Add form
