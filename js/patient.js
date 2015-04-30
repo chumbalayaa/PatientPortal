@@ -48,15 +48,17 @@ $(function() {
 	});
 
 	$("#anxietyForm").click(function(){
-		$("#form").html(forms[0].html);
-		$("#formName").html(forms[0].type);
+		// $("#form").html(forms[0].html);
+		// $("#formName").html(forms[0].type);
 		//alert(submitted);
+		loadRightPanel('./forms/anxiety-form')
 	});
 
 	$("#moodForm").click(function(){
-		$("#form").html(forms[2].html);
-		$("#formName").html(forms[2].type);
+		// $("#form").html(forms[2].html);
+		// $("#formName").html(forms[2].type);
 		alert('sorry, havent gotten around making the correct form quite yet 8===D');
+		loadRightPanel('./forms/mood-form')
 	});
 
 	//Remove form
