@@ -140,7 +140,7 @@ var populateBio = function(fullName) {
 	var bio = Patients[fullName]['bio'];
 	$('#patientPicture').attr('src', bio['photo']);
 	$('#height').html('<span class="text-primary">Height:</span> '+bio['height']);
-	$('#weight').html('<span class="text-primary">Weight:</span> 'bio['weight']+ ' lbs');
+	$('#weight').html('<span class="text-primary">Weight:</span> '+bio['weight']+ ' lbs');
 	$('#bloodPressure').html('<span class="text-primary">Blood Pressure:</span> '+bio['bloodPressure']);
 	$('#heartRate').html('<span class="text-primary">Heart Rate: </span> '+bio['heartRate']);
 	$('#recentUpdates').html('<h6>Recent Updates:</h6>'+bio['recentUpdates']);
