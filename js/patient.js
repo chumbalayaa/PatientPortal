@@ -20,30 +20,10 @@ $(function() {
 
 	var currentForm;
 
-	var unfinishedForms=[anxiety,sleep,mood];
+	var unfinishedForms=['anxiety','sleep','mood'];
 
 	//Data Structures
 	var forms = [{
-					type:"Anxiety",
-					patient:"MarshallMathers",
-					dueDate:"Apr 15, 2015",
-					doctor:"Dr.Dre",
-					html:'<iframe src="https://docs.google.com/forms/d/1kDZ19hpSOj53k2yhiTATE--fsaoqgj8HUB-8CR9aOjc/viewform?embedded=true" width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0" id="anxietyForm" onsubmit="submitted=true;">Loading...</iframe>'
-				},{
-					type:"Sleep",
-					patient:"MarshallMathers",
-					dueDate:"Apr 11, 2015",
-					doctor:"Dr.Dre",
-					html:'<iframe src="https://docs.google.com/forms/d/10xn9Qp9T6goWqZsXCq6GEpThAPx4J1eW8M5338kGnW4/viewform?embedded=true" width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0" id="sleepForm" onsubmit="submitted=true;">Loading...</iframe>'
-				},{
-					type:"Mood",
-					patient:"MarshallMathers",
-					dueDate:"Apr 18, 2015",
-					doctor:"Dr.Dre",
-					html:'<iframe src="https://docs.google.com/forms/d/1Hk_DksNNvJ-OTJFhRNiVQhMroPHMcHi9PlMlElhqpV4/viewform?embedded=true" width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>'
-				}];
-
-	var forms1 = [{
 					type:"Anxiety",
 					patient:"MarshallMathers",
 					dueDate:"Apr 15, 2015",
@@ -115,12 +95,15 @@ $(function() {
 		});
 	};
 
-	var reloadRightPanel = function() {
+	var updateRightPanel = function() {
 		//disable proper button 
 		//load in next due form
+		//remove from unfinished form list
 		$('#'+currentForm+'Form').prop("disabled",true);
+		$('#'+currentForm+'FormText').html("Finished!");		
 		if(unfinishedForms.length!=0){
 			loadRightPanel(unfinishedForms[0]);
+			unfinishedForms.splice(0,1);
 		}
 		else{
 			loadRightPanel('done');
