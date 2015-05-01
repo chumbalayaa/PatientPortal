@@ -47,24 +47,25 @@ $(function() {
 		// $("#form").html(forms[1].html);
 		// $("#formName").html(forms[1].type);
 		//alert(submitted);
-		loadRightPanel('sleep')
+		loadRightPanel('sleep');
 	});
 
 	$("#anxietyForm").click(function(){
 		// $("#form").html(forms[0].html);
 		// $("#formName").html(forms[0].type);
 		//alert(submitted);
-		loadRightPanel('anxiety')
+		loadRightPanel('anxiety');
 	});
 
 	$("#moodForm").click(function(){
 		// $("#form").html(forms[2].html);
 		// $("#formName").html(forms[2].type);
 		//alert('sorry, havent gotten around making the correct form quite yet 8===D');
-		loadRightPanel('mood')
+		loadRightPanel('mood');
 	});
 
 	$("#ss-submit").click(function(){
+		alert('hi');
 		updateRightPanel();
 	});
 
