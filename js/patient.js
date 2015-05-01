@@ -17,6 +17,11 @@
 
 $(function() {
 
+
+	var currentForm;
+
+	var unfinishedForms=[anxiety,sleep,mood];
+
 	//Data Structures
 	var forms = [{
 					type:"Anxiety",
@@ -62,21 +67,21 @@ $(function() {
 		// $("#form").html(forms[1].html);
 		// $("#formName").html(forms[1].type);
 		//alert(submitted);
-		loadRightPanel('./forms/sleep-form')
+		loadRightPanel('sleep')
 	});
 
 	$("#anxietyForm").click(function(){
 		// $("#form").html(forms[0].html);
 		// $("#formName").html(forms[0].type);
 		//alert(submitted);
-		loadRightPanel('./forms/anxiety-form')
+		loadRightPanel('anxiety')
 	});
 
 	$("#moodForm").click(function(){
 		// $("#form").html(forms[2].html);
 		// $("#formName").html(forms[2].type);
 		//alert('sorry, havent gotten around making the correct form quite yet 8===D');
-		loadRightPanel('./forms/mood-form')
+		loadRightPanel('mood')
 	});
 
 	//Remove form
@@ -88,9 +93,9 @@ $(function() {
 	};
 
 	var loadRightPanel = function(file) {
-
+		currentForm=file;
 		$.ajax({
-			url: file+'.html',
+			url: './forms/'+file+'-form.html',
 			context: document.body,
 			success: function(response) {
 				$("#form").html(response);
@@ -109,5 +114,18 @@ $(function() {
 			return Date.parse(a.dueDate) - Date.parse(b.dueDate);
 		});
 	};
+
+	var reloadRightPanel = function() {
+		//disable proper button 
+		//load in next due form
+		$('#'+currentForm+'Form').prop("disabled",true);
+		if(unfinishedForms.length!=0){
+			loadRightPanel(unfinishedForms[0]);
+		}
+		else{
+			loadRightPanel('done');
+		}
+	};
+
 
 });
