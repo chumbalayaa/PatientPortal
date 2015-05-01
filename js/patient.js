@@ -38,7 +38,7 @@ $(function() {
 					html:'<iframe src="https://docs.google.com/forms/d/1Hk_DksNNvJ-OTJFhRNiVQhMroPHMcHi9PlMlElhqpV4/viewform?embedded=true" width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>'
 				}];
 
-	var forms = [{
+	var forms1 = [{
 					type:"Anxiety",
 					patient:"MarshallMathers",
 					dueDate:"Apr 15, 2015",
@@ -57,7 +57,7 @@ $(function() {
 					doctor:"Dr.Dre",
 					html:'<iframe src="https://docs.google.com/forms/d/1Hk_DksNNvJ-OTJFhRNiVQhMroPHMcHi9PlMlElhqpV4/viewform?embedded=true" width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>'
 				}];
-				
+
 	$("#sleepForm").click(function(){
 		// $("#form").html(forms[1].html);
 		// $("#formName").html(forms[1].type);
@@ -75,7 +75,7 @@ $(function() {
 	$("#moodForm").click(function(){
 		// $("#form").html(forms[2].html);
 		// $("#formName").html(forms[2].type);
-		alert('sorry, havent gotten around making the correct form quite yet 8===D');
+		//alert('sorry, havent gotten around making the correct form quite yet 8===D');
 		loadRightPanel('./forms/mood-form')
 	});
 
