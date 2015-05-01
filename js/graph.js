@@ -12,7 +12,7 @@ function make_graph(patientName, graphType) {
     } else if (graphType == "anxiety") {
       labels = ["Composite Score"];
     }
-    console.log(graphType)
+    
 
 
     var FLAG_LOCATION = 210; // dont know what this does
@@ -42,9 +42,25 @@ function make_graph(patientName, graphType) {
     // } else if (graphType == "anxiety") {
     
     // } else {
-        formatOutput0 = function(d) { return  timeToText(d.First) + " O'Clock"; }, // The focus text
-        formatOutput1 = function(d) { return  timeToText(d.Second) + " O'Clock"; };
-        formatOutput2 = function(d) { return  timeToText(d.Third) + " O'Clock"; };
+        formatOutput0 = function(d) { 
+          if (graphType == "sleep") { 
+            return  timeToText(d.First) + " O'Clock"; 
+          } else { 
+            return d.First;
+          }
+        }, // The focus text
+        formatOutput1 = function(d) { 
+          if (graphType == "sleep") { 
+            return  timeToText(d.Second) + " O'Clock"; 
+          } else { 
+            return d.First;
+          } };
+        formatOutput2 = function(d) { 
+          if (graphType == "sleep") { 
+            return  timeToText(d.Third) + " O'Clock"; 
+          } else { 
+            return d.First;
+          } };
     // }
     var annotations = [[parseDate("20141213"), "<b>".concat(parseDate("20141213").toDateString()).concat("</b><br>Marshall started taking Xanax.")]]//[[date, html],...]
 
@@ -78,16 +94,17 @@ function make_graph(patientName, graphType) {
         .x(function(d) { return main_x(d.TimeOfDay); })
         .y(function(d) { return main_y0(d.First); }); 
 
-    var main_line1 = d3.svg.line()
-        .interpolate("linear")
-        .x(function(d) { return main_x(d.TimeOfDay); })
-        .y(function(d) { return main_y0(d.Second); }); //red line
+    if ((graphType == "sleep") || (graphType == "mood")){
+      var main_line1 = d3.svg.line()
+          .interpolate("linear")
+          .x(function(d) { return main_x(d.TimeOfDay); })
+          .y(function(d) { return main_y0(d.Second); }); //red line
 
-    var main_line2 = d3.svg.line()
-        .interpolate("linear")
-        .x(function(d) { return main_x(d.TimeOfDay); })
-        .y(function(d) { return main_y0(d.Third); }); //green line
-
+      var main_line2 = d3.svg.line()
+          .interpolate("linear")
+          .x(function(d) { return main_x(d.TimeOfDay); })
+          .y(function(d) { return main_y0(d.Third); }); //green line
+    }
     // displays the tooltip
     var annotation = d3.select("#".concat(div_name)).append("div")   
         .attr("class", "tooltip")               
@@ -122,18 +139,20 @@ function make_graph(patientName, graphType) {
           d.First = +d.WakeUpTime;
           d.Second = +d.TimeInBed; //Qty
           d.Third = +d.FellAsleep;
-        } else if (graphType == "mood") {
+        } else if ((graphType == "mood") /*|| (graphType == "anxiety")*/){
           d.First = +d.LowMood;
           d.Second = +d.HighMood; //Qty
           d.Third = +d.Irritability;
-        } else if (graphType == "anxiety") {
-          d.TimeOfDay = parseDate(d.TimeOfDay); //TimeOfDay
+        } 
+        else if (graphType == "anxiety") {
           d.First = +d.CompositeScore;
+          d.Second = +d.HighMood; //Qty
+          d.Third = +d.Irritability;
         }
      });
         
   
-    
+
     svg.append("text")
         .attr("transform", "translate(" + (main_width+3) + "," + -200 + ")")
         .attr("dy", ".35em")
@@ -145,22 +164,22 @@ function make_graph(patientName, graphType) {
       data.sort(function(a, b) {
         return a.TimeOfDay - b.TimeOfDay;
       });
+
       main_x.domain([data[0].TimeOfDay, data[data.length - 1].TimeOfDay]); //builds the x-axis
-      
+      console.log('step3')
       // sets the domains for the x axis
       if (graphType == "mood") {
         main_y0.domain([-3.5, 3.5])
       } else if (graphType == "anxiety") {
-        main_y0.domain([0, 60])  
+        main_y0.domain([0, 65])  
       } else { // sleep
-        main_y0.domain(d3.extent(d3.extent(data, function(d) { return d.Third; }).concat( d3.extent(data, function(d) { return d.First; })))); // builds the left axis that the BLUE line is plotted on
+        main_y0.domain([0, 24.5])  
+        // main_y0.domain(d3.extent(d3.extent(data, function(d) { return d.Third; }).concat( d3.extent(data, function(d) { return d.First; })))); // builds the left axis that the BLUE line is plotted on
       }
       
       
 
       // main_y1.domain(d3.extent(data, function(d) { return d.TimeInBed; })); //builds the right axis that the red line is plotted on
-
-      console.log(d3.extent(d3.extent(data, function(d) { return d.Third; }).concat( d3.extent(data, function(d) { return d.First; }))))
 
       svg.append("text")
         .attr("transform", "translate(" + (main_width+3) + "," + main_y0(data[data.length-1].First) + ")")
@@ -169,40 +188,42 @@ function make_graph(patientName, graphType) {
         .style("fill", "steelblue")
         .text(labels[0]);
 
-      
-      svg.append("text")
-        .attr("transform", "translate(" + (main_width+3) + "," + main_y0(data[data.length-1].Second) + ")")
-        .attr("dy", ".35em")
-        .attr("text-anchor", "start")
-        .style("fill", "indianred")
-        .text(labels[1]);
+    if ((graphType == "sleep") || (graphType == "mood")){
+        svg.append("text")
+          .attr("transform", "translate(" + (main_width+3) + "," + main_y0(data[data.length-1].Second) + ")")
+          .attr("dy", ".35em")
+          .attr("text-anchor", "start")
+          .style("fill", "indianred")
+          .text(labels[1]);
 
-      svg.append("text")
-        .attr("transform", "translate(" + (main_width+3) + "," + main_y0(data[data.length-1].Third) + ")")
-        .attr("dy", ".35em")
-        .attr("text-anchor", "start")
-        .style("fill", "#92CCA6")
-        .text(labels[2]);
-      
+        svg.append("text")
+          .attr("transform", "translate(" + (main_width+3) + "," + main_y0(data[data.length-1].Third) + ")")
+          .attr("dy", ".35em")
+          .attr("text-anchor", "start")
+          .style("fill", "#92CCA6")
+          .text(labels[2]);
+      }
+
       main.append("path")
           .datum(data)
           .attr("clip-path", "url(#clip)")
           .attr("class", "line line0")
           .attr("d", main_line0); //appends the blue line
 
-      main.append("path")
-          .datum(data)
-          .attr("clip-path", "url(#clip)")
-          .attr("class", "line line1")
-          .attr("d", main_line1); // appends the red line 
+      if ((graphType == "sleep") || (graphType == "mood")){
+        main.append("path")
+            .datum(data)
+            .attr("clip-path", "url(#clip)")
+            .attr("class", "line line1")
+            .attr("d", main_line1); // appends the red line 
 
 
-      main.append("path")
-          .datum(data)
-          .attr("clip-path", "url(#clip)")
-          .attr("class", "line line2")
-          .attr("d", main_line2); // appends the green line 
-
+        main.append("path")
+            .datum(data)
+            .attr("clip-path", "url(#clip)")
+            .attr("class", "line line2")
+            .attr("d", main_line2); // appends the green line 
+      }
       main.append("g")
           .attr("class", "x axis")
           .attr("transform", "translate(0," + main_height + ")")
@@ -427,24 +448,25 @@ function make_graph(patientName, graphType) {
         // get mous coords
         var coordinates = [0, 0];
         coordinates = d3.mouse(this);
-        // var x = coordinates[0];
-        // Ti
-        // var y = coordinates[1];
+
         focus.select("circle.y0").attr("transform", "translate(" + main_x(d.TimeOfDay) + "," + main_y0(d.First) + ")");
         focus.select("text.y0").attr("transform", "translate(" + main_x(d.TimeOfDay) + "," + main_y0(d.First) + ")").text(formatOutput0(d));
-        focus.select("circle.y1").attr("transform", "translate(" + main_x(d.TimeOfDay) + "," + main_y0(d.Second) + ")"); //draws the circle on the top
-        focus.select("text.y1").attr("transform", "translate(" + main_x(d.TimeOfDay) + "," + main_y0(d.Second) + ")").text(formatOutput1(d)); // writes the text on the top
-        focus.select("circle.y2").attr("transform", "translate(" + main_x(d.TimeOfDay) + "," + main_y0(d.Third) + ")"); //draws the circle on the top
-        focus.select("text.y2").attr("transform", "translate(" + main_x(d.TimeOfDay) + "," + main_y0(d.Third) + ")").text(formatOutput2(d)); // writes the text on the top
-        focus.select(".x").attr("transform", "translate(" + main_x(d.TimeOfDay) + ",0)");
+        if ((graphType == "sleep") || (graphType == "mood") ){
+          focus.select("circle.y1").attr("transform", "translate(" + main_x(d.TimeOfDay) + "," + main_y0(d.Second) + ")"); //draws the circle on the top
+          focus.select("text.y1").attr("transform", "translate(" + main_x(d.TimeOfDay) + "," + main_y0(d.Second) + ")").text(formatOutput1(d)); // writes the text on the top
+          focus.select("circle.y2").attr("transform", "translate(" + main_x(d.TimeOfDay) + "," + main_y0(d.Third) + ")"); //draws the circle on the top
+          focus.select("text.y2").attr("transform", "translate(" + main_x(d.TimeOfDay) + "," + main_y0(d.Third) + ")").text(formatOutput2(d)); // writes the text on the top
+        }
+          focus.select(".x").attr("transform", "translate(" + main_x(d.TimeOfDay) + ",0)");
         // focus.select("text.x").attr("transform", "translate(" + main_x(d.TimeOfDay) + ","+ main_height/2 +")").text('Click to add Annotation');
         focus.select(".y0").attr("transform", "translate(" + main_width * -1 + ", " + main_y0(d.First) + ")")
         .attr("x2", main_width + main_x(d.TimeOfDay)); //makes the line to the left
-        focus.select(".y1").attr("transform", "translate(" + main_width * -1 + ", " + main_y0(d.Second) + ")")
-        .attr("x2", main_width + main_x(d.TimeOfDay)); //makes the line
-        focus.select(".y2").attr("transform", "translate(" + main_width * -1 + ", " + main_y0(d.Third) + ")")
-        .attr("x2", main_width + main_x(d.TimeOfDay)); //makes the line to the right
-        
+        if ((graphType == "sleep") || (graphType == "mood") ){
+          focus.select(".y1").attr("transform", "translate(" + main_width * -1 + ", " + main_y0(d.Second) + ")")
+          .attr("x2", main_width + main_x(d.TimeOfDay)); //makes the line
+          focus.select(".y2").attr("transform", "translate(" + main_width * -1 + ", " + main_y0(d.Third) + ")")
+          .attr("x2", main_width + main_x(d.TimeOfDay)); //makes the line to the right
+        }
         //building the dynamic annotation box
         if (!isFlag(main_x(d.TimeOfDay))) { //not on the flag
           var box_middle = coordinates[1]-main_height/(annotationBoxSize*2);
@@ -467,10 +489,34 @@ function make_graph(patientName, graphType) {
     });
 }
 
-make_graph("jane_goodall", "sleep");
-// make_graph("marshall_mathers", "sleep");
-make_graph("jane_goodall", "mood");
 
-// make_graph("jane_goodall", "anxiety");
-// make_graph("marshall_mathers", "sleep");
-// make_graph("marshall_mathers", "sleep");
+//Export to CSV
+//data is a 2-D array, each sub-array creates a newline
+//Example: [[1,2,3], ['chums', 'is', 'tight']] makes
+//1,2,3
+//'chums','is','tight'
+//filename is the name of the file (MarshallMathersSleep?)
+var csvExport = function(data, filename) {
+    var csvContent = "data:text/csv;charset=utf-8,";
+    $("#csvExport").click(function(){
+        data.forEach(function(infoArray, index){
+            dataString = infoArray.join(",");
+            csvContent += dataString+ "\n";
+        });
+
+        var encodedUri = encodeURI(csvContent);
+        var link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", filename+".csv");
+
+        link.click();
+    });
+};
+
+make_graph("jane_goodall", "sleep");
+make_graph("jane_goodall", "mood");
+make_graph("jane_goodall", "anxiety");
+make_graph("marshall_mathers", "sleep");
+make_graph("marshall_mathers", "mood");
+make_graph("marshall_mathers", "anxiety");
+
