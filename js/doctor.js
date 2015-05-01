@@ -218,10 +218,10 @@ var editBio = function(fullName, newBio) {
 //Adding new patient code
 var addNewPatient = function(firstName, lastName) {
 	var fullName = firstName+lastName;
-	patientJSON = {fullName: 
+	patientJSON = {fullName: {
 					'firstName': firstName,
 					'lastName': lastName,
-					'bio': basicBio};
+					'bio': basicBio}};
 	Patients.push({fullName: patientJSON});
 	addPatientToSideNav(firstName, lastName);
 };
