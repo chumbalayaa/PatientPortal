@@ -151,7 +151,7 @@ var loadRightPanel = function(file) {
 
 var loadPatient = function(fullName) {
 	loadLeftPanel(fullName);
-	loadRightPanel('graph'+fullName);
+	loadRightPanel('graph');
 };
 
 var populateBio = function(fullName) {
