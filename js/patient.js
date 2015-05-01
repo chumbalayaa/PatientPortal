@@ -64,6 +64,10 @@ $(function() {
 		loadRightPanel('mood')
 	});
 
+	$("#ss-submit").click(function(){
+		updateRightPanel();
+	});
+
 	//Remove form
 	var removeForm = function(form) {
 		var i = forms.indexOf(form);
@@ -96,6 +100,7 @@ $(function() {
 	};
 
 	var updateRightPanel = function() {
+		alert('hi');
 		//disable proper button 
 		//load in next due form
 		//remove from unfinished form list
