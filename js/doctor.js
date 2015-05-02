@@ -211,6 +211,7 @@ var editBio = function(fullName, newBio) {
 //Editing Password code
 var editPassword = function(isDoctor) {
 	var fullName =  $('#userDropdown').text;
+	console.log(fullName);
 	fullName = fullName.replace(/\s/g, '');
 	var oldPassword = $('#oldPass').text;
 	var newPassword = $('#newPass').text;
