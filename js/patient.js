@@ -117,7 +117,8 @@
 		//$('#'+currentForm+'FormText').removeClass("urgentForm");	
 		$('#'+currentForm+'FormText').addClass("completedForm");
 		alert($('#moodFormText').hasClass('dueForm'));
-	
+		alert($('#moodFormText').hasClass('completedForm'));
+
 	
 		if(unfinishedForms.length>1){
 			removeForm(currentForm);
