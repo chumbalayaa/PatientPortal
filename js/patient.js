@@ -19,6 +19,7 @@
 
 	//updateRightPanel();
 	alert('update10');
+	alert($('#moodFormText').hasClass('dueForm'));
 
 	var currentForm;
 
@@ -111,7 +112,14 @@
 		//load in next due form
 		//remove from unfinished form list
 		$('#'+currentForm+'Form').prop("disabled",true);
-		$('#'+currentForm+'FormText').html("Finished!");		
+		$('#'+currentForm+'FormText').html("Finished!");	
+		$('#'+currentForm+'FormText').removeClass("dueForm");		
+		//$('#'+currentForm+'FormText').removeClass("urgentForm");	
+		$('#'+currentForm+'FormText').addClass("completedForm");
+		alert($('#moodFormText').hasClass('dueForm'));
+		alert($('#moodFormText').hasClass('completedForm'));
+
+	
 		if(unfinishedForms.length>1){
 			removeForm(currentForm);
 			loadRightPanel(unfinishedForms[0]);

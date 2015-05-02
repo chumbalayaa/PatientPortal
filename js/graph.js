@@ -1,6 +1,8 @@
 //patientName is all lowercase with an underscore between first and last name 
 // e.g. jane_goodall mood
-function make_graph(patientName, graphType) {
+function draw_graph(patientName, graphType) {
+    // delete the previous graph is there is one
+    d3.select('svg').remove();
     var div_name = patientName.concat('_').concat(graphType);
     $("#main").append('<div id="'.concat(div_name).concat('"></div>'));
     
@@ -14,10 +16,11 @@ function make_graph(patientName, graphType) {
     }
     
 
-
     var FLAG_LOCATION = 210; // dont know what this does
-    var containerWidth = document.getElementById('main').offsetWidth
+    var containerWidth = document.getElementById('main').offsetWidth;
     var containerHeight = containerWidth/1.6;
+
+    console.log("containerWidth".concat(containerWidth));
 
 
 
@@ -53,13 +56,13 @@ function make_graph(patientName, graphType) {
           if (graphType == "sleep") { 
             return  timeToText(d.Second) + " O'Clock"; 
           } else { 
-            return d.First;
-          } };
+            return d.Second;
+          } },
         formatOutput2 = function(d) { 
           if (graphType == "sleep") { 
             return  timeToText(d.Third) + " O'Clock"; 
           } else { 
-            return d.First;
+            return d.Third;
           } };
     // }
     var annotations = [[parseDate("20141213"), "<b>".concat(parseDate("20141213").toDateString()).concat("</b><br>Marshall started taking Xanax.")]]//[[date, html],...]
@@ -118,6 +121,34 @@ function make_graph(patientName, graphType) {
     var svg = d3.select("#".concat(div_name)).append("svg")
         .attr("width", main_width + main_margin.left + main_margin.right)
         .attr("height", main_height + main_margin.top + main_margin.bottom); //sets the bounding space 
+
+    // Allow the graph to be resized
+    // function updateWindow(){
+    //   console.log('here');
+    //   var w = window,
+    //       d = document,
+    //       e = d.documentElement,
+    //       g = d.getElementsByTagName('body')[0],
+    //       x = w.innerWidth || e.clientWidth || g.clientWidth,
+    //       y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+
+    //   x = w.innerWidth || e.clientWidth || g.clientWidth;
+    //   y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+    //   console.log(x);
+    //   console.log(y);
+    //   svg.attr("width", x)
+    //      .attr("height", y); 
+    //   // var containerWidth = document.getElementById('main').offsetWidth
+    //   // var containerHeight = containerWidth/1.6;
+    //   // var main_margin = {top: 20, right: 100, bottom: 100, left: 40},
+    //   //     mini_margin = {top: 430, right: 80, bottom: 20, left: 40},
+    //   //     main_width = containerWidth - main_margin.left - main_margin.right,
+    //   //     main_height = containerHeight - main_margin.top - main_margin.bottom;
+      
+    //   // svg.attr("width", main_width + main_margin.left + main_margin.right)
+    //   //   .attr("height", main_height + main_margin.top + main_margin.bottom); 
+    // }
+    // window.onresize = updateWindow;
 
 
 
@@ -489,6 +520,13 @@ function make_graph(patientName, graphType) {
     });
 }
 
+function make_graph(patientName, graphType) {
+  draw_graph(patientName, graphType);
+    window.addEventListener('resize', function(event){
+      console.log('here')
+        draw_graph(patientName, graphType); // just call it again...
+    });
+}
 
 //Export to CSV
 //data is a 2-D array, each sub-array creates a newline
@@ -514,9 +552,9 @@ var csvExport = function(data, filename) {
 };
 
 make_graph("jane_goodall", "sleep");
-make_graph("jane_goodall", "mood");
-make_graph("jane_goodall", "anxiety");
-make_graph("marshall_mathers", "sleep");
-make_graph("marshall_mathers", "mood");
-make_graph("marshall_mathers", "anxiety");
+// make_graph("jane_goodall", "mood");
+// make_graph("jane_goodall", "anxiety");
+// make_graph("marshall_mathers", "sleep");
+// make_graph("marshall_mathers", "mood");
+// make_graph("marshall_mathers", "anxiety");
 
