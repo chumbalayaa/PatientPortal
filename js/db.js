@@ -3,7 +3,7 @@ var Patients = {
 		"firstName": "Marshall",
 		"lastName": "Mathers",
 		"username": "mmathers",
-		"password": "rapGod"
+		"password": "rapGod",
 		"bio": {
 			"height": "5' 10''",
 			"weight": "180",
@@ -18,7 +18,7 @@ var Patients = {
 		"firstName": "Jane",
 		"lastName": "Goodall",
 		"username": "jgoodall",
-		"password": "monkeysRcool"
+		"password": "monkeysRcool",
 		"bio": {
 			"height": "5' "+ '3"',
 			"weight": "110",
