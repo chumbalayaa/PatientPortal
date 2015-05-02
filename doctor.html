@@ -98,7 +98,7 @@
                 </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onClick="editPassword(true)">Save changes</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onClick="editPassword($('#userDropdown').text(), true, $('#oldPass').val(), $('#newPass').val())">Save changes</button>
                 </div>
             </div>
         </div>
@@ -219,7 +219,14 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal" 
-                    onclick="editBio($('#firstName').val() + $('#lastName').val(), $('#height').val(), $('#weight').val(), $('#bloodPressure').val(), $('#heartRate').val(), $('#newUpdate').val(), $('#newOverview').val(), $('#newPicture').val()">Add Patient</button>
+                    onclick="editBio($('#firstName').val() + $('#lastName').val(), 
+                    $('#height').val(), 
+                    $('#weight').val(), 
+                    $('#bloodPressure').val(), 
+                    $('#heartRate').val(), 
+                    $('#newUpdate').val(), 
+                    $('#newOverview').val(), 
+                    $('#newPicture').val())">Add Patient</button>
                 </div>
             </div>
         </div>

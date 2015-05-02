@@ -202,7 +202,9 @@ var addPaitientTopNavListener = function() {
 //Editing Bio code
 var editBio = function(fullName, height, weight, bloodPressure, heartRate, newUpdate, newOverview, newPicture) {
 	var bioFieldStrings = ['height', 'weight', 'bloodPressure', 'heartRate', 'recentUpdates', 'overview', 'photo'];
-	var bioFields = [height, weight, bloodPressure, heartRate, recentUpdates, overview, photo];
+	var bioFields = [height, weight, bloodPressure, heartRate, newUpdate, newOverview, newPicture];
+	console.log(fullName);
+	console.log(Patients[fullName]);
 	var currentBio = Patients[fullName]['bio'];
 	for (var i = 0; i < bioFields.length; i ++){
 		console.log(bioFieldStrings[i]);
@@ -217,17 +219,12 @@ var editBio = function(fullName, height, weight, bloodPressure, heartRate, newUp
 //################################################################################
 //################################################################################
 //Editing Password code
-var editPassword = function(isDoctor) {
-	var fullName =  $('#userDropdown').text;
-	console.log(fullName);
+var editPassword = function(fullName, isDoctor, oldPassword, newPassword) {
 	fullName = fullName.replace(/\s/g, '');
-	var oldPassword = $('#oldPass').text;
-	var newPassword = $('#newPass').text;
 	if (isDoctor) {
+		console.log(Doctors[fullName]['password']);
+		console.log(oldPassword);
 		if (Doctors[fullName]['password'] == oldPassword) {
-			console.log("Success");
-			console.log(oldPassword);
-			console.log(newPassword);
 			Doctors[fullName]['password'] == newPassword;
 		} else {
 			alert("INCORRECT PASSWORD");
