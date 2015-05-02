@@ -111,9 +111,9 @@
 		//remove from unfinished form list
 		$('#'+currentForm+'Form').prop("disabled",true);
 		$('#'+currentForm+'FormText').html("Finished!");	
-		$('#'+currentForm+'FormText').removeClass("dueForm");		
+		$('#'+currentForm+'FormDiv').removeClass("dueForm");		
 		$('#'+currentForm+'FormText').removeClass("urgentForm");	
-		$('#'+currentForm+'FormText').addClass("completedForm");
+		$('#'+currentForm+'FormDiv').addClass("completedForm");
 	
 		if(unfinishedForms.length>1){
 			removeForm(currentForm);

@@ -7,7 +7,9 @@ body {
 }
 
 .row_group {
-  background-color:#D3D3D3;
+  background-color: lightgreen;
+  border: 1px solid lightgray;
+  margin: 3px;
 }
 
 #form{
@@ -18,17 +20,15 @@ body {
 }
 
 .completedForm{
-  color:#00FF7F;
+  background-color:lightgreen;
 }
 
 .dueForm{
-  color:#FF0000;
+  background-color:#fdbdbd;
 }
 
 .urgentForm{
   font-weight:bold;
-  color:#FF0000;
-
 }
 
 #leftPanel {
