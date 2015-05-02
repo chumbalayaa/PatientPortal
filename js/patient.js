@@ -19,7 +19,7 @@
 
 	//updateRightPanel();
 	alert('update10');
-	alert($('#sleepFormText').hasClass('dueForm'));
+	alert($('#moodFormText').hasClass('dueForm'));
 
 	var currentForm;
 
@@ -115,7 +115,9 @@
 		$('#'+currentForm+'FormText').html("Finished!");	
 		$('#'+currentForm+'FormText').removeClass("dueForm");		
 		//$('#'+currentForm+'FormText').removeClass("urgentForm");	
-		$('#'+currentForm+'FormText').addClass("completedForm");	
+		$('#'+currentForm+'FormText').addClass("completedForm");
+		alert($('#moodFormText').hasClass('dueForm'));
+	
 	
 		if(unfinishedForms.length>1){
 			removeForm(currentForm);
