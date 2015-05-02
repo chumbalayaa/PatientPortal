@@ -541,11 +541,7 @@ var csvExport = function(data, filename) {
         });
 
         var encodedUri = encodeURI(csvContent);
-        var link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.setAttribute("download", filename+".csv");
-
-        link.click();
+        window.open(encodedUri);
     });
 };
 
