@@ -126,7 +126,6 @@ var loadLeftPanel = function(fullName) {
 		context: document.body,
 		success: function(response) {
 			$("#leftPanel").html(response);
-			console.log(fullName);
 			populateBio(fullName);
 		}
 	});
