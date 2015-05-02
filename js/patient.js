@@ -111,7 +111,11 @@
 		//load in next due form
 		//remove from unfinished form list
 		$('#'+currentForm+'Form').prop("disabled",true);
-		$('#'+currentForm+'FormText').html("Finished!");		
+		$('#'+currentForm+'FormText').html("Finished!");	
+		$('#'+currentForm+'FormText').removeClass("dueForm");		
+		$('#'+currentForm+'FormText').removeClass("urgentForm");	
+		$('#'+currentForm+'FormText').addClass("completedForm");	
+	
 		if(unfinishedForms.length>1){
 			removeForm(currentForm);
 			loadRightPanel(unfinishedForms[0]);
