@@ -218,7 +218,15 @@
               </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="editBio($('#firstName').val() + #lastName').val(), 'bio'">Add Patient</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" 
+                    onclick="editBio($('#firstName').val() + $('#lastName').val(), 
+                    $('#height').val(), 
+                    $('#weight').val(), 
+                    $('#bloodPressure').val(), 
+                    $('#heartRate').val(), 
+                    $('#newUpdate').val(), 
+                    $('#newOverview').val(), 
+                    $('#newPicture').val())">Add Patient</button>
                 </div>
             </div>
         </div>

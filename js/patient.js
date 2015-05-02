@@ -18,7 +18,7 @@
 //$(function() {
 
 	//updateRightPanel();
-	alert('update4');
+	alert('update7');
 
 	var currentForm;
 
@@ -103,6 +103,10 @@
 	};
 
 	var updateRightPanel = function() {
+		var resonse = window.confirm('Are you sure you want to submit?');
+		if (response==false){
+			return;
+		}
 		//disable proper button 
 		//load in next due form
 		//remove from unfinished form list
