@@ -207,8 +207,16 @@ var addPaitientTopNavListener = function() {
 //################################################################################
 //################################################################################
 //Editing Bio code
-var editBio = function(fullName, newBio) {
-	Patients[fullName]['bio'] = newBio;
+var editBio = function(fullName, height, weight, bloodPressure, heartRate, newUpdate, newOverview, newPicture) {
+	var bioFieldStrings = ['height', 'weight', 'bloodPressure', 'heartRate', 'recentUpdates', 'overview', 'photo'];
+	var bioFields = [height, weight, bloodPressure, heartRate, recentUpdates, overview, photo];
+	var currentBio = Patients[fullName]['bio'];
+	for (var i = 0; i < bioFields.length; i ++){
+		console.log(bioFieldStrings[i]);
+		if (bioFields[i] != null){
+			Patients[fullName]['bio'][bioFieldStrings[i]] = bioFields[i];
+		}
+	}
 };
 
 //--------------------------------------------------------------------------------
