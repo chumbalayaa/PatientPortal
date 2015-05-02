@@ -18,7 +18,8 @@
 //$(function() {
 
 	//updateRightPanel();
-	alert('update5');
+	alert('update10');
+	alert($('#moodFormText').hasClass('dueForm'));
 
 	var currentForm;
 
@@ -114,7 +115,10 @@
 		$('#'+currentForm+'FormText').html("Finished!");	
 		$('#'+currentForm+'FormText').removeClass("dueForm");		
 		$('#'+currentForm+'FormText').removeClass("urgentForm");	
-		$('#'+currentForm+'FormText').addClass("completedForm");	
+		$('#'+currentForm+'FormText').addClass("completedForm");
+		alert($('#moodFormText').hasClass('dueForm'));
+		alert($('#moodFormText').hasClass('completedForm'));
+
 	
 		if(unfinishedForms.length>1){
 			removeForm(currentForm);
