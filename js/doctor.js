@@ -126,7 +126,6 @@ var loadLeftPanel = function(fullName) {
 		context: document.body,
 		success: function(response) {
 			$("#leftPanel").html(response);
-			console.log(fullName);
 			populateBio(fullName);
 		}
 	});
@@ -202,7 +201,9 @@ var addPaitientTopNavListener = function() {
 //Editing Bio code
 var editBio = function(fullName, height, weight, bloodPressure, heartRate, newUpdate, newOverview, newPicture) {
 	var bioFieldStrings = ['height', 'weight', 'bloodPressure', 'heartRate', 'recentUpdates', 'overview', 'photo'];
-	var bioFields = [height, weight, bloodPressure, heartRate, recentUpdates, overview, photo];
+	var bioFields = [height, weight, bloodPressure, heartRate, newUpdate, newOverview, newPicture];
+	console.log(fullName);
+	console.log(Patients[fullName]);
 	var currentBio = Patients[fullName]['bio'];
 	for (var i = 0; i < bioFields.length; i ++){
 		console.log(bioFieldStrings[i]);
