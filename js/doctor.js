@@ -167,7 +167,6 @@ var populateBio = function(fullName) {
 
 //Load form into right panel
 var assignNewForm = function() {
-	console.log("assigning new form");
 	loadRightPanel('assignNewForm');
 };
 
@@ -203,8 +202,8 @@ var editBio = function(fullName, height, weight, bloodPressure, heartRate, newUp
 	var bioFieldStrings = ['height', 'weight', 'bloodPressure', 'heartRate', 'recentUpdates', 'overview', 'photo'];
 	var bioFields = [height, weight, bloodPressure, heartRate, newUpdate, newOverview, newPicture];
 	for (var i = 0; i < bioFields.length; i ++){
-		console.log(bioFieldStrings[i]);
-		if (bioFields[i] != null){
+		console.log(bioFields[i]);
+		if (bioFields[i] != ""){
 			Patients["MarshallMathers"]['bio'][bioFieldStrings[i]] = bioFields[i];
 		}
 	}
@@ -218,8 +217,6 @@ var editBio = function(fullName, height, weight, bloodPressure, heartRate, newUp
 var editPassword = function(fullName, isDoctor, oldPassword, newPassword) {
 	fullName = fullName.replace(/\s/g, '');
 	if (isDoctor) {
-		console.log(Doctors[fullName]['password']);
-		console.log(oldPassword);
 		if (Doctors[fullName]['password'] == oldPassword) {
 			Doctors[fullName]['password'] == newPassword;
 		} else {
