@@ -17,9 +17,7 @@
 
 //$(function() {
 
-	//updateRightPanel();
-	alert('update10');
-	alert($('#moodFormText').hasClass('dueForm'));
+	//alert('update0');
 
 	var currentForm;
 
@@ -116,9 +114,6 @@
 		$('#'+currentForm+'FormText').removeClass("dueForm");		
 		$('#'+currentForm+'FormText').removeClass("urgentForm");	
 		$('#'+currentForm+'FormText').addClass("completedForm");
-		alert($('#moodFormText').hasClass('dueForm'));
-		alert($('#moodFormText').hasClass('completedForm'));
-
 	
 		if(unfinishedForms.length>1){
 			removeForm(currentForm);

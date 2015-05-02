@@ -8,7 +8,7 @@ body {
 
 #form{
   height:450px;
-  width:450px;
+  /*width:450px;*/
 
   overflow: scroll;
 }

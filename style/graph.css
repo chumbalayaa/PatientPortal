@@ -8,6 +8,11 @@ h1 {
   width: 100%;
 }
 
+.download-button {
+  font: 10px sans-serif;
+  float: right;
+}
+
 .axis path,
 .axis line {
   fill: none;
