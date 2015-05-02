@@ -18,7 +18,7 @@
 //$(function() {
 
 	//updateRightPanel();
-	alert('update3');
+	alert('update4');
 
 	var currentForm;
 
@@ -111,6 +111,7 @@
 		if(unfinishedForms.length!=0){
 			unfinishedForms.removeForm(currentForm);
 			loadRightPanel(unfinishedForms[0]);
+			alert(unfinishedForms);
 		}
 		else{
 			loadRightPanel('done');
