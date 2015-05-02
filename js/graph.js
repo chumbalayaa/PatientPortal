@@ -10,8 +10,9 @@ function drawGraph(patientName, graphType) {
     // delete the previous graph is there is one
     
     addDownloadButton(div_name);
+    addDateRange(div_name);
 
-    $("#main").append('<div id="'.concat(div_name).concat('"></div>'));
+    // $("#main").append('<div id="'.concat(div_name).concat('"></div>'));
 
     // append the correct type of labels
     var labels = ["Fell Asleep", "Time in Bed", "Wake Up Time"]
@@ -534,15 +535,14 @@ function makeGraph(patientName, graphType) {
 
 function addDownloadButton(div_name){
   var args = "'".concat(div_name).concat("', '").concat(div_name).concat("'");
-  console.log(args)
+  console.log('<button onclick="csvExport('.concat(args).concat(')" type="button" class="download-button btn btn-default">Download CSV</button>'));
   $("#".concat(div_name)).append('<button onclick="csvExport('.concat(args).concat(')" type="button" class="download-button btn btn-default">Download CSV</button>'));
-// //csvExport(\'marshall_mathers_sleep\', \'marshall_mathers_sleep\')
-//   // $("#".concat(div_name)).append('<button onclick="csvExport("'.concat(div_name).concat(')" type="button" class="download-button btn btn-default">Download CSV</button>'));
 }
 
-// var tst = function(){
-//   alert('tst');
-// }
+function addDateRange(div_name) {
+  //$("#".concat(div_name)).append('<button onclick="csvExport('.concat(args).concat(')" type="button" class="download-button btn btn-default">Download CSV</button>'));
+}
+
 //Export to CSV
 var csvExport = function(dataFile, filename) {
     var csvContent = "data:text/csv;charset=utf-8,";
