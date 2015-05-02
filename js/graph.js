@@ -26,7 +26,6 @@ function drawGraph(patientName, graphType) {
     var containerWidth = document.getElementById('main').offsetWidth;
     var containerHeight = containerWidth/1.6;
 
-    console.log("containerWidth".concat(containerWidth));
 
 
 
@@ -203,7 +202,6 @@ function drawGraph(patientName, graphType) {
       });
 
       main_x.domain([data[0].TimeOfDay, data[data.length - 1].TimeOfDay]); //builds the x-axis
-      console.log('step3')
       // sets the domains for the x axis
       if (graphType == "mood") {
         main_y0.domain([-3.5, 3.5])

@@ -167,7 +167,6 @@ var populateBio = function(fullName) {
 
 //Load form into right panel
 var assignNewForm = function() {
-	console.log("assigning new form");
 	loadRightPanel('assignNewForm');
 };
 
@@ -203,8 +202,8 @@ var editBio = function(fullName, height, weight, bloodPressure, heartRate, newUp
 	var bioFieldStrings = ['height', 'weight', 'bloodPressure', 'heartRate', 'recentUpdates', 'overview', 'photo'];
 	var bioFields = [height, weight, bloodPressure, heartRate, newUpdate, newOverview, newPicture];
 	for (var i = 0; i < bioFields.length; i ++){
-		console.log(bioFieldStrings[i]);
-		if (bioFields[i] != null){
+		console.log(bioFields[i]);
+		if (bioFields[i] != ""){
 			Patients["MarshallMathers"]['bio'][bioFieldStrings[i]] = bioFields[i];
 		}
 	}
@@ -218,8 +217,6 @@ var editBio = function(fullName, height, weight, bloodPressure, heartRate, newUp
 var editPassword = function(fullName, isDoctor, oldPassword, newPassword) {
 	fullName = fullName.replace(/\s/g, '');
 	if (isDoctor) {
-		console.log(Doctors[fullName]['password']);
-		console.log(oldPassword);
 		if (Doctors[fullName]['password'] == oldPassword) {
 			Doctors[fullName]['password'] == newPassword;
 		} else {
@@ -259,55 +256,6 @@ var addPatientToSideNav = function(firstName, lastName) {
 //--------------------------------------------------------------------------------
 //################################################################################
 //################################################################################
-
-//Export to CSV
-//data is a 2-D array, each sub-array creates a newline
-//Example: [[1,2,3], ['chums', 'is', 'tight']] makes
-//1,2,3
-//'chums','is','tight'
-//filename is the name of the file (MarshallMathersSleep?)
-var csvExport = function(dataFile, filename) {
-    var csvContent = "data:text/csv;charset=utf-8,";
-    $.ajax({
-        type: "GET",
-        url: "./data"+dataFile,
-        dataType: "text",
-        success: function(allText) {
-            var allTextLines = allText.split(/\r\n|\n/);
-    		var headers = allTextLines[0].split(',');
-    		var lines = [];
-
-    		for (var i=1; i<allTextLines.length; i++) {
-        		var data = allTextLines[i].split(',');
-        		if (data.length == headers.length) {
-            		var tarr = [];
-            		for (var j=0; j<headers.length; j++) {
-                		tarr.push(headers[j]+":"+data[j]);
-            		}
-            		lines.push(tarr);
-        		}
-    		}
-    		console.log(headers);
-    		console.log(lines);
-        }
-     });
-
-
-
-    $("#csvExport").click(function(){
-        data.forEach(function(infoArray, index){
-            dataString = infoArray.join(",");
-            csvContent += dataString+ "\n";
-        });
-
-        var encodedUri = encodeURI(csvContent);
-        var link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.setAttribute("download", filename+".csv");
-
-        link.click();
-    });
-};
 
 $( document ).ready(function() {
     reassignListeners();
