@@ -1,11 +1,17 @@
 //patientName is all lowercase with an underscore between first and last name 
 // e.g. jane_goodall mood
-function draw_graph(patientName, graphType) {
-    // delete the previous graph is there is one
-    d3.select('svg').remove();
+function drawGraph(patientName, graphType) {
+
     var div_name = patientName.concat('_').concat(graphType);
+    if ($("#".concat(div_name)).length) {
+      d3.select("#".concat(div_name)).remove();
+    }
     $("#main").append('<div id="'.concat(div_name).concat('"></div>'));
+    // delete the previous graph is there is one
     
+    addDownloadButton(div_name);
+
+    $("#main").append('<div id="'.concat(div_name).concat('"></div>'));
 
     // append the correct type of labels
     var labels = ["Fell Asleep", "Time in Bed", "Wake Up Time"]
@@ -520,41 +526,57 @@ function draw_graph(patientName, graphType) {
     });
 }
 
-function make_graph(patientName, graphType) {
-  draw_graph(patientName, graphType);
+function makeGraph(patientName, graphType) {
+  drawGraph(patientName, graphType);
     window.addEventListener('resize', function(event){
       console.log('here')
-        draw_graph(patientName, graphType); // just call it again...
+        drawGraph(patientName, graphType); // just call it again...
     });
 }
 
+function addDownloadButton(div_name){
+  var args = "'".concat(div_name).concat("', '").concat(div_name).concat("'");
+  console.log(args)
+  $("#".concat(div_name)).append('<button onclick="csvExport('.concat(args).concat(')" type="button" class="download-button btn btn-default">Download CSV</button>'));
+// //csvExport(\'marshall_mathers_sleep\', \'marshall_mathers_sleep\')
+//   // $("#".concat(div_name)).append('<button onclick="csvExport("'.concat(div_name).concat(')" type="button" class="download-button btn btn-default">Download CSV</button>'));
+}
+
+// var tst = function(){
+//   alert('tst');
+// }
 //Export to CSV
-//data is a 2-D array, each sub-array creates a newline
-//Example: [[1,2,3], ['chums', 'is', 'tight']] makes
-//1,2,3
-//'chums','is','tight'
-//filename is the name of the file (MarshallMathersSleep?)
-var csvExport = function(data, filename) {
+var csvExport = function(dataFile, filename) {
     var csvContent = "data:text/csv;charset=utf-8,";
-    $("#csvExport").click(function(){
-        data.forEach(function(infoArray, index){
-            dataString = infoArray.join(",");
-            csvContent += dataString+ "\n";
-        });
+    $.ajax({
+        type: "GET",
+        url: "./data"+dataFile,
+        dataType: "text",
+        success: function(allText) {
+            var allTextLines = allText.split(/\r\n|\n/);
+            var lines = [];
+            for (var i=0; i<allTextLines.length; i++) {
+                var data = allTextLines[i].split(',');
+                lines.push(data);
+            }
+            lines.forEach(function(infoArray, index){
 
-        var encodedUri = encodeURI(csvContent);
-        var link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.setAttribute("download", filename+".csv");
-
-        link.click();
-    });
+                dataString = infoArray.join(",");
+                csvContent += dataString+ "\n";
+            });
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", filename+".csv");
+            link.click();
+        }
+     });
 };
 
-make_graph("jane_goodall", "sleep");
-// make_graph("jane_goodall", "mood");
-// make_graph("jane_goodall", "anxiety");
-// make_graph("marshall_mathers", "sleep");
-// make_graph("marshall_mathers", "mood");
-// make_graph("marshall_mathers", "anxiety");
+makeGraph("jane_goodall", "sleep");
+makeGraph("jane_goodall", "mood");
+makeGraph("jane_goodall", "anxiety");
+makeGraph("marshall_mathers", "sleep");
+makeGraph("marshall_mathers", "mood");
+makeGraph("marshall_mathers", "anxiety");
 
