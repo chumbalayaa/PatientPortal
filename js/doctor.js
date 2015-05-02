@@ -260,6 +260,40 @@ var addPatientToSideNav = function(firstName, lastName) {
 //################################################################################
 //################################################################################
 
+//Export to CSV
+//data is a 2-D array, each sub-array creates a newline
+//Example: [[1,2,3], ['chums', 'is', 'tight']] makes
+//1,2,3
+//'chums','is','tight'
+//filename is the name of the file (MarshallMathersSleep?)
+var csvExport = function(dataFile, filename) {
+    var csvContent = "data:text/csv;charset=utf-8,";
+    $.ajax({
+        type: "GET",
+        url: "./data"+dataFile,
+        dataType: "text",
+        success: function(data) {
+            console.log(data);
+        }
+     });
+
+
+
+    $("#csvExport").click(function(){
+        data.forEach(function(infoArray, index){
+            dataString = infoArray.join(",");
+            csvContent += dataString+ "\n";
+        });
+
+        var encodedUri = encodeURI(csvContent);
+        var link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", filename+".csv");
+
+        link.click();
+    });
+};
+
 $( document ).ready(function() {
     reassignListeners();
 });
