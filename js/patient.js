@@ -18,7 +18,7 @@
 //$(function() {
 
 	//updateRightPanel();
-	alert('update6');
+	alert('update7');
 
 	var currentForm;
 
@@ -67,7 +67,7 @@
 	});
 
 	$("#ss-submit").click(function(){
-		alert('hi');
+		//alert('hi');
 		updateRightPanel();
 	});
 
