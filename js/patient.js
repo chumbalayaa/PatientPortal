@@ -114,7 +114,7 @@
 		$('#'+currentForm+'Form').prop("disabled",true);
 		$('#'+currentForm+'FormText').html("Finished!");	
 		$('#'+currentForm+'FormText').removeClass("dueForm");		
-		//$('#'+currentForm+'FormText').removeClass("urgentForm");	
+		$('#'+currentForm+'FormText').removeClass("urgentForm");	
 		$('#'+currentForm+'FormText').addClass("completedForm");
 		alert($('#moodFormText').hasClass('dueForm'));
 		alert($('#moodFormText').hasClass('completedForm'));
