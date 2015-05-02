@@ -50,7 +50,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dr. Dre <span class="caret"></span></a>
+                <a href="#" id="userDropdown" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dr. Dre <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="#passwordModal" role="button" data-toggle="modal">Change Password</a></li>
                   <li><a href="#helpModal" role="button" data-toggle="modal">Help</a></li>
@@ -98,7 +98,7 @@
                 </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onClick="editPassword($('#userDropdown').text(), true, $('#oldPass').val(), $('#newPass').val())">Save changes</button>
                 </div>
             </div>
         </div>
@@ -127,7 +127,7 @@
                 </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Add Patient</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addNewPatient($('#firstName').val(), $('#lastName').val())">Add Patient</button>
                 </div>
             </div>
         </div>
@@ -161,6 +161,72 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Patient Bio Modal -->
+    <div id="editBioModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Edit Patient Bio</h4>
+                </div>
+                <div class="modal-body">
+                  <p>Please enter patient information</p>
+                  <form class="form-inline">
+                    <div class="form-group">
+                      <label for="firstName">First Name:</label>
+                      <input type="text" style="margin-left:7px;" class="form-control" id="firstName">
+                    </div></br>
+                    <div class="form-group">
+                      <label for="lastName">Last Name:</label>
+                      <input type="text" style="margin-left:7px;" class="form-control" id="lastName">
+                    </div></br>
+                    <div class="form-group">
+                      <label for="firstName">Height:</label>
+                      <input type="text" style="margin-left:7px;" class="form-control" id="height">
+                    </div></br>
+                    <div class="form-group">
+                      <label for="lastName">Weight:</label>
+                      <input type="text" style="margin-left:7px;" class="form-control" id="weight">
+                    </div></br>
+                    <div class="form-group">
+                      <label for="bloodPressure">Blood Pressure:</label>
+                      <input type="text" style="margin-left:7px;" class="form-control" id="bloodPressure">
+                    </div></br>
+                    <div class="form-group">
+                      <label for="heartRate">Heart Rate:</label>
+                      <input type="text" style="margin-left:7px;" class="form-control" id="heartRate">
+                    </div></br>
+                    <div class="form-group">
+                      <label for="newUpdate">New Update:</label>
+                      <textarea style="margin-left:7px;" class="form-control" id="newUpdate"></textarea>
+                    </div></br>
+                    <div class="form-group">
+                      <label for="newOverview">Overview:</label>
+                      <textarea type="textarea" style="margin-left:7px;" class="form-control" id="newOverview"></textarea>
+                    </div></br>
+                    <div class="form-group">
+                      <label for="newPicture">Picture:</label>
+                      <input type="file" style="margin-left:7px;" class="btn btn-file" id="newPicture">
+                    </div>
+                  </div>
+                </form>
+              </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" 
+                    onclick="editBio($('#firstName').val() + $('#lastName').val(), 
+                    $('#height').val(), 
+                    $('#weight').val(), 
+                    $('#bloodPressure').val(), 
+                    $('#heartRate').val(), 
+                    $('#newUpdate').val(), 
+                    $('#newOverview').val(), 
+                    $('#newPicture').val())">Add Patient</button>
                 </div>
             </div>
         </div>

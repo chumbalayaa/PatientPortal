@@ -57,7 +57,7 @@
               <button class="formButton center-block" id="anxietyForm">Anxiety</button>
             </div>
             <div class="col-xs-6 col-lg-6">
-              <p class="logCompleteDate center-block" >Finish by: Apr, 11 2015</p>
+              <p class="logCompleteDate center-block dueForm urgentForm" id="anxietyFormText">Finish by: Apr, 11 2015</p>
             </div>
           </div>
           <div class="row row1">
@@ -65,7 +65,7 @@
               <button class="formButton center-block" id="sleepForm">Sleep</button>
             </div>
             <div class="col-xs-6 col-lg-6">
-              <p class="logCompleteDate center-block">Finish by: Apr, 15 2015</p>
+              <p class="logCompleteDate center-block dueForm" id="sleepFormText" style='color:#FF0000;'>Finish by: Apr, 15 2015</p>
             </div>
           </div>
           <div class="row row1">
@@ -73,32 +73,32 @@
               <button class="formButton center-block" id="moodForm">Mood</button>
             </div>
             <div class="col-xs-6 col-lg-6">
-              <p class="logCompleteDate center-block">Finish by: Apr, 18 2015</p>
+              <p class="logCompleteDate center-block dueForm" id="moodFormText" style='color:#FF6347;'>Finish by: Apr, 18 2015</p>
             </div>
           </div>
           <div class="row row1">
             <div class="col-xs-6 col-lg-6">
               <button class="formButton center-block" disabled
-		    id="moodForm">Anxiety</button>
+		    id="moodForm1">Anxiety</button>
             </div>
             <div class="col-xs-6 col-lg-6">
-              <p class="logCompleteDate center-block">Finished!</p>
-            </div>
-          </div>
-          <div class="row row1">
-            <div class="col-xs-6 col-lg-6">
-              <button class="formButton center-block" id="moodForm" disabled >Mood</button>
-            </div>
-            <div class="col-xs-6 col-lg-6">
-              <p class="logCompleteDate center-block">Finished!</p>
+              <p class="logCompleteDate center-block completedForm">Finished!</p>
             </div>
           </div>
           <div class="row row1">
             <div class="col-xs-6 col-lg-6">
-              <button class="formButton center-block" disabled id="moodForm">Sleep</button>
+              <button class="formButton center-block" id="moodForm2" disabled >Mood</button>
             </div>
             <div class="col-xs-6 col-lg-6">
-              <p class="logCompleteDate center-block">Finished!</p>
+              <p class="logCompleteDate center-block completedForm">Finished!</p>
+            </div>
+          </div>
+          <div class="row row1">
+            <div class="col-xs-6 col-lg-6">
+              <button class="formButton center-block" disabled id="moodForm3">Sleep</button>
+            </div>
+            <div class="col-xs-6 col-lg-6" >
+              <p class="logCompleteDate center-block completedForm">Finished!</p>
             </div>
           </div>
         </div>
@@ -108,7 +108,7 @@
             <h1>Current Form</h1>
         </div>
         <div id="form">
-          <p class="lead text-centered">Select a form on the left to get started!</p>
+          <p class="lead text-center">Select a form on the left to get started!</p>
         </div>
     </div>
     <!-- End Main Page-->
