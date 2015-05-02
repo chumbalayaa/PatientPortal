@@ -534,13 +534,13 @@ function makeGraph(patientName, graphType) {
 }
 
 function addDownloadButton(div_name){
-  var args = "'".concat(div_name).concat("', '").concat(div_name).concat("'");
+  var args = "'/".concat(div_name).concat(".txt', '/").concat(div_name).concat(".txt'");
   console.log('<button onclick="csvExport('.concat(args).concat(')" type="button" class="download-button btn btn-default">Download CSV</button>'));
   $("#".concat(div_name)).append('<button onclick="csvExport('.concat(args).concat(')" type="button" class="download-button btn btn-default">Download CSV</button>'));
 }
 
 function addDateRange(div_name) {
-  //$("#".concat(div_name)).append('<button onclick="csvExport('.concat(args).concat(')" type="button" class="download-button btn btn-default">Download CSV</button>'));
+  // $("#".concat(div_name)).datepicker();
 }
 
 //Export to CSV
