@@ -9,6 +9,18 @@
   overflow: scroll;
 }
 
+.completedForm{
+  color:#00FF7F;
+}
+
+.dueForm{
+  color:#00FF7F;
+}
+
+.urgentForm{
+  font-weight:bold;
+}
+
 #leftPanel {
   float:left;
   height: 100%;
