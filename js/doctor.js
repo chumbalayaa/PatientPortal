@@ -273,7 +273,7 @@ var csvExport = function(dataFile, filename) {
         url: "./data"+dataFile,
         dataType: "text",
         success: function(data) {
-            console.log(data);
+            console.log(typeof data);
         }
      });
 
