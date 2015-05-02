@@ -17,6 +17,11 @@
 
 $(function() {
 
+
+	var currentForm;
+
+	var unfinishedForms=['anxiety','sleep','mood'];
+
 	//Data Structures
 	var forms = [{
 					type:"Anxiety",
@@ -38,27 +43,30 @@ $(function() {
 					html:'<iframe src="https://docs.google.com/forms/d/1Hk_DksNNvJ-OTJFhRNiVQhMroPHMcHi9PlMlElhqpV4/viewform?embedded=true" width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>'
 				}];
 
-	//var submitted=false;
-
 	$("#sleepForm").click(function(){
 		// $("#form").html(forms[1].html);
 		// $("#formName").html(forms[1].type);
 		//alert(submitted);
-		loadRightPanel('./forms/sleep-form')
+		loadRightPanel('sleep');
 	});
 
 	$("#anxietyForm").click(function(){
 		// $("#form").html(forms[0].html);
 		// $("#formName").html(forms[0].type);
 		//alert(submitted);
-		loadRightPanel('./forms/anxiety-form')
+		loadRightPanel('anxiety');
 	});
 
 	$("#moodForm").click(function(){
 		// $("#form").html(forms[2].html);
 		// $("#formName").html(forms[2].type);
-		alert('sorry, havent gotten around making the correct form quite yet 8===D');
-		loadRightPanel('./forms/mood-form')
+		//alert('sorry, havent gotten around making the correct form quite yet 8===D');
+		loadRightPanel('mood');
+	});
+
+	$("#ss-submit").click(function(){
+		alert('hi');
+		updateRightPanel();
 	});
 
 	//Remove form
@@ -70,11 +78,9 @@ $(function() {
 	};
 
 	var loadRightPanel = function(file) {
-		//var html = new EJS({url: 'templates/graphs.html'});
-		//$("#leftPanel").innerHTML = html;
-
+		currentForm=file;
 		$.ajax({
-			url: file+'.html',
+			url: './forms/'+file+'-form.html',
 			context: document.body,
 			success: function(response) {
 				$("#form").html(response);
@@ -93,5 +99,22 @@ $(function() {
 			return Date.parse(a.dueDate) - Date.parse(b.dueDate);
 		});
 	};
+
+	var updateRightPanel = function() {
+		alert('hi');
+		//disable proper button 
+		//load in next due form
+		//remove from unfinished form list
+		$('#'+currentForm+'Form').prop("disabled",true);
+		$('#'+currentForm+'FormText').html("Finished!");		
+		if(unfinishedForms.length!=0){
+			loadRightPanel(unfinishedForms[0]);
+			unfinishedForms.splice(0,1);
+		}
+		else{
+			loadRightPanel('done');
+		}
+	};
+
 
 });

@@ -4,7 +4,24 @@
 //Patient in navbar stuff --------------------------------------------------------
 var patientsInNavBar = [];
 
+//
+var sideNav = false;
 
+var slideSide = function() {
+	if (sideNav) {
+		sideNav = false;
+		$('#sideNavToggle').empty();
+		$('#sideNavToggle').html('<span class="glyphicon glyphicon-chevron-right"></span><br> \
+              					  <span class="glyphicon glyphicon-chevron-right"></span><br> \
+              					  <span class="glyphicon glyphicon-chevron-right"></span>');
+	} else {
+		sideNav = true;
+		$('#sideNavToggle').empty();
+		$('#sideNavToggle').html('<span class="glyphicon glyphicon-chevron-left"></span><br> \
+              					  <span class="glyphicon glyphicon-chevron-left"></span><br> \
+              					  <span class="glyphicon glyphicon-chevron-left"></span>');
+	}
+}
 
 //Take patient names out of the navbar - UI
 var assignNavbarXClickListener = function() {
@@ -134,7 +151,7 @@ var loadRightPanel = function(file) {
 
 var loadPatient = function(fullName) {
 	loadLeftPanel(fullName);
-	loadRightPanel('graph'+fullName);
+	loadRightPanel('graph');
 };
 
 var populateBio = function(fullName) {
@@ -185,7 +202,33 @@ var addPaitientTopNavListener = function() {
 	});
 };
 
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+//################################################################################
+//################################################################################
+//Editing Bio code
+var editBio = function(fullName, newBio) {
+	Patients[fullName]['bio'] = newBio;
+};
 
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+//################################################################################
+//################################################################################
+//Adding new patient code
+var addNewPatient = function(firstName, lastName) {
+	var fullName = firstName+lastName;
+	patientJSON = {fullName: {
+					'firstName': firstName,
+					'lastName': lastName,
+					'bio': basicBio}};
+	Patients.push({fullName: patientJSON});
+	addPatientToSideNav(firstName, lastName);
+};
+
+var addPatientToSideNav = function(firstName, lastName) {
+	$('#sideNavPatientList').append('<li class="patient"><a href="#" class="patient">'+firstName+' '+lastName+'</a></li>')
+};
 
 
 //--------------------------------------------------------------------------------

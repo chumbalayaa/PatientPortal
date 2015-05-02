@@ -95,7 +95,7 @@ if (typeof jQuery === 'undefined') { throw new Error('Jasny Bootstrap\'s JavaScr
     if (this.options.autohide)
       $(document).on('click', $.proxy(this.autohide, this))
 
-    if (this.options.toggle) this.toggle()
+    if (this.options.toggle) this.toggle() 
     
     if (this.options.disablescrolling) {
         this.options.disableScrolling = this.options.disablescrolling
@@ -252,6 +252,7 @@ if (typeof jQuery === 'undefined') { throw new Error('Jasny Bootstrap\'s JavaScr
       this.state = 'slid'
 
       elements.removeClass('canvas-sliding').addClass('canvas-slid')
+      slideSide()
       this.$element.trigger('shown.bs.offcanvas')
     }
 
@@ -283,6 +284,7 @@ if (typeof jQuery === 'undefined') { throw new Error('Jasny Bootstrap\'s JavaScr
       this.$element.removeClass('in')
       
       elements.removeClass('canvas-sliding')
+      slideSide()
       elements.add(this.$element).add('body').each(function() {
         $(this).attr('style', $(this).data('offcanvas-style')).removeData('offcanvas-style')
       })
