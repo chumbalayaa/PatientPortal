@@ -18,7 +18,7 @@
 //$(function() {
 
 	//updateRightPanel();
-	alert('update4');
+	alert('update5');
 
 	var currentForm;
 
@@ -109,7 +109,7 @@
 		$('#'+currentForm+'Form').prop("disabled",true);
 		$('#'+currentForm+'FormText').html("Finished!");		
 		if(unfinishedForms.length!=0){
-			unfinishedForms.removeForm(currentForm);
+			removeForm(currentForm);
 			loadRightPanel(unfinishedForms[0]);
 			alert(unfinishedForms);
 		}
