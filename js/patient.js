@@ -18,7 +18,7 @@
 //$(function() {
 
 	//updateRightPanel();
-	alert('update7');
+	alert('update0');
 
 	var currentForm;
 
@@ -108,12 +108,13 @@
 		//remove from unfinished form list
 		$('#'+currentForm+'Form').prop("disabled",true);
 		$('#'+currentForm+'FormText').html("Finished!");		
-		if(unfinishedForms.length!=0){
+		if(unfinishedForms.length>1){
 			removeForm(currentForm);
 			loadRightPanel(unfinishedForms[0]);
 			alert(unfinishedForms);
 		}
 		else{
+			removeForm(currentForm);
 			loadRightPanel('done');
 		}
 	};
