@@ -18,7 +18,7 @@
 //$(function() {
 
 	//updateRightPanel();
-
+	alert('update0');
 
 	var currentForm;
 
@@ -67,15 +67,15 @@
 	});
 
 	$("#ss-submit").click(function(){
-		alert('hi');
+		//alert('hi');
 		updateRightPanel();
 	});
 
 	//Remove form
 	var removeForm = function(form) {
-		var i = forms.indexOf(form);
+		var i = unfinishedForms.indexOf(form);
 		if(i != -1) {
-			forms.splice(i, 1);
+			unfinishedForms.splice(i, 1);
 		}
 	};
 
@@ -92,12 +92,12 @@
 
 	//Add form
 	var addForm = function(form) {
-		forms.push(form);
+		unfinishedForms.push(form);
 	};
 
 	//Sort form data Structure
 	var sortFormsByTime = function() {
-		forms.sort(function(a,b) {
+		unfinishedForms.sort(function(a,b) {
 			return Date.parse(a.dueDate) - Date.parse(b.dueDate);
 		});
 	};
@@ -108,11 +108,13 @@
 		//remove from unfinished form list
 		$('#'+currentForm+'Form').prop("disabled",true);
 		$('#'+currentForm+'FormText').html("Finished!");		
-		if(unfinishedForms.length!=0){
+		if(unfinishedForms.length>1){
+			removeForm(currentForm);
 			loadRightPanel(unfinishedForms[0]);
-			unfinishedForms.splice(0,1);
+			alert(unfinishedForms);
 		}
 		else{
+			removeForm(currentForm);
 			loadRightPanel('done');
 		}
 	};
