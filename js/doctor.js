@@ -287,26 +287,18 @@ var csvExport = function(dataFile, filename) {
             		lines.push(tarr);
         		}
     		}
-    		console.log(headers);
-    		console.log(lines);
+    		lines.unshift(headers);
+    		lines.forEach(function(infoArray, index){
+            	dataString = infoArray.join(",");
+            	csvContent += dataString+ "\n";
+        	});
+        	var encodedUri = encodeURI(csvContent);
+        	var link = document.createElement("a");
+        	link.setAttribute("href", encodedUri);
+        	link.setAttribute("download", filename+".csv");
+        	link.click();
         }
      });
-
-
-
-    $("#csvExport").click(function(){
-        data.forEach(function(infoArray, index){
-            dataString = infoArray.join(",");
-            csvContent += dataString+ "\n";
-        });
-
-        var encodedUri = encodeURI(csvContent);
-        var link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.setAttribute("download", filename+".csv");
-
-        link.click();
-    });
 };
 
 $( document ).ready(function() {
