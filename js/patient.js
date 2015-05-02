@@ -19,6 +19,7 @@
 
 	//updateRightPanel();
 	alert('update10');
+	alert($('#sleepFormText').hasClass('dueForm'));
 
 	var currentForm;
 
