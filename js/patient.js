@@ -18,7 +18,7 @@
 //$(function() {
 
 	//updateRightPanel();
-	alert('update10');
+	alert('update5');
 
 	var currentForm;
 
