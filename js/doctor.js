@@ -203,7 +203,7 @@ var editBio = function(fullName, height, weight, bloodPressure, heartRate, newUp
 	var bioFieldStrings = ['height', 'weight', 'bloodPressure', 'heartRate', 'recentUpdates', 'overview', 'photo'];
 	var bioFields = [height, weight, bloodPressure, heartRate, newUpdate, newOverview, newPicture];
 	for (var i = 0; i < bioFields.length; i ++){
-		console.log(bioFieldStrings[i]);
+		console.log(bioFields[i]);
 		if (bioFields[i] != undefined){
 			Patients["MarshallMathers"]['bio'][bioFieldStrings[i]] = bioFields[i];
 		}
