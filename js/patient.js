@@ -111,7 +111,7 @@
 		if(unfinishedForms.length>1){
 			removeForm(currentForm);
 			loadRightPanel(unfinishedForms[0]);
-			alert(unfinishedForms);
+			//alert(unfinishedForms);
 		}
 		else{
 			removeForm(currentForm);
