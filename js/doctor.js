@@ -222,7 +222,7 @@ var addNewPatient = function(firstName, lastName) {
 					'firstName': firstName,
 					'lastName': lastName,
 					'bio': basicBio}};
-	Patients.push({fullName: patientJSON});
+	Patients[fullName]= patientJSON;
 	addPatientToSideNav(firstName, lastName);
 };
 

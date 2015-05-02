@@ -2,6 +2,8 @@ var Patients = {
 	"MarshallMathers": {
 		"firstName": "Marshall",
 		"lastName": "Mathers",
+		"username": "mmathers",
+		"password": "rapGod"
 		"bio": {
 			"height": "5' 10''",
 			"weight": "180",
@@ -15,6 +17,8 @@ var Patients = {
 	"JaneGoodall": {
 		"firstName": "Jane",
 		"lastName": "Goodall",
+		"username": "jgoodall",
+		"password": "monkeysRcool"
 		"bio": {
 			"height": "5' "+ '3"',
 			"weight": "110",
@@ -29,7 +33,8 @@ var Patients = {
 
 var Doctors = {
 	"Dr. Dre": {
-
+		"username": "ddre",
+		"password": "ddre"
 	}
 };
 
