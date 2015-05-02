@@ -15,7 +15,9 @@
 // }
 // ]
 
-$(function() {
+//$(function() {
+
+	//updateRightPanel();
 
 
 	var currentForm;
@@ -117,4 +119,4 @@ $(function() {
 	};
 
 
-});
+//});
