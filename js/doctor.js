@@ -217,17 +217,12 @@ var editBio = function(fullName, height, weight, bloodPressure, heartRate, newUp
 //################################################################################
 //################################################################################
 //Editing Password code
-var editPassword = function(isDoctor) {
-	var fullName =  $('#userDropdown').text;
-	console.log(fullName);
+var editPassword = function(fullName, isDoctor, oldPassword, newPassword) {
 	fullName = fullName.replace(/\s/g, '');
-	var oldPassword = $('#oldPass').text;
-	var newPassword = $('#newPass').text;
 	if (isDoctor) {
+		console.log(Doctors[fullName]['password']);
+		console.log(oldPassword);
 		if (Doctors[fullName]['password'] == oldPassword) {
-			console.log("Success");
-			console.log(oldPassword);
-			console.log(newPassword);
 			Doctors[fullName]['password'] == newPassword;
 		} else {
 			alert("INCORRECT PASSWORD");
