@@ -189,13 +189,6 @@ var addPaitientTopNavListener = function() {
 		var name = e.target.text;
 		var nameArray = name.split(" ");
 		var fullName = nameArray[0]+nameArray[1];
-		//$("#patientName").html(fullName);
-		// if (fullName == "MarshallMathers") {
-		// 	$('#patientName').html("Marshall Mathers");
-		// }
-		// else {
-		// 	$('#patientName').html("Jane Goodall");
-		// }
 		if (currentPatient != fullName) {
 			loadPatient(fullName);	
 		}
@@ -218,6 +211,36 @@ var editBio = function(fullName, height, weight, bloodPressure, heartRate, newUp
 		}
 	}
 };
+
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+//################################################################################
+//################################################################################
+//Editing Password code
+var editPassword = function(isDoctor) {
+	var fullName =  $('#userDropdown').text;
+	console.log(fullName);
+	fullName = fullName.replace(/\s/g, '');
+	var oldPassword = $('#oldPass').text;
+	var newPassword = $('#newPass').text;
+	if (isDoctor) {
+		if (Doctors[fullName]['password'] == oldPassword) {
+			console.log("Success");
+			console.log(oldPassword);
+			console.log(newPassword);
+			Doctors[fullName]['password'] == newPassword;
+		} else {
+			alert("INCORRECT PASSWORD");
+		}
+	} else {
+		if (Patients[fullName]['password'] == oldPassword) {
+			Patients[fullName]['password'] == newPassword;
+		} else {
+			alert("INCORRECT PASSWORD");
+		}
+	}
+};	
+
 
 //--------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------

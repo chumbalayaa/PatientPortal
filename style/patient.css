@@ -2,6 +2,13 @@
   text-align: center;
 }
 
+#form{
+  height:400px;
+  width:400px;
+
+  overflow: scroll;
+}
+
 #leftPanel {
   float:left;
   height: 100%;
@@ -18,7 +25,8 @@
   /*border: 2px solid gray;*/
   margin-right: 5%;
   margin-top: 0%;
-  height:400px;
+  /*height:400px;
+  overflow: scroll;*/
 }
 
 .navbar-right {

@@ -32,7 +32,9 @@ var Patients = {
 };
 
 var Doctors = {
-	"Dr. Dre": {
+	"Dr.Dre": {
+		"firstName": "Dr.",
+		"lastName": "Dre",
 		"username": "ddre",
 		"password": "ddre"
 	}
