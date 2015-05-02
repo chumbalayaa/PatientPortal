@@ -18,7 +18,7 @@
 //$(function() {
 
 	//updateRightPanel();
-	alert('update7');
+	alert('update10');
 
 	var currentForm;
 
@@ -103,7 +103,7 @@
 	};
 
 	var updateRightPanel = function() {
-		var resonse = window.confirm('Are you sure you want to submit?');
+		var response = window.confirm('Are you sure you want to submit?');
 		if (response==false){
 			return;
 		}
