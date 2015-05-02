@@ -14,11 +14,13 @@
 }
 
 .dueForm{
-  color:#00FF7F;
+  color:#FF0000;
 }
 
 .urgentForm{
   font-weight:bold;
+  color:#FF0000;
+
 }
 
 #leftPanel {
