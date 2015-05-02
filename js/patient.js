@@ -15,7 +15,9 @@
 // }
 // ]
 
-$(function() {
+//$(function() {
+
+	//updateRightPanel();
 
 
 	var currentForm;
@@ -101,7 +103,6 @@ $(function() {
 	};
 
 	var updateRightPanel = function() {
-		alert('hi');
 		//disable proper button 
 		//load in next due form
 		//remove from unfinished form list
@@ -117,4 +118,4 @@ $(function() {
 	};
 
 
-});
+//});
