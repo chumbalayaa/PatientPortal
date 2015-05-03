@@ -123,8 +123,8 @@
                       <label for="lastName">Last Name:</label>
                       <input type="text" style="margin-left:7px;" class="form-control" id="lastName">
                     </div>
-                  </div>
-                </form>
+                  </form>
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addNewPatient($('#firstName').val(), $('#lastName').val()); document.getElementById('newPatient').reset();">Add Patient</button>
@@ -175,16 +175,8 @@
                     <h4 class="modal-title">Edit Patient Bio</h4>
                 </div>
                 <div class="modal-body">
-                  <p>Please enter patient information</p>
+                  <p>Please enter new patient information</p>
                   <form id="editBio" class="form-inline">
-                    <div class="form-group">
-                      <label for="firstName">First Name:</label>
-                      <input type="text" style="margin-left:7px;" class="form-control" id="firstName">
-                    </div></br>
-                    <div class="form-group">
-                      <label for="lastName">Last Name:</label>
-                      <input type="text" style="margin-left:7px;" class="form-control" id="lastName">
-                    </div></br>
                     <div class="form-group">
                       <label for="firstName">Height:</label>
                       <input type="text" style="margin-left:7px;" class="form-control" id="height">
@@ -216,18 +208,18 @@
                   </div>
                 </form>
               </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" 
-                    onclick="editBio($('#height').val(), 
-                    $('#weight').val(), 
-                    $('#bloodPressure').val(), 
-                    $('#heartRate').val(), 
-                    $('#newUpdate').val(), 
-                    $('#newOverview').val(), 
-                    $('#newPicture').val()); 
-                    document.getElementById('editBio').reset();">Add Patient</button>
-                </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary" data-dismiss="modal" 
+                  onclick="editBio($('#height').val(), 
+                  $('#weight').val(), 
+                  $('#bloodPressure').val(), 
+                  $('#heartRate').val(), 
+                  $('#newUpdate').val(), 
+                  $('#newOverview').val(), 
+                  $('#newPicture').val()); 
+                  document.getElementById('editBio').reset();">Add Patient</button>
+              </div>
             </div>
         </div>
     </div>
