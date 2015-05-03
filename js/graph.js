@@ -1,9 +1,9 @@
-MAX_DATE = 
-MIN_DATE = 
+// MAX_DATE = 
+// MIN_DATE = 
 
 //patientName is all lowercase with an underscore between first and last name 
 // e.g. jane_goodall mood
-function drawGraph(patientName, graphType, maxDate, minDate, startDate, endDate) {
+function drawGraph(patientName, graphType, startDate, endDate) {
  // console.log(startDate)
     var div_name = patientName.concat('_').concat(graphType);
     if ($("#".concat(div_name)).length) {
