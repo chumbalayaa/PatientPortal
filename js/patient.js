@@ -17,7 +17,7 @@
 
 //$(function() {
 
-	alert('update6');
+	alert('update7');
 
 	var currentForm;
 
@@ -113,7 +113,7 @@
 	var loadRightPanel = function(file) {
 		currentForm=file;
 		$.ajax({
-			url: './forms/'+file+'-form.html',
+			url: './forms/'+file+'-form-interaction.html',
 			context: document.body,
 			success: function(response) {
 				$("#form").html(response);
