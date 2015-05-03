@@ -109,6 +109,7 @@ var loadLeftPanel = function(fullName) {
 			populateBio(fullName);
 		}
 	});
+	currentPatient = fullName;
 	var firstName = Patients[fullName]['firstName'];
 	var lastName = Patients[fullName]['lastName'];
 	$('#patientName').html(firstName+" "+lastName);
@@ -192,6 +193,7 @@ var editBio = function(height, weight, systolicBloodPressure, diastolicBloodPres
 	var bioFieldStrings = ['height', 'weight', 'systolicBloodPressure', 'diastolicBloodPressure', 'heartRate', 'recentUpdates', 'overview', 'photo'];
 	var bioFields = [height, weight, systolicBloodPressure, diastolicBloodPressure, heartRate, newUpdate, newOverview, newPicture];
 	console.log(bioFields);
+	console.log(currentPatient);
 	for (var i = 0; i < bioFields.length; i ++){
 		if (bioFields[i] != ""){
 			Patients[currentPatient]['bio'][bioFieldStrings[i]] = bioFields[i];
