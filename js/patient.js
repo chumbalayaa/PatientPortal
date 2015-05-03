@@ -17,7 +17,7 @@
 
 //$(function() {
 
-	alert('update0');
+	alert('update1');
 
 	var currentForm;
 
@@ -70,7 +70,7 @@
 		updateRightPanel();
 	});
 
-	$('input').click(function(){
+	$('span').click(function(){
 		alert('hi');
 	});
 
