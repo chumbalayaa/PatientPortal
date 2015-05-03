@@ -18,8 +18,6 @@
 //$(function() {
 
 	alert('update15');
-	console.log('anything');
-	feklwajf;elkwajfei;owafjew;oaifjewa;ofiej
 
 	var currentForm;
 
