@@ -244,9 +244,21 @@ var addNewPatient = function(firstName, lastName) {
 	patientJSON = {fullName: {
 					'firstName': firstName,
 					'lastName': lastName,
-					'bio': basicBio}};
+					'bio': basicBio,
+					'forms': [],
+					'annotations': []}};
 	Patients[fullName]= patientJSON;
 	addPatientToSideNav(firstName, lastName);
+};
+
+var addFormToPatient = function(firstName, lastName, formType) {
+	var fullName = firstName+lastName;
+	if (Patients[fullName]['forms'].indexOf(formType) == -1) {
+		Patients[fullName]['forms'].push(formType);
+		Patients[fullName]['annotations'][formType] = [];
+	} else {
+		alert(firstName+" "+lastName+" already has the form: "+formType);
+	}
 };
 
 var addPatientToSideNav = function(firstName, lastName) {
@@ -265,6 +277,43 @@ var drLogIn = function(username, password){
 	}
 };
 
+//Add Annotation
+var addAnnotation = function(firstName, lastName, formType, annotation) {
+	var fullName = firstName+lastName;
+	Patients[fullName]['annotations'][formType].push(annotation);
+};
+
+//Annotation Editing
+var editAnnotation = function(firstName, lastName, formType, date, newAnnotation) {
+	var fullName = firstName+lastName;
+	var annotations = Patients[fullName]['annotations'][formType];
+	var found = false;
+	for (var i = 0; i < annotations.length; i ++) {
+		if (annotations[i]["date"] == date) {
+			annotations[i] = newAnnotation;
+			found = true;
+		}
+	}
+	if (!found) {
+		alert("That annotation doesn't exist");
+	}
+};	
+
+//Delete Annotation
+var deleteAnnotation = function(firstName, lastName, formType, date) {
+	var fullName = firstName+lastName;
+	var annotations = Patients[fullName]['annotations'][formType];
+	var found = false;
+	for (var i = 0; i < annotations.length; i ++) {
+		if (annotations[i]["date"] == date) {
+			annotations.splice(i, 1);
+			found = true;
+		}
+	}
+	if (!found) {
+		alert("That annotation doesn't exist");
+	}
+};
 
 //--------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------

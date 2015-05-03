@@ -13,7 +13,11 @@ var Patients = {
 			"overview": "Marshall has started taking medicine A on 12/6/2014.",
 			"photo": "./images/marshall.jpg"
 		},
-		"forms": ["sleep"]
+		"forms": ["sleep"],
+		"annotations": {
+			'sleep': [
+			]
+		}
 	},
 	"JaneGoodall": {
 		"firstName": "Jane",
@@ -29,7 +33,11 @@ var Patients = {
 			"overview": "Jane was perscribed intranasal corticosteroid medicine on 12/25/2015. She has been adhering to the medicine rigorously.",
 			"photo": "./images/janeGoodall.png"
 		},
-		"forms": ["sleep"]
+		"forms": ["sleep"],
+		"annotations": [{"sleep": [
+
+		]}
+		]
 	}
 };
 
