@@ -49,7 +49,7 @@
 		// $("#formName").html(forms[1].type);
 		//alert(submitted);
 		loadRightPanel('sleep');
-		assignFormClickListener();
+		reassignListeners();
 
 	});
 
@@ -58,7 +58,7 @@
 		// $("#formName").html(forms[0].type);
 		//alert(submitted);
 		loadRightPanel('anxiety');
-		assignFormClickListener();
+		reassignListeners();
 
 	});
 
@@ -67,7 +67,7 @@
 		// $("#formName").html(forms[2].type);
 		//alert('sorry, havent gotten around making the correct form quite yet 8===D');
 		loadRightPanel('mood');
-		assignFormClickListener();
+		reassignListeners();
 
 	});
 
@@ -161,13 +161,13 @@
 
 	var reassignListeners = function() {
 		//unbindListeners();
-		assignFormClickListener();
+		unbindListeners();
+		assignListeners();
 	};
 
 	//Add this function to the listeners on the left
-	var assignFormClickListener = function() {
-		alert('reassigning');
-		unbindListeners();
+	var assignListeners = function() {
+		//alert('reassigning');
 		$("#ss-submit").click(function(){
 			alert('hi');
 			updateRightPanel();
