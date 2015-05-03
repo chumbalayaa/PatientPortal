@@ -36,10 +36,10 @@ var Patients = {
 			"photo": "./images/janeGoodall.png"
 		},
 		"forms": ["sleep"],
-		"annotations": [{"sleep": [
-
-		]}
-		]
+		"annotations": {
+			"sleep": [
+			]
+		}
 	}
 };
 

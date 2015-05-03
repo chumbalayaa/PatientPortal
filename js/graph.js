@@ -465,7 +465,7 @@ function drawGraph(firstName, lastName,  graphType, startDate, endDate, minDate,
                   console.log(graphType);
                   console.log(annotation);
                   addAnnotation(capitalizeFirstLetter(firstName), capitalizeFirstLetter(lastName), graphType, annotation);
-                  annotations.push([date, "<b>".concat(date.toDateString()).concat("</b><br>").concat(added_annotation)]);
+                  annotations.push([date, "<b>".concat(date.toDateString()).concat("</b><br>").concat($('#annotationText').val())]);
                 //    new_annotation.transition()        
                 //               .duration(200)      
                 //               .style("opacity", 0);

@@ -313,6 +313,7 @@ var deleteAnnotation = function(firstName, lastName, formType, date) {
 //Log In
 var drLogIn = function(username, password){
 	if((Doctors["Dr.Dre"]["username"] != username) || (Doctors["Dr.Dre"]["password"] != password)){
+		alert("That User does not exist")
 		return false;
 	}
 };
