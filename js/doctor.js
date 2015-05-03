@@ -103,6 +103,7 @@ var reassignListeners = function() {
 	addPatientSideNavListener();
 	addPaitientTopNavListener();
 };
+
 //End patients in navbar stuff ---------------------------------------------------
 //--------------------------------------------------------------------------------
 //################################################################################
@@ -250,6 +251,18 @@ var addNewPatient = function(firstName, lastName) {
 
 var addPatientToSideNav = function(firstName, lastName) {
 	$('#sideNavPatientList').append('<li class="patient"><a href="#" class="patient">'+firstName+' '+lastName+'</a></li>')
+};
+
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+//################################################################################
+//################################################################################
+//log in code
+
+var drLogIn = function(username, password){
+	if((Doctors["Dr.Dre"]["username"] != username) || (Doctors["Dr.Dre"]["password"] != password)){
+		return false;
+	}
 };
 
 
