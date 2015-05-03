@@ -49,6 +49,8 @@
 		// $("#formName").html(forms[1].type);
 		//alert(submitted);
 		loadRightPanel('sleep');
+		assignFormClickListener();
+
 	});
 
 	$("#anxietyForm").click(function(){
@@ -56,6 +58,8 @@
 		// $("#formName").html(forms[0].type);
 		//alert(submitted);
 		loadRightPanel('anxiety');
+		assignFormClickListener();
+
 	});
 
 	$("#moodForm").click(function(){
@@ -63,40 +67,11 @@
 		// $("#formName").html(forms[2].type);
 		//alert('sorry, havent gotten around making the correct form quite yet 8===D');
 		loadRightPanel('mood');
+		assignFormClickListener();
+
 	});
 
-	$("#ss-submit").click(function(){
-		//alert('hi');
-		updateRightPanel();
-	});
-
-	$('span').click(function(){
-		alert('hi0');
-	});
-
-	$('input').click(function(){
-		alert('hi1');
-	});
-
-	$('label').click(function(){
-		alert('hi2');
-	});
-
-	$('ul').click(function(){
-		alert('hi3');
-	});
-
-	$('li').click(function(){
-		alert('hi4');
-	});
-
-	$('#test').click(function(){
-		alert('hi4');
-	});
-
-	$('.completedForm').mouseover(function(){
-		//console.log('hi');
-	});
+	
 
 	//Remove form
 	var removeForm = function(form) {
