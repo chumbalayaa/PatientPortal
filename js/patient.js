@@ -17,7 +17,7 @@
 
 //$(function() {
 
-	alert('update3');
+	alert('update4');
 
 	var currentForm;
 
@@ -87,6 +87,10 @@
 	});
 
 	$('li').click(function(){
+		alert('hi4');
+	});
+
+	$('#test').click(function(){
 		alert('hi4');
 	});
 
