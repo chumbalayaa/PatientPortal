@@ -48,8 +48,7 @@
 		// $("#form").html(forms[1].html);
 		// $("#formName").html(forms[1].type);
 		//alert(submitted);
-		loadRightPanel('sleep');
-		reassignListeners();
+		loadRightPanel('sleep',reassignListeners());
 
 	});
 
@@ -57,8 +56,7 @@
 		// $("#form").html(forms[0].html);
 		// $("#formName").html(forms[0].type);
 		//alert(submitted);
-		loadRightPanel('anxiety');
-		reassignListeners();
+		loadRightPanel('anxiety',reassignListeners());
 
 	});
 
@@ -66,8 +64,7 @@
 		// $("#form").html(forms[2].html);
 		// $("#formName").html(forms[2].type);
 		//alert('sorry, havent gotten around making the correct form quite yet 8===D');
-		loadRightPanel('mood');
-		reassignListeners();
+		loadRightPanel('mood',reassignListeners());
 
 	});
 
