@@ -109,7 +109,7 @@
 	var loadRightPanel = function(file) {
 		currentForm=file;
 		$.ajax({
-			url: './forms/'+file+'-form-interaction.html',
+			url: './forms/'+file+'-form.html',
 			context: document.body,
 			success: function(response) {
 				$("#form").html(response);
