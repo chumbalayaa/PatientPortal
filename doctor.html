@@ -114,7 +114,7 @@
                 </div>
                 <div class="modal-body">
                   <p>Please enter patient information</p>
-                  <form class="form-inline">
+                  <form id="newPatient" class="form-inline">
                     <div class="form-group">
                       <label for="firstName">First Name:</label>
                       <input type="text" style="margin-left:7px;" class="form-control" id="firstName">
@@ -127,7 +127,7 @@
                 </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addNewPatient($('#firstName').val(), $('#lastName').val())">Add Patient</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addNewPatient($('#firstName').val(), $('#lastName').val()); document.getElementById('editBio').reset();">Add Patient</button>
                 </div>
             </div>
         </div>
@@ -176,7 +176,7 @@
                 </div>
                 <div class="modal-body">
                   <p>Please enter patient information</p>
-                  <form class="form-inline">
+                  <form id="editBio" class="form-inline">
                     <div class="form-group">
                       <label for="firstName">First Name:</label>
                       <input type="text" style="margin-left:7px;" class="form-control" id="firstName">
@@ -219,14 +219,14 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal" 
-                    onclick="editBio($('#firstName').val() + $('#lastName').val(), 
-                    $('#height').val(), 
+                    onclick="editBio($('#height').val(), 
                     $('#weight').val(), 
                     $('#bloodPressure').val(), 
                     $('#heartRate').val(), 
                     $('#newUpdate').val(), 
                     $('#newOverview').val(), 
-                    $('#newPicture').val())">Add Patient</button>
+                    $('#newPicture').val()); 
+                    document.getElementById('editBio').reset();">Add Patient</button>
                 </div>
             </div>
         </div>

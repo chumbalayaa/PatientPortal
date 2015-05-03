@@ -198,14 +198,12 @@ var addPaitientTopNavListener = function() {
 //################################################################################
 //################################################################################
 //Editing Bio code
-var editBio = function(fullName, height, weight, bloodPressure, heartRate, newUpdate, newOverview, newPicture) {
-	console.log(currentPatient);
+var editBio = function(height, weight, bloodPressure, heartRate, newUpdate, newOverview, newPicture) {
 	var bioFieldStrings = ['height', 'weight', 'bloodPressure', 'heartRate', 'recentUpdates', 'overview', 'photo'];
 	var bioFields = [height, weight, bloodPressure, heartRate, newUpdate, newOverview, newPicture];
 	for (var i = 0; i < bioFields.length; i ++){
-		console.log(bioFields[i]);
 		if (bioFields[i] != ""){
-			Patients["MarshallMathers"]['bio'][bioFieldStrings[i]] = bioFields[i];
+			Patients[currentPatient]['bio'][bioFieldStrings[i]] = bioFields[i];
 		}
 	}
 };
