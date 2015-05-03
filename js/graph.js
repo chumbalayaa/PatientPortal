@@ -450,7 +450,7 @@ function drawGraph(firstName, lastName,  graphType, startDate, endDate, minDate,
                 //             .style("opacity", .9);  
                 // new_annotation.html("<div>Add your annotation below:<br><textarea id='annotation-text' name='paragraph_text' cols='15' rows='5'></textarea><br><input type='submit' id='submit_annotation'  value='Submit'><br><input type='submit' id='cancel_annotation'  value='Cancel'>");
                 
-                // var date = d.TimeOfDay;
+                var date = d.TimeOfDay;
 
                 var submit_annotation = document.getElementById("submit-annotation");
                 submit_annotation.onclick = function(evt){
