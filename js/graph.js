@@ -459,10 +459,10 @@ function drawGraph(firstName, lastName,  graphType, startDate, endDate, minDate,
                 var submit_annotation = document.getElementById("submit-annotation");
                 submit_annotation.onclick = function(evt){
                   onClick="document.getElementById('annotationForm').reset()"
-                   var annotation = [date, $('#annotationText').val()]
+                   var annotation = {'date': date, 'text': $('#annotationText').val()}
                    console.log((firstName.charAt(0).toUpperCase()+ firstName.slice(1)));
                    console.log((lastName.charAt(0).toUpperCase()+lastName.slice(1)));
-                   addAnnotation((firstName.charAt(0).toUpperCase()+ firstName.slice(1)), (lastName.charAt(0).toUpperCase()+lastName.slice(1)), graphType, annotationText);
+                   addAnnotation((firstName.charAt(0).toUpperCase()+ firstName.slice(1)), (lastName.charAt(0).toUpperCase()+lastName.slice(1)), graphType, annotation);
                     annotations.push([date, "<b>".concat(date.toDateString()).concat("</b><br>").concat(added_annotation)]);
                 //    new_annotation.transition()        
                 //               .duration(200)      
