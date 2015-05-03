@@ -152,21 +152,46 @@
 			removeForm(currentForm);
 			loadRightPanel('done');
 		}
+		reassignListeners();
 	};
 
-
-	//--------------------------------------------------------------------------------
-	//--------------------------------------------------------------------------------
-	//################################################################################
-	//################################################################################
-	//log in code
-
-	var patientLogIn = function(username, password){
-		console.log('getting here');
-		if((Patients["MarshallMathers"]["username"] != username) || (Patients["MarshallMathers"]["password"] != password)){
-			return false;
-		};
+	var reassignListeners = function() {
+		//unbindListeners();
+		assignFormClickListener();
 	};
+
+	//Add this function to the listeners on the left
+	var assignFormClickListener = function() {
+		$("#ss-submit").click(function(){
+			//alert('hi');
+			updateRightPanel();
+		});
+
+		$('span').click(function(){
+			alert('hi0');
+		});
+
+		$('input').click(function(){
+			alert('hi1');
+		});
+
+		$('label').click(function(){
+			alert('hi2');
+		});
+
+		$('ul').click(function(){
+			alert('hi3');
+		});
+
+		$('li').click(function(){
+			alert('hi4');
+		});
+
+		$('#test').click(function(){
+			alert('hi4');
+		});
+	};
+
 
 
 //});
