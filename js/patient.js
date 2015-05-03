@@ -17,7 +17,7 @@
 
 //$(function() {
 
-	alert('update11');
+	alert('update15');
 
 	var currentForm;
 
@@ -95,7 +95,7 @@
 	});
 
 	$('.completedForm').mouseover(function(){
-		console.log('hi');
+		//console.log('hi');
 	});
 
 	//Remove form
