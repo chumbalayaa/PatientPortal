@@ -1,7 +1,10 @@
+MAX_DATE = 
+MIN_DATE = 
+
 //patientName is all lowercase with an underscore between first and last name 
 // e.g. jane_goodall mood
-function drawGraph(patientName, graphType) {
-
+function drawGraph(patientName, graphType, maxDate, minDate, startDate, endDate) {
+ // console.log(startDate)
     var div_name = patientName.concat('_').concat(graphType);
     if ($("#".concat(div_name)).length) {
       d3.select("#".concat(div_name)).remove();
@@ -9,8 +12,11 @@ function drawGraph(patientName, graphType) {
     $("#main").append('<div id="'.concat(div_name).concat('"></div>'));
     // delete the previous graph is there is one
     
+    var formatDate = d3.time.format("%Y%m%d"),
+        parseDate = formatDate.parse,
+        bisectDate = d3.bisector(function(d) { return d.TimeOfDay; }).left;
     addDownloadButton(div_name);
-    addDateRange(div_name);
+    addDateRange(div_name, parseDate(startDate), parseDate(endDate));
 
     // $("#main").append('<div id="'.concat(div_name).concat('"></div>'));
 
@@ -41,9 +47,6 @@ function drawGraph(patientName, graphType) {
         return hour.toString().concat(":").concat(min);
       }
 
-    var formatDate = d3.time.format("%Y%m%d"),
-        parseDate = formatDate.parse,
-        bisectDate = d3.bisector(function(d) { return d.TimeOfDay; }).left,
     // if (graphType == "mood") {
     //     formatOutput0 = function(d) { return  d.First; }, // The focus text
     //     formatOutput1 = function(d) { return  d.Second; };
@@ -51,7 +54,7 @@ function drawGraph(patientName, graphType) {
     // } else if (graphType == "anxiety") {
     
     // } else {
-        formatOutput0 = function(d) { 
+    var formatOutput0 = function(d) { 
           if (graphType == "sleep") { 
             return  timeToText(d.First) + " O'Clock"; 
           } else { 
@@ -168,24 +171,36 @@ function drawGraph(patientName, graphType) {
         .attr("transform", "translate(" + main_margin.left + "," + main_margin.top + ")");
 
     d3.csv("data/".concat(div_name).concat(".txt"), function(error, data) {
+      
+      // Trim the data
+      var temp = [];
       data.forEach(function(d) {
+          if ((parseDate(d.TimeOfDay) >= parseDate(startDate)) && (parseDate(d.TimeOfDay) <= parseDate(endDate))) {
+            temp.push(d)
+          }
+      });
 
-        d.TimeOfDay = parseDate(d.TimeOfDay); //TimeOfDay
+      data = temp;
 
-        if (graphType == "sleep") {
-          d.First = +d.WakeUpTime;
-          d.Second = +d.TimeInBed; //Qty
-          d.Third = +d.FellAsleep;
-        } else if ((graphType == "mood") /*|| (graphType == "anxiety")*/){
-          d.First = +d.LowMood;
-          d.Second = +d.HighMood; //Qty
-          d.Third = +d.Irritability;
-        } 
-        else if (graphType == "anxiety") {
-          d.First = +d.CompositeScore;
-          d.Second = +d.HighMood; //Qty
-          d.Third = +d.Irritability;
-        }
+      data.forEach(function(d) {
+       
+            // console.log(parseDate(d.TimeOfDay))
+            d.TimeOfDay = parseDate(d.TimeOfDay); //TimeOfDay
+
+            if (graphType == "sleep") {
+              d.First = +d.WakeUpTime;
+              d.Second = +d.TimeInBed; //Qty
+              d.Third = +d.FellAsleep;
+            } else if (graphType == "mood"){
+              d.First = +d.LowMood;
+              d.Second = +d.HighMood; //Qty
+              d.Third = +d.Irritability;
+            } 
+            else if (graphType == "anxiety") {
+              d.First = +d.CompositeScore;
+              d.Second = +d.HighMood; //Qty
+              d.Third = +d.Irritability;
+            }
      });
         
   
@@ -525,22 +540,63 @@ function drawGraph(patientName, graphType) {
     });
 }
 
-function makeGraph(patientName, graphType) {
-  drawGraph(patientName, graphType);
+// Wrapper code that handles resizing the graph
+function makeGraph(patientName, graphType, startDate, endDate) {
+  drawGraph(patientName, graphType, startDate, endDate);
     window.addEventListener('resize', function(event){
-      console.log('here')
-        drawGraph(patientName, graphType); // just call it again...
+        drawGraph(patientName, graphType, startDate, endDate); // just call it again...
     });
 }
 
 function addDownloadButton(div_name){
-  var args = "'/".concat(div_name).concat(".txt', '/").concat(div_name).concat(".txt'");
-  console.log('<button onclick="csvExport('.concat(args).concat(')" type="button" class="download-button btn btn-default">Download CSV</button>'));
+  var args = "'/".concat(div_name).concat(".txt', '/").concat(div_name).concat("'");
+  //console.log('<button onclick="csvExport('.concat(args).concat(')" type="button" class="download-button btn btn-default">Download CSV</button>'));
   $("#".concat(div_name)).append('<button onclick="csvExport('.concat(args).concat(')" type="button" class="download-button btn btn-default">Download CSV</button>'));
 }
 
-function addDateRange(div_name) {
+function addDateRange(div_name, startDate, endDate) {
   // $("#".concat(div_name)).datepicker();
+  var startdate_name = div_name.concat("_startdate");
+  var enddate_name = div_name.concat("_enddate");
+  // console.log('<div class="startdate-picker">Beginning of date range: <input type="text" name="selected_date" id="'.concat(startdate_name).concat('" />').concat('End of date range: <input type="text" name="selected_date" id="').concat(enddate_name).concat('" /></div>'))
+  // var button = '<div class="startdate-picker">Beginning of date range: <input type="text" name="selected_date" id="'
+  //   .concat(startdate_name).concat('" />').concat('  End of date range: <input type="text" name="selected_date" id="').concat(enddate_name).concat('" />')
+  //   .concat('<button onclick="updateDate(').concat(startdate_name).concat(", ").concat( enddate_name).concat(')" type="button" class="update-button btn btn-default">Update dates</button></div>');
+  var formatted_enddate = d3.time.format("%m/%d/%Y")(endDate);
+  var formatted_startdate = d3.time.format("%m/%d/%Y")(startDate);
+  
+  $("#".concat(div_name)).append('<div class="startdate-picker">Beginning of date range: <input type="text" placeholder="'.concat(formatted_startdate ).concat('" name="selected_date" id="')
+    .concat(startdate_name).concat('" />').concat('  End of date range: <input type="text" placeholder="').concat(formatted_enddate ).concat('" name="selected_date" id="').concat(enddate_name).concat('" />')
+    .concat('<button onclick="updateDate(\'').concat(startdate_name).concat("\', \'").concat( enddate_name).concat('\')" type="button" class="update-button btn btn-default">Update dates</button></div>'));
+  // $("#".concat(div_name)).append('<div class="startdate-picker">Beginning of date range: <input type="text" name="selected_date" id="'.concat(startdate_name).concat('" />'));
+  // $("#".concat(div_name)).append('End of date range: <input type="text" name="selected_date" id="'.concat(enddate_name).concat('" /></div>'));
+   // $("#".concat(div_name)).append('<button onclick="csvExport('.concat(args).concat(')" type="button" class="download-button btn btn-default">Update dates</button>'));
+  $(function(){
+    $( "#".concat(startdate_name) ).datepicker({ 
+      minDate: startDate, 
+      maxDate: endDate,
+      onSelect: function(selected,evnt) {
+         updateAb(selected);
+      } 
+    });
+  //Pass the user selected date format 
+    // $( "#format" ).change(function() {
+    //   $( "#datepicker" ).datepicker( "option", "dateFormat", $(this).val() );
+    // });
+  });
+  $(function(){
+    $( "#".concat(enddate_name) ).datepicker({ minDate: startDate, maxDate: endDate });
+  //Pass the user selected date format 
+    // $( "#format" ).change(function() {
+    //   $( "#datepicker" ).datepicker( "option", "dateFormat", $(this).val() );
+    // });
+  });
+// 
+}
+
+function updateDate(startdate_name, enddate_name) {
+  var beginning_date = $("#".concat(startdate_name)).datepicker({ dateFormat: 'dd,MM,yyyy' }).val();
+  var beginning_date = $("#".concat(startdate_name)).datepicker({ dateFormat: 'dd,MM,yyyy' }).val();
 }
 
 //Export to CSV
@@ -569,10 +625,10 @@ var csvExport = function(dataFile, filename) {
      });
 };
 
-makeGraph("jane_goodall", "sleep");
-makeGraph("jane_goodall", "mood");
-makeGraph("jane_goodall", "anxiety");
-makeGraph("marshall_mathers", "sleep");
-makeGraph("marshall_mathers", "mood");
-makeGraph("marshall_mathers", "anxiety");
+makeGraph("jane_goodall", "sleep", "20141201", "20141230");
+makeGraph("jane_goodall", "mood", "20141201", "20141230");
+// makeGraph("jane_goodall", "anxiety");
+// makeGraph("marshall_mathers", "sleep");
+// makeGraph("marshall_mathers", "mood");
+// makeGraph("marshall_mathers", "anxiety");
 
