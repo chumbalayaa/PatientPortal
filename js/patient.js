@@ -162,6 +162,7 @@
 
 	//Add this function to the listeners on the left
 	var assignFormClickListener = function() {
+		alert('reassigning');
 		$("#ss-submit").click(function(){
 			alert('hi');
 			updateRightPanel();
