@@ -160,14 +160,13 @@
 	};
 
 	var reassignListeners = function() {
-		//unbindListeners();
 		unbindListeners();
 		assignListeners();
 	};
 
 	//Add this function to the listeners on the left
 	var assignListeners = function() {
-		//alert('reassigning');
+		alert('reassigning');
 		$("#ss-submit").click(function(){
 			alert('hi');
 			updateRightPanel();
