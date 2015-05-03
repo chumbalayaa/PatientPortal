@@ -83,10 +83,11 @@ function drawGraph(firstName, lastName,  graphType, startDate, endDate, minDate,
           } };
     // }
     var annotations = [[parseDate("20141213"), "<b>".concat(parseDate("20141213").toDateString()).concat("</b><br>Marshall started taking Xanax.")]]//[[date, html],...]
-
-    for (int i = 0; i < Patients[capitalizeFirstLetter(firstName).concat(capitalizeFirstLetter(lastName))]['annotations'][graphType].length; i++){
-      annotations.push(Patients[capitalizeFirstLetter(firstName).concat(capitalizeFirstLetter(lastName))]['annotations'][graphType][i])
+    for (var i = 0; i < Patients[capitalizeFirstLetter(firstName).concat(capitalizeFirstLetter(lastName))]['annotations'][graphType].length; i++){
+        annotations.push(Patients[capitalizeFirstLetter(firstName).concat(capitalizeFirstLetter(lastName))]['annotations'][graphType][i])
     }
+
+    
     //
     var main_x = d3.time.scale()
         .range([0, main_width]);
@@ -392,9 +393,7 @@ function drawGraph(firstName, lastName,  graphType, startDate, endDate, minDate,
         drawFlag(main_x(annotations[i][0]));
       }
 
-      for (var i = 0; i < annotations.length; i++){
 
-      }
 
       function drawFlag(x_coord) {
           main.append("line")
