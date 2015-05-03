@@ -70,6 +70,10 @@
 		updateRightPanel();
 	});
 
+	$('input').click(function(){
+		alert('hi');
+	});
+
 	//Remove form
 	var removeForm = function(form) {
 		var i = unfinishedForms.indexOf(form);
