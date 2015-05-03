@@ -15,7 +15,8 @@ average = function(a) {
 }
 //patientName is all lowercase with an underscore between first and last name 
 // e.g. jane_goodall mood
-function drawGraph(patientName, graphType, startDate, endDate, minDate, maxDate) {
+function drawGraph(firstName, lastName,  graphType, startDate, endDate, minDate, maxDate) {
+    var patientName = firstName.concat('_').concat(lastName);
     var div_name = patientName.concat('_').concat(graphType);
     if ($("#".concat(div_name)).length) {
       d3.select("#".concat(div_name)).remove();
@@ -442,8 +443,8 @@ function drawGraph(patientName, graphType, startDate, endDate, minDate, maxDate)
             
              if (isFlag(main_x(d.TimeOfDay))) { // on the flag
             }  else { // if in the add annotation box
-              console.log('er')
-               $('#annotationModal').modal('show') 
+                console.log('er')
+               $('#annotationModal').modal('show'); 
                 // new_annotation.transition()        
                 //             .duration(200)      
                 //             .style("opacity", .9);  
@@ -451,15 +452,18 @@ function drawGraph(patientName, graphType, startDate, endDate, minDate, maxDate)
                 
                 // var date = d.TimeOfDay;
 
-                // var submit_annotation = document.getElementById("submit_annotation");
-                // submit_annotation.onclick = function(evt){
-                //    var added_annotation = $('#annotation-text').val()
-                //    annotations.push([date, "<b>".concat(date.toDateString()).concat("</b><br>").concat(added_annotation)]);
+                var submit_annotation = document.getElementById("submit-annotation");
+                submit_annotation.onclick = function(evt){
+                  onClick="document.getElementById('annotationForm').reset()"
+                   var annotation = [date, $('#annotationText').val()]
+
+                   addAnnotation(firstName, lastName, graphType, annotationText);
+                    annotations.push([date, "<b>".concat(date.toDateString()).concat("</b><br>").concat(added_annotation)]);
                 //    new_annotation.transition()        
                 //               .duration(200)      
                 //               .style("opacity", 0);
                 //   drawFlag(main_x(d.TimeOfDay));
-                // }; 
+                }; 
                 // // functionality in the cancel annotation button
                 // var cancel_annotation = document.getElementById("cancel_annotation");
                 // cancel_annotation.onclick = function(evt){
@@ -540,10 +544,10 @@ function drawGraph(patientName, graphType, startDate, endDate, minDate, maxDate)
 }
 
 // Wrapper code that handles resizing the graph
-function makeGraph(patientName, graphType, startDate, endDate, minDate, maxDate) {
-  drawGraph(patientName, graphType, startDate, endDate, minDate, maxDate);
+function makeGraph(firstName, lastName, graphType, startDate, endDate, minDate, maxDate) {
+  drawGraph(firstName, lastName, graphType, startDate, endDate, minDate, maxDate);
     window.addEventListener('resize', function(event){
-        drawGraph(patientName, graphType, startDate, endDate, minDate, maxDate); // just call it again...
+        drawGraph(firstName, lastName, graphType, startDate, endDate, minDate, maxDate); // just call it again...
     });
 }
 
@@ -600,10 +604,6 @@ function addDateRange(div_name, patientName, graphType, startDate, endDate, minD
 // 
 }
 
-function updateDate(startdate_name, enddate_name) {
-  var beginning_date = $("#".concat(startdate_name)).datepicker({ dateFormat: 'dd,MM,yyyy' }).val();
-  var beginning_date = $("#".concat(startdate_name)).datepicker({ dateFormat: 'dd,MM,yyyy' }).val();
-}
 
 //Export to CSV
 var csvExport = function(dataFile) {
@@ -629,9 +629,9 @@ var csvExport = function(dataFile) {
      });
 };
 
-makeGraph("jane_goodall", "sleep", "20141201", "20141221", MIN_DATE, MAX_DATE);
-makeGraph("jane_goodall", "mood", "20141201", "20141220", MIN_DATE, MAX_DATE);
-makeGraph("jane_goodall", "anxiety", "20141201", "20141220", MIN_DATE, MAX_DATE);
+makeGraph("jane", "goodall", "sleep", "20141201", "20141221", MIN_DATE, MAX_DATE);
+makeGraph("jane", "goodall", "mood", "20141201", "20141220", MIN_DATE, MAX_DATE);
+makeGraph("jane", "goodall", "anxiety", "20141201", "20141220", MIN_DATE, MAX_DATE);
 // makeGraph("jane_goodall", "anxiety");
 // makeGraph("marshall_mathers", "sleep");
 // makeGraph("marshall_mathers", "mood");
