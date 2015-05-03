@@ -241,14 +241,15 @@ var editPassword = function(fullName, isDoctor, oldPassword, newPassword) {
 //Adding new patient code
 var addNewPatient = function(firstName, lastName) {
 	var fullName = firstName+lastName;
-	patientJSON = {fullName: {
+	patientJSON = {
 					'firstName': firstName,
 					'lastName': lastName,
 					'bio': basicBio,
 					'forms': [],
-					'annotations': []}};
+					'annotations': []};
 	Patients[fullName]= patientJSON;
 	addPatientToSideNav(firstName, lastName);
+	reassignListeners();
 };
 
 var addFormToPatient = function(firstName, lastName, formType) {
