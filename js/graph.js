@@ -459,11 +459,13 @@ function drawGraph(firstName, lastName,  graphType, startDate, endDate, minDate,
                 var submit_annotation = document.getElementById("submit-annotation");
                 submit_annotation.onclick = function(evt){
                   onClick="document.getElementById('annotationForm').reset()"
-                   var annotation = {'date': date, 'text': $('#annotationText').val()}
-                   console.log((firstName.charAt(0).toUpperCase()+ firstName.slice(1)));
-                   console.log((lastName.charAt(0).toUpperCase()+lastName.slice(1)));
-                   addAnnotation((firstName.charAt(0).toUpperCase()+ firstName.slice(1)), (lastName.charAt(0).toUpperCase()+lastName.slice(1)), graphType, annotation);
-                    annotations.push([date, "<b>".concat(date.toDateString()).concat("</b><br>").concat(added_annotation)]);
+                  var annotation = {'date': date, 'text': $('#annotationText').val()}
+                  console.log(capitalizeFirstLetter(firstName));
+                  console.log(capitalizeFirstLetter(lastName));
+                  console.log(graphType);
+                  console.log(annotation);
+                  addAnnotation(capitalizeFirstLetter(firstName), capitalizeFirstLetter(lastName), graphType, annotation);
+                  annotations.push([date, "<b>".concat(date.toDateString()).concat("</b><br>").concat(added_annotation)]);
                 //    new_annotation.transition()        
                 //               .duration(200)      
                 //               .style("opacity", 0);
@@ -609,6 +611,9 @@ function addDateRange(div_name, patientName, graphType, startDate, endDate, minD
 // 
 }
 
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 //Export to CSV
 var csvExport = function(dataFile) {
