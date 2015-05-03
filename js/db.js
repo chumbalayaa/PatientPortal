@@ -12,7 +12,8 @@ var Patients = {
 			"recentUpdates": "Marshall suffers from severe depression caused by his recent divorce.",
 			"overview": "Marshall has started taking medicine A on 12/6/2014.",
 			"photo": "./images/marshall.jpg"
-		}
+		},
+		"forms": ["sleep"]
 	},
 	"JaneGoodall": {
 		"firstName": "Jane",
@@ -27,7 +28,8 @@ var Patients = {
 			"recentUpdates": "Jane has sleep apnea",
 			"overview": "Jane was perscribed intranasal corticosteroid medicine on 12/25/2015. She has been adhering to the medicine rigorously.",
 			"photo": "./images/janeGoodall.png"
-		}
+		},
+		"forms": ["sleep"]
 	}
 };
 
