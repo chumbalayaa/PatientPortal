@@ -389,6 +389,10 @@ function drawGraph(firstName, lastName,  graphType, startDate, endDate, minDate,
         drawFlag(main_x(annotations[i][0]));
       }
 
+      for (var i = 0; i < annotations.length; i++){
+
+      }
+
       function drawFlag(x_coord) {
           main.append("line")
           .attr("x1", x_coord)
@@ -456,13 +460,13 @@ function drawGraph(firstName, lastName,  graphType, startDate, endDate, minDate,
                 submit_annotation.onclick = function(evt){
                   onClick="document.getElementById('annotationForm').reset()"
                    var annotation = [date, $('#annotationText').val()]
-
-                   addAnnotation(firstName, lastName, graphType, annotationText);
+string.charAt(0).toUpperCase() + string.slice(1);
+                   addAnnotation((firstName.charAt(0).toUpperCase()+ firstName.slice(1)), (lastName.charAt(0).toUpperCase()+lastName.slice(1)), graphType, annotationText);
                     annotations.push([date, "<b>".concat(date.toDateString()).concat("</b><br>").concat(added_annotation)]);
                 //    new_annotation.transition()        
                 //               .duration(200)      
                 //               .style("opacity", 0);
-                //   drawFlag(main_x(d.TimeOfDay));
+                  drawFlag(main_x(d.TimeOfDay));
                 }; 
                 // // functionality in the cancel annotation button
                 // var cancel_annotation = document.getElementById("cancel_annotation");
