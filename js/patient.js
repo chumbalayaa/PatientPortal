@@ -17,7 +17,7 @@
 
 //$(function() {
 
-	alert('update0');
+	alert('update5');
 
 	var currentForm;
 
@@ -163,7 +163,7 @@
 	//Add this function to the listeners on the left
 	var assignFormClickListener = function() {
 		$("#ss-submit").click(function(){
-			//alert('hi');
+			alert('hi');
 			updateRightPanel();
 		});
 
