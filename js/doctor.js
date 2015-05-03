@@ -201,7 +201,7 @@ var addPaitientTopNavListener = function() {
 var editBio = function(height, weight, bloodPressure, heartRate, newUpdate, newOverview, newPicture) {
 	var bioFieldStrings = ['height', 'weight', 'bloodPressure', 'heartRate', 'recentUpdates', 'overview', 'photo'];
 	var bioFields = [height, weight, bloodPressure, heartRate, newUpdate, newOverview, newPicture];
-	console.log(bioFields)
+	console.log(bioFields);
 	for (var i = 0; i < bioFields.length; i ++){
 		if (bioFields[i] != ""){
 			Patients[currentPatient]['bio'][bioFieldStrings[i]] = bioFields[i];
