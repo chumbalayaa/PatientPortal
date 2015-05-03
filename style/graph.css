@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+#main {
+  display: flex;
+  flex-direction: column;
+}
+
 #first-graph {
   font: 10px sans-serif;
   height: 100%;
@@ -27,7 +32,17 @@ margin:5px 10px 20px 35px;
   
 }
 
+.sleep-graph {
+  order: 1;
+}
 
+.mood-graph {
+ order: 2; 
+}
+
+.anxiety-graph {
+  order: 3;
+}
 .download-button {
   font: 10px sans-serif;
   float: right;
