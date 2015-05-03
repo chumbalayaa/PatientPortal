@@ -110,13 +110,14 @@
 		}
 	};
 
-	var loadRightPanel = function(file) {
+	var loadRightPanel = function(file, callback) {
 		currentForm=file;
 		$.ajax({
 			url: './forms/'+file+'-form-interaction.html',
 			context: document.body,
 			success: function(response) {
 				$("#form").html(response);
+				callback();
 			}
 		});	
 	};
@@ -149,14 +150,13 @@
 	
 		if(unfinishedForms.length>1){
 			removeForm(currentForm);
-			loadRightPanel(unfinishedForms[0]);
+			loadRightPanel(unfinishedForms[0], reassignListeners());
 			//alert(unfinishedForms);
 		}
 		else{
 			removeForm(currentForm);
-			loadRightPanel('done');
+			loadRightPanel('done', reassignListeners());
 		}
-		reassignListeners();
 	};
 
 	var reassignListeners = function() {
@@ -176,7 +176,7 @@
 			alert('hi0');
 		});
 
-		$('input').click(function(){
+		$('input.ss-q-radio').click(function(){
 			alert('hi1');
 		});
 
