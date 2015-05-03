@@ -17,7 +17,7 @@
 
 //$(function() {
 
-	alert('update10');
+	alert('update1');
 
 	var currentForm;
 
@@ -199,13 +199,13 @@
 	};
 
 	var unbindListeners = function() {
-		$("#ss-submit").unbind(click);
-		$('span').unbind(click);
-		$('input').unbind(click);
-		$('label').unbind(click);
-		$('ul').unbind(click);
-		$('li').unbind(click);
-		$('#test').unbind(click);
+		$("#ss-submit").unbind('click');
+		$('span').unbind('click');
+		$('input').unbind('click');
+		$('label').unbind('click');
+		$('ul').unbind('click');
+		$('li').unbind('click');
+		$('#test').unbind('click');
 	};
 
 
