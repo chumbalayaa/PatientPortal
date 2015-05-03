@@ -17,7 +17,7 @@
 
 //$(function() {
 
-	alert('update8');
+	alert('update9');
 
 	var currentForm;
 
@@ -138,6 +138,7 @@
 	//Add this function to the listeners on the left
 	var assignFormClickListener = function() {
 		alert('reassigning');
+		unbindListeners();
 		$("#ss-submit").click(function(){
 			alert('hi');
 			updateRightPanel();
@@ -166,6 +167,16 @@
 		$('#test').click(function(){
 			alert('hi4');
 		});
+	};
+
+	var unbindListeners = function() {
+		$("#ss-submit").unbind(click);
+		$('span').unbind(click);
+		$('input').unbind(click);
+		$('label').unbind(click);
+		$('ul').unbind(click);
+		$('li').unbind(click);
+		$('#test').unbind(click);
 	};
 
 
