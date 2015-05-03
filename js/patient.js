@@ -17,7 +17,7 @@
 
 //$(function() {
 
-	alert('update7');
+	alert('update2');
 
 	var currentForm;
 
@@ -47,16 +47,14 @@
 	$("#sleepForm").click(function(){
 		// $("#form").html(forms[1].html);
 		// $("#formName").html(forms[1].type);
-		//alert(submitted);
-		loadRightPanel('sleep',reassignListeners());
+		loadRightPanel('sleep',reassignListeners);
 
 	});
 
 	$("#anxietyForm").click(function(){
 		// $("#form").html(forms[0].html);
 		// $("#formName").html(forms[0].type);
-		//alert(submitted);
-		loadRightPanel('anxiety',reassignListeners());
+		loadRightPanel('anxiety',reassignListeners);
 
 	});
 
@@ -64,40 +62,20 @@
 		// $("#form").html(forms[2].html);
 		// $("#formName").html(forms[2].type);
 		//alert('sorry, havent gotten around making the correct form quite yet 8===D');
-		loadRightPanel('mood',reassignListeners());
+		loadRightPanel('mood',reassignListeners);
+		//reassignListeners();
 
 	});
 
 	$("#ss-submit").click(function(){
-		alert('hi');
+		alert('submit');
 		updateRightPanel();
 	});
 
-	$('span').click(function(){
-		alert('hi0');
-	});
 
-	$('input').click(function(){
-		alert('hi1');
+	$('input.ss-q-radio').click(function(){
+		alert('selection');
 	});
-
-	$('label').click(function(){
-		alert('hi2');
-	});
-
-	$('ul').click(function(){
-		alert('hi3');
-	});
-
-	$('li').click(function(){
-		alert('hi4');
-	});
-
-	$('#test').click(function(){
-		alert('hi4');
-	});
-
-	
 
 	//Remove form
 	var removeForm = function(form) {
@@ -110,11 +88,11 @@
 	var loadRightPanel = function(file, callback) {
 		currentForm=file;
 		$.ajax({
-			url: './forms/'+file+'-form-interaction.html',
+			url: './forms/'+file+'-form.html',
 			context: document.body,
 			success: function(response) {
 				$("#form").html(response);
-				callback;
+				callback();
 			}
 		});	
 	};
@@ -147,61 +125,37 @@
 	
 		if(unfinishedForms.length>1){
 			removeForm(currentForm);
-			loadRightPanel(unfinishedForms[0], reassignListeners());
+			loadRightPanel(unfinishedForms[0], reassignListeners);
 			//alert(unfinishedForms);
 		}
 		else{
 			removeForm(currentForm);
-			loadRightPanel('done', reassignListeners());
+			loadRightPanel('done', reassignListeners);
 		}
 	};
 
 	var reassignListeners = function() {
+		//alert('reassignListeners');
 		unbindListeners();
 		assignListeners();
 	};
 
 	//Add this function to the listeners on the left
 	var assignListeners = function() {
-		alert('reassigning');
+
 		$("#ss-submit").click(function(){
-			alert('hi');
+			alert('submit');
 			updateRightPanel();
 		});
 
-		$('span').click(function(){
-			alert('hi0');
-		});
-
 		$('input.ss-q-radio').click(function(){
-			alert('hi1');
-		});
-
-		$('label').click(function(){
-			alert('hi2');
-		});
-
-		$('ul').click(function(){
-			alert('hi3');
-		});
-
-		$('li').click(function(){
-			alert('hi4');
-		});
-
-		$('#test').click(function(){
-			alert('hi4');
+			alert('selection');
 		});
 	};
 
 	var unbindListeners = function() {
 		$("#ss-submit").unbind('click');
-		$('span').unbind('click');
-		$('input').unbind('click');
-		$('label').unbind('click');
-		$('ul').unbind('click');
-		$('li').unbind('click');
-		$('#test').unbind('click');
+		$('input.ss-q-radio').unbind('click');
 	};
 
 

@@ -11,6 +11,10 @@
   overflow: hidden;
 }
 
+.addPatientModal {
+  pointer-events: none
+}
+
 a.not-active {
    pointer-events: none;
    cursor: default;

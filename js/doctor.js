@@ -4,25 +4,6 @@
 //Patient in navbar stuff --------------------------------------------------------
 var patientsInNavBar = [];
 
-//
-var sideNav = false;
-
-var slideSide = function() {
-	if (sideNav) {
-		sideNav = false;
-		$('#sideNavToggle').empty();
-		$('#sideNavToggle').html('<span class="glyphicon glyphicon-chevron-right"></span><br> \
-              					  <span class="glyphicon glyphicon-chevron-right"></span><br> \
-              					  <span class="glyphicon glyphicon-chevron-right"></span>');
-	} else {
-		sideNav = true;
-		$('#sideNavToggle').empty();
-		$('#sideNavToggle').html('<span class="glyphicon glyphicon-chevron-left"></span><br> \
-              					  <span class="glyphicon glyphicon-chevron-left"></span><br> \
-              					  <span class="glyphicon glyphicon-chevron-left"></span>');
-	}
-}
-
 //Take patient names out of the navbar - UI
 var assignNavbarXClickListener = function() {
 	$('a.navIconButton').click(function (e) {
@@ -187,7 +168,7 @@ var addPatientSideNavListener = function() {
 		if (currentPatient != fullName) {
 			loadPatient(fullName);	
 		}
-		$('.navmenu').offcanvas('hide');
+		//$('#theSideNav').offcanvas('hide');
 	});
 };
 //Add click listener for when we click on a patient in the top nav
@@ -323,6 +304,19 @@ var deleteAnnotation = function(firstName, lastName, formType, date) {
 		alert("That annotation doesn't exist");
 	}
 };
+
+
+//--------------------------------------------------------------------------------
+//--------------------------------------------------------------------------------
+//################################################################################
+//################################################################################
+//Log In
+var drLogIn = function(username, password){
+	if((Doctors["Dr.Dre"]["username"] != username) || (Doctors["Dr.Dre"]["password"] != password)){
+		return false;
+	}
+};
+
 
 //--------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------

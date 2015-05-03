@@ -1,14 +1,21 @@
 MIN_DATE = "20141201";
 MAX_DATE = "20141230";
 
-//sleep
-//mood
-//anxiety
+// $(function() {
+//   // initialize scrollable
+//   $("#main").scrollable();
+// });
 
+
+average = function(a) {
+  var r = {mean: 0, variance: 0, deviation: 0}, t = a.length;
+  for(var m, s = 0, l = t; l--; s += a[l]);
+  for(m = r.mean = s / t, l = t, s = 0; l--; s += Math.pow(a[l] - m, 2));
+  return r.deviation = Math.sqrt(r.variance = s / t), r;
+}
 //patientName is all lowercase with an underscore between first and last name 
 // e.g. jane_goodall mood
 function drawGraph(patientName, graphType, startDate, endDate, minDate, maxDate) {
- // console.log(startDate)
     var div_name = patientName.concat('_').concat(graphType);
     if ($("#".concat(div_name)).length) {
       d3.select("#".concat(div_name)).remove();
@@ -26,13 +33,8 @@ function drawGraph(patientName, graphType, startDate, endDate, minDate, maxDate)
     // $("#main").append('<div id="'.concat(div_name).concat('"></div>'));
 
     // append the correct type of labels
-    var labels = ["Fell Asleep", "Time in Bed", "Wake Up Time"]
-    if (graphType == "mood") {
-      labels = ["Low Mood", "High Mood", "Irritability"];
-    } else if (graphType == "anxiety") {
-      labels = ["Composite Score"];
-    }
-    
+
+
 
     var FLAG_LOCATION = 210; // dont know what this does
     var containerWidth = document.getElementById('main').offsetWidth;
@@ -136,34 +138,6 @@ function drawGraph(patientName, graphType, startDate, endDate, minDate, maxDate)
         .attr("width", main_width + main_margin.left + main_margin.right)
         .attr("height", main_height + main_margin.top + main_margin.bottom); //sets the bounding space 
 
-    // Allow the graph to be resized
-    // function updateWindow(){
-    //   console.log('here');
-    //   var w = window,
-    //       d = document,
-    //       e = d.documentElement,
-    //       g = d.getElementsByTagName('body')[0],
-    //       x = w.innerWidth || e.clientWidth || g.clientWidth,
-    //       y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-
-    //   x = w.innerWidth || e.clientWidth || g.clientWidth;
-    //   y = w.innerHeight|| e.clientHeight|| g.clientHeight;
-    //   console.log(x);
-    //   console.log(y);
-    //   svg.attr("width", x)
-    //      .attr("height", y); 
-    //   // var containerWidth = document.getElementById('main').offsetWidth
-    //   // var containerHeight = containerWidth/1.6;
-    //   // var main_margin = {top: 20, right: 100, bottom: 100, left: 40},
-    //   //     mini_margin = {top: 430, right: 80, bottom: 20, left: 40},
-    //   //     main_width = containerWidth - main_margin.left - main_margin.right,
-    //   //     main_height = containerHeight - main_margin.top - main_margin.bottom;
-      
-    //   // svg.attr("width", main_width + main_margin.left + main_margin.right)
-    //   //   .attr("height", main_height + main_margin.top + main_margin.bottom); 
-    // }
-    // window.onresize = updateWindow;
-
 
 
     svg.append("defs").append("clipPath")
@@ -182,31 +156,50 @@ function drawGraph(patientName, graphType, startDate, endDate, minDate, maxDate)
       data.forEach(function(d) {
           if ((parseDate(d.TimeOfDay) >= parseDate(startDate)) && (parseDate(d.TimeOfDay) <= parseDate(endDate))) {
             temp.push(d)
+
           }
       });
 
       data = temp;
-
-      data.forEach(function(d) {
-       
-            // console.log(parseDate(d.TimeOfDay))
+      var stat_array = [[],[],[]];
+      data.forEach(function(d) {          
             d.TimeOfDay = parseDate(d.TimeOfDay); //TimeOfDay
 
             if (graphType == "sleep") {
               d.First = +d.WakeUpTime;
               d.Second = +d.TimeInBed; //Qty
               d.Third = +d.FellAsleep;
+              stat_array[0].push(Number(d.WakeUpTime))
+              stat_array[1].push(Number(d.TimeInBed))
+              stat_array[2].push(Number(d.FellAsleep))
             } else if (graphType == "mood"){
               d.First = +d.LowMood;
               d.Second = +d.HighMood; //Qty
               d.Third = +d.Irritability;
+              stat_array[0].push(Number(d.LowMood))
+              stat_array[1].push(Number(d.HighMood))
+              stat_array[2].push(Number(d.Irritability))
             } 
             else if (graphType == "anxiety") {
               d.First = +d.CompositeScore;
               d.Second = +d.HighMood; //Qty
               d.Third = +d.Irritability;
+              stat_array[0].push(Number(d.CompositeScore))
             }
      });
+    var result = [[],[],[]];
+    result[0] = average(stat_array[0]);
+    result[1] = average(stat_array[1]);
+    result[2] = average(stat_array[2]);
+
+    var labels = ["Fell Asleep Avg: ".concat(Math.round(result[0].mean)), "Time in Bed Avg: ".concat(Math.round(result[1].mean)), "Wake Up Time Avg: ".concat(Math.round(result[2].mean))]
+    if (graphType == "mood") {
+      labels = ["Low Mood Avg: ".concat(Math.round(result[0].mean)), "High Mood Avg: ".concat(Math.round(result[1].mean)), "Irritability Avg: ".concat(Math.round(result[2].mean))];
+    } else if (graphType == "anxiety") {
+      labels = ["Composite Score Avg: ".concat(Math.round(result[0].mean))];
+    }
+
+  
         
   
 
@@ -238,7 +231,7 @@ function drawGraph(patientName, graphType, startDate, endDate, minDate, maxDate)
       // main_y1.domain(d3.extent(data, function(d) { return d.TimeInBed; })); //builds the right axis that the red line is plotted on
 
       svg.append("text")
-        .attr("transform", "translate(" + (main_width+3) + "," + main_y0(data[data.length-1].First) + ")")
+        .attr("transform", "translate(" + (main_width-40) + "," + main_y0(data[data.length-1].First) + ")")
         .attr("dy", ".35em")
         .attr("text-anchor", "start")
         .style("fill", "steelblue")
@@ -246,14 +239,17 @@ function drawGraph(patientName, graphType, startDate, endDate, minDate, maxDate)
 
     if ((graphType == "sleep") || (graphType == "mood")){
         svg.append("text")
-          .attr("transform", "translate(" + (main_width+3) + "," + main_y0(data[data.length-1].Second) + ")")
+          .attr("transform", "translate(" + (main_width-40) + "," + main_y0(data[data.length-1].Second) + ")")
           .attr("dy", ".35em")
           .attr("text-anchor", "start")
           .style("fill", "indianred")
           .text(labels[1]);
-
+        var text_location = main_y0(data[data.length-1].Third);
+        if (text_location == main_y0(data[data.length-1].Second) ){
+          text_location = text_location + 14;
+        }
         svg.append("text")
-          .attr("transform", "translate(" + (main_width+3) + "," + main_y0(data[data.length-1].Third) + ")")
+          .attr("transform", "translate(" + (main_width-40) + "," + text_location + ")")
           .attr("dy", ".35em")
           .attr("text-anchor", "start")
           .style("fill", "#92CCA6")
@@ -445,34 +441,32 @@ function drawGraph(patientName, graphType, startDate, endDate, minDate, maxDate)
             coordinates = d3.mouse(this);
             
              if (isFlag(main_x(d.TimeOfDay))) { // on the flag
+            }  else { // if in the add annotation box
+              console.log('er')
+               $('#annotationModal').modal('show') 
                 // new_annotation.transition()        
                 //             .duration(200)      
                 //             .style("opacity", .9);  
-                // new_annotation.html("<b>December 5th, 2014</b><br>Marshall was prescribed Xanax.<input  type='submit' id='hide' value='Hide'>")  
-            }  else /*if (isInBox(coordinates, d))*/{ // if in the add annotation box
-                new_annotation.transition()        
-                            .duration(200)      
-                            .style("opacity", .9);  
-                new_annotation.html("<div>Add your annotation below:<br><textarea id='annotation-text' name='paragraph_text' cols='15' rows='5'></textarea><br><input type='submit' id='submit_annotation'  value='Submit'><br><input type='submit' id='cancel_annotation'  value='Cancel'>");
+                // new_annotation.html("<div>Add your annotation below:<br><textarea id='annotation-text' name='paragraph_text' cols='15' rows='5'></textarea><br><input type='submit' id='submit_annotation'  value='Submit'><br><input type='submit' id='cancel_annotation'  value='Cancel'>");
                 
-                var date = d.TimeOfDay;
+                // var date = d.TimeOfDay;
 
-                var submit_annotation = document.getElementById("submit_annotation");
-                submit_annotation.onclick = function(evt){
-                   var added_annotation = $('#annotation-text').val()
-                   annotations.push([date, "<b>".concat(date.toDateString()).concat("</b><br>").concat(added_annotation)]);
-                   new_annotation.transition()        
-                              .duration(200)      
-                              .style("opacity", 0);
-                  drawFlag(main_x(d.TimeOfDay));
-                }; 
-                // functionality in the cancel annotation button
-                var cancel_annotation = document.getElementById("cancel_annotation");
-                cancel_annotation.onclick = function(evt){
-                   new_annotation.transition()        
-                              .duration(200)      
-                              .style("opacity", 0);
-                }; 
+                // var submit_annotation = document.getElementById("submit_annotation");
+                // submit_annotation.onclick = function(evt){
+                //    var added_annotation = $('#annotation-text').val()
+                //    annotations.push([date, "<b>".concat(date.toDateString()).concat("</b><br>").concat(added_annotation)]);
+                //    new_annotation.transition()        
+                //               .duration(200)      
+                //               .style("opacity", 0);
+                //   drawFlag(main_x(d.TimeOfDay));
+                // }; 
+                // // functionality in the cancel annotation button
+                // var cancel_annotation = document.getElementById("cancel_annotation");
+                // cancel_annotation.onclick = function(evt){
+                //    new_annotation.transition()        
+                //               .duration(200)      
+                //               .style("opacity", 0);
+                // }; 
             } 
       }
 
@@ -553,63 +547,33 @@ function makeGraph(patientName, graphType, startDate, endDate, minDate, maxDate)
     });
 }
 
-// function insertDiv(patientName, graphType, div_name){
-//   var mood_graph = "#".concat(patientName).concat("_mood");
-//   var sleep_graph = "#".concat(patientName).concat("_sleep");
-//   var anxiety_graph = "#".concat(patientName).concat("_anxiety");
-
-//   if (graphType == "sleep") {
-//     if ($(mood_graph).length) {
-//       $(sleep_graph).insertBefore(mood_graph);
-//     } else if ($(anxiety_graph).length) {
-//       $(sleep_graph).insertBefore(anxiety_graph);
-//   } else if (graphType == "sleep") {
-
-//   } else {
-
-//   }
-//    if ($("#".concat(div_name)).length) {
-//       d3.select("#".concat(div_name)).remove();
-//     }
-//     insertDiv(patientName, graphType, div_name);
-//     $("#main").append('<div id="'.concat(div_name).concat('"></div>'));
-// }
-
 function addDownloadButton(div_name){
   var args = "'/".concat(div_name).concat(".txt', '/").concat(div_name).concat("'");
-  //console.log('<button onclick="csvExport('.concat(args).concat(')" type="button" class="download-button btn btn-default">Download CSV</button>'));
   $("#".concat(div_name)).append('<button onclick="csvExport('.concat(args).concat(')" type="button" class="download-button btn btn-default">Download CSV</button>'));
 }
 
 function addDateRange(div_name, patientName, graphType, startDate, endDate, minDate, maxDate) {
-  // $("#".concat(div_name)).datepicker();
+  
   var startdate_name = div_name.concat("_startdate");
   var enddate_name = div_name.concat("_enddate");
-  // console.log('<div class="startdate-picker">Beginning of date range: <input type="text" name="selected_date" id="'.concat(startdate_name).concat('" />').concat('End of date range: <input type="text" name="selected_date" id="').concat(enddate_name).concat('" /></div>'))
-  // var button = '<div class="startdate-picker">Beginning of date range: <input type="text" name="selected_date" id="'
-  //   .concat(startdate_name).concat('" />').concat('  End of date range: <input type="text" name="selected_date" id="').concat(enddate_name).concat('" />')
-  //   .concat('<button onclick="updateDate(').concat(startdate_name).concat(", ").concat( enddate_name).concat(')" type="button" class="update-button btn btn-default">Update dates</button></div>');
   var formatted_enddate = d3.time.format("%m/%d/%Y")(endDate);
   var formatted_startdate = d3.time.format("%m/%d/%Y")(startDate);
   
   $("#".concat(div_name)).append('<div class="startdate-picker">Beginning of date range: <input type="text" placeholder="'.concat(formatted_startdate ).concat('" name="selected_date" id="')
     .concat(startdate_name).concat('" />').concat('  End of date range: <input type="text" placeholder="').concat(formatted_enddate ).concat('" name="selected_date" id="').concat(enddate_name).concat('" /></div>'));
-    // '</div>'));
-  // $("#".concat(div_name)).append('<div class="startdate-picker">Beginning of date range: <input type="text" name="selected_date" id="'.concat(startdate_name).concat('" />'));
-  // $("#".concat(div_name)).append('End of date range: <input type="text" name="selected_date" id="'.concat(enddate_name).concat('" /></div>'));
-   // $("#".concat(div_name)).append('<button onclick="csvExport('.concat(args).concat(')" type="button" class="download-button btn btn-default">Update dates</button>'));
+  
+  var endDateMinus = new Date(endDate);
+  endDateMinus.setDate(endDate.getDate()-1);
+
+  var startDatePlus = new Date(startDate);
+  startDatePlus.setDate(startDate.getDate()+1);
+
   $(function(){
     $( "#".concat(startdate_name) ).datepicker({ 
       minDate: minDate, 
-      maxDate: endDate,
+      maxDate: endDateMinus,
       onSelect: function(selected,evnt) {
          var updatedDate = $("#".concat(startdate_name)).datepicker("getDate");
-         console.log(patientName)
-         console.log( graphType)
-         console.log(d3.time.format("%Y%m%d")(updatedDate))
-         console.log( endDate)
-         console.log( minDate)
-         console.log( maxDate)
          drawGraph(patientName, graphType, d3.time.format("%Y%m%d")(updatedDate), d3.time.format("%Y%m%d")(endDate), d3.time.format("%Y%m%d")(minDate), d3.time.format("%Y%m%d")(maxDate));
       } 
     });
@@ -620,7 +584,7 @@ function addDateRange(div_name, patientName, graphType, startDate, endDate, minD
   });
   $(function(){
     $( "#".concat(enddate_name) ).datepicker({
-      minDate: startDate, 
+      minDate: startDatePlus, 
       maxDate: maxDate,
       onSelect: function(selected,evnt) {
          var updatedDate = $("#".concat(enddate_name)).datepicker("getDate");
@@ -659,15 +623,15 @@ var csvExport = function(dataFile) {
                 dataString = infoArray.join(",");
                 csvContent += dataString+ "\n";
             });
-            console.log(csvContent);
             var encodedUri = encodeURI(csvContent);
             window.open(encodedUri);
         }
      });
 };
 
-makeGraph("jane_goodall", "sleep", "20141201", "20141220", MIN_DATE, MAX_DATE);
+makeGraph("jane_goodall", "sleep", "20141201", "20141221", MIN_DATE, MAX_DATE);
 makeGraph("jane_goodall", "mood", "20141201", "20141220", MIN_DATE, MAX_DATE);
+makeGraph("jane_goodall", "anxiety", "20141201", "20141220", MIN_DATE, MAX_DATE);
 // makeGraph("jane_goodall", "anxiety");
 // makeGraph("marshall_mathers", "sleep");
 // makeGraph("marshall_mathers", "mood");

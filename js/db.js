@@ -62,3 +62,21 @@ var basicBio = {
 	"overview": "None",
 	"photo": "None"
 };
+
+var sideNav = false;
+
+var slideSide = function() {
+	if (sideNav) {
+		sideNav = false;
+		$('#sideNavToggle').empty();
+		$('#sideNavToggle').html('<span class="glyphicon glyphicon-chevron-right"></span><br> \
+              					  <span class="glyphicon glyphicon-chevron-right"></span><br> \
+              					  <span class="glyphicon glyphicon-chevron-right"></span>');
+	} else {
+		sideNav = true;
+		$('#sideNavToggle').empty();
+		$('#sideNavToggle').html('<span class="glyphicon glyphicon-chevron-left"></span><br> \
+              					  <span class="glyphicon glyphicon-chevron-left"></span><br> \
+              					  <span class="glyphicon glyphicon-chevron-left"></span>');
+	}
+}

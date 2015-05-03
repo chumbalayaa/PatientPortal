@@ -327,6 +327,7 @@ if (typeof jQuery === 'undefined') { throw new Error('Jasny Bootstrap\'s JavaScr
   }
   
   OffCanvas.prototype.autohide = function (e) {
+    console.log(e.target);
     if ($(e.target).closest(this.$element).length === 0) this.hide()
   }
 
@@ -370,8 +371,35 @@ if (typeof jQuery === 'undefined') { throw new Error('Jasny Bootstrap\'s JavaScr
     var data    = $canvas.data('bs.offcanvas')
     var option  = data ? 'toggle' : $this.data()
 
+    //console.log(target);
+    //console.log($canvas);
+    //console.log(data);
+    //console.log(option);
+
     e.stopPropagation()
 
+    if (data) data.toggle()
+      else $canvas.offcanvas(option)
+  })
+
+  $(document).on('click.bs.offcanvas.data-api', 'a.patient', function (e) {
+    console.log("start");
+    var $this   = $(this), href
+    var target  = $this.attr('data-target')
+        || e.preventDefault()
+        || (href = $this.attr('href')) && href.replace(/.*(?=#[^\s]+$)/, '') //strip for ie7
+    var $canvas = $(target)
+    var data    = $canvas.data('bs.offcanvas')
+    var option  = data ? 'toggle' : $this.data()
+
+    target = '.navmenu';
+    $canvas = $(target); 
+    data = $canvas.data('bs.offcanvas');
+    option = 'toggle';
+
+    e.stopPropagation()
+
+    console.log('end');
     if (data) data.toggle()
       else $canvas.offcanvas(option)
   })
