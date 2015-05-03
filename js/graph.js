@@ -600,12 +600,11 @@ function updateDate(startdate_name, enddate_name) {
 }
 
 //Export to CSV
-var csvExport = function(dataFile, filename) {
-    var csvContent = "data:text/csv;charset=utf-8,";
+var csvExport = function(dataFile) {
     var csvContent = "data:text/csv;charset=utf-8,";
     $.ajax({
         type: "GET",
-        url: "./data"+dataFile,
+        url: "./data/"+dataFile,
         dataType: "text",
         success: function(allText) {
             var allTextLines = allText.split(/\r\n|\n/);
@@ -618,7 +617,7 @@ var csvExport = function(dataFile, filename) {
                 dataString = infoArray.join(",");
                 csvContent += dataString+ "\n";
             });
-            console.log(lines);
+            console.log(csvContent);
             var encodedUri = encodeURI(csvContent);
             window.open(encodedUri);
         }

@@ -17,7 +17,7 @@
 
 //$(function() {
 
-	alert('update4');
+	alert('update5');
 
 	var currentForm;
 
@@ -92,6 +92,10 @@
 
 	$('#test').click(function(){
 		alert('hi4');
+	});
+
+	$('.completedForm').mouseover(function(){
+		console.log('hi');
 	});
 
 	//Remove form
