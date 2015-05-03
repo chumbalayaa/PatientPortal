@@ -55,8 +55,10 @@ var Doctors = {
 var basicBio = {
 	"height": "5' "+ '9"',
 	"weight": "150",
-	"bloodPressure": "120/80",
+	"systolicBloodPressure": "120",
+	"diastolicBloodPressure": "80",
 	"heartRate": "72",
 	"recentUpdates": "None",
-	"overview": "None"
+	"overview": "None",
+	"photo": "None"
 };
