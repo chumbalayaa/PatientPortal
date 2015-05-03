@@ -205,7 +205,8 @@ var editBio = function(height, weight, bloodPressure, heartRate, newUpdate, newO
 		if (bioFields[i] != ""){
 			Patients[currentPatient]['bio'][bioFieldStrings[i]] = bioFields[i];
 		}
-	}
+	};
+	populateBio(currentPatient);
 };
 
 //--------------------------------------------------------------------------------
