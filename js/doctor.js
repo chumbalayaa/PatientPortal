@@ -159,7 +159,7 @@ var populateBio = function(fullName) {
 	$('#patientPicture').attr('src', bio['photo']);
 	$('#height').html('<span class="text-primary">Height:</span> '+bio['height']);
 	$('#weight').html('<span class="text-primary">Weight:</span> '+bio['weight']+ ' lbs');
-	$('#bloodPressure').html('<span class="text-primary">Blood Pressure:</span> '+bio['bloodPressure']);
+	$('#bloodPressure').html('<span class="text-primary">Blood Pressure:</span> '+bio['systolicBloodPressure'] + '/' + bio['diastolicBloodPressure']);
 	$('#heartRate').html('<span class="text-primary">Heart Rate: </span> '+bio['heartRate']+' bpm');
 	$('#recentUpdates').html('<h6>Recent Updates:</h6>'+bio['recentUpdates']);
 	$('#overview').html('<h6>Overview:</h6>'+bio['overview']);

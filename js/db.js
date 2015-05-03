@@ -7,7 +7,8 @@ var Patients = {
 		"bio": {
 			"height": "5' 10''",
 			"weight": "180",
-			"bloodPressure": "120/70",
+			"systolicBloodPressure": "120",
+			"diastolicBloodPressure": "70",
 			"heartRate": "68",
 			"recentUpdates": "Marshall suffers from severe depression caused by his recent divorce.",
 			"overview": "Marshall has started taking medicine A on 12/6/2014.",
@@ -27,7 +28,8 @@ var Patients = {
 		"bio": {
 			"height": "5' "+ '3"',
 			"weight": "110",
-			"bloodPressure": "110/70",
+			"systolicBloodPressure": "110",
+			"diastolicBloodPressure": "80",
 			"heartRate": "58",
 			"recentUpdates": "Jane has sleep apnea",
 			"overview": "Jane was perscribed intranasal corticosteroid medicine on 12/25/2015. She has been adhering to the medicine rigorously.",
