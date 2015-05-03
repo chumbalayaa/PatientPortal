@@ -18,6 +18,7 @@
 //$(function() {
 
 	alert('update15');
+	console.log('anything');
 
 	var currentForm;
 
