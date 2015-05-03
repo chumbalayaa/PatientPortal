@@ -114,7 +114,7 @@
 			context: document.body,
 			success: function(response) {
 				$("#form").html(response);
-				callback();
+				callback;
 			}
 		});	
 	};

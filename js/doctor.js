@@ -41,8 +41,8 @@ var removePatientFromNavbar = function(fullName) {
 	}
 };
 
-var patientIsInNavbar = function(firstName, lastName) {
-	var i = patientsInNavBar.indexOf(firstName+lastName);
+var patientIsInNavbar = function(fullName) {
+	var i = patientsInNavBar.indexOf(fullName);
 	if (i != -1) {
 		return true;
 	} else {
@@ -60,9 +60,13 @@ var removePatientThatIsNot = function(firstName, lastName) {
 	}
 };
 
+var removePatientFromNavUI = function(fullName) {
+	$('#'+fullName).remove();
+};
+
 //Add person to top navbar
 var addPatientToNav = function(firstName, lastName) {
-	if (patientIsInNavbar(firstName, lastName)) {
+	if (patientIsInNavbar(firstName+lastName)) {
 		return;
 	}
 	else {
@@ -81,24 +85,15 @@ var addPatientToNav = function(firstName, lastName) {
 		reassignListeners();
 	}
 };
-//Add this function to the listeners on the left
-var assignPatientClickListener = function() {
-	$('a.patient').click(function (e) {
-		var fullName = this.text;
-		var nameArray = fullName.split(" ");
-		addPatientToNav(nameArray[0], nameArray[1]);
-	});
-};
 
 var unbindListeners = function() {
 	$('a.navIconButton').unbind('click');
 	$('a.patient').unbind('click');
 	$('.patientInNav').unbind('click');
-	$('.patient').unbind('click');
+	$('li.patient').unbind('click');
 };
 var reassignListeners = function() {
 	unbindListeners();
-	assignPatientClickListener();
 	assignNavbarXClickListener();
 	addPatientSideNavListener();
 	addPaitientTopNavListener();
@@ -122,6 +117,9 @@ var currentPatient = "";
 
 //Loading HTML into panels
 var loadLeftPanel = function(fullName) {
+	var previousPatient = $("#patientName").text();
+	var previousPatientArray = previousPatient.split(" ");
+	previousPatient = previousPatientArray[0] + previousPatientArray[1];
 	$.ajax({
 		url: 'templates/patientBio.html',
 		context: document.body,
@@ -130,12 +128,21 @@ var loadLeftPanel = function(fullName) {
 			populateBio(fullName);
 		}
 	});
-	currentPatient = fullName;
-	if (currentPatient == "MarshallMathers") {
-		$('#patientName').html("Marshall Mathers");
+	var firstName = Patients[fullName]['firstName'];
+	var lastName = Patients[fullName]['lastName'];
+	$('#patientName').html(firstName+" "+lastName);
+	//If they're in the navbar, take them out
+	if (patientIsInNavbar(fullName)) {
+		removePatientFromNavbar(fullName);
+		removePatientFromNavUI(fullName);
 	}
-	else {
-		$('#patientName').html("Jane Goodall");
+	//Put the old patient in the nav
+	if (previousPatient != "undefined") {
+		var previousFirst = Patients[previousPatient]['firstName'];
+		var previousLast = Patients[previousPatient]['lastName'];
+		if (previousPatient != fullName) {
+			addPatientToNav(previousFirst, previousLast);
+		}
 	}
 };
 
@@ -173,18 +180,19 @@ var assignNewForm = function() {
 
 //Add click listener for when we click on a patient in the side nav
 var addPatientSideNavListener = function() {
-	$('.patient').click(function (e) {
+	$('a.patient').click(function (e) {
 		var name = e.target.text;
 		var nameArray = name.split(" ");
 		var fullName = nameArray[0]+nameArray[1];
 		if (currentPatient != fullName) {
 			loadPatient(fullName);	
 		}
+		$('.navmenu').offcanvas('hide');
 	});
 };
 //Add click listener for when we click on a patient in the top nav
 var addPaitientTopNavListener = function() {
-	$('.patientInNav').click(function (e) {
+	$('a.patientInNav').click(function (e) {
 		var name = e.target.text;
 		var nameArray = name.split(" ");
 		var fullName = nameArray[0]+nameArray[1];
