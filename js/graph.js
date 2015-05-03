@@ -546,17 +546,7 @@ function addDateRange(div_name) {
 //Export to CSV
 var csvExport = function(dataFile, filename) {
     var csvContent = "data:text/csv;charset=utf-8,";
-<<<<<<< HEAD
-    $("#csvExport").click(function(){
-        data.forEach(function(infoArray, index){
-            dataString = infoArray.join(",");
-            csvContent += dataString+ "\n";
-        });
-
-        var encodedUri = encodeURI(csvContent);
-        window.open(encodedUri);
-    });
-=======
+    var csvContent = "data:text/csv;charset=utf-8,";
     $.ajax({
         type: "GET",
         url: "./data"+dataFile,
@@ -569,18 +559,14 @@ var csvExport = function(dataFile, filename) {
                 lines.push(data);
             }
             lines.forEach(function(infoArray, index){
-
                 dataString = infoArray.join(",");
                 csvContent += dataString+ "\n";
             });
+            console.log(lines);
             var encodedUri = encodeURI(csvContent);
-            var link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", filename+".csv");
-            link.click();
+            window.open(encodedUri);
         }
      });
->>>>>>> c183f15b86df3e5952a42d3fab43e6be67171b5c
 };
 
 makeGraph("jane_goodall", "sleep");
