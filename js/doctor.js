@@ -199,7 +199,7 @@ var addPaitientTopNavListener = function() {
 //################################################################################
 //################################################################################
 //Editing Bio code
-var editBio = function(height, weight, bloodPressure, heartRate, newUpdate, newOverview, newPicture) {
+var editBio = function(height, weight, systolicBloodPressure, diastolicBloodPressure, heartRate, newUpdate, newOverview, newPicture) {
 	var bioFieldStrings = ['height', 'weight', 'systolicBloodPressure', 'diastolicBloodPressure', 'heartRate', 'recentUpdates', 'overview', 'photo'];
 	var bioFields = [height, weight, systolicBloodPressure, diastolicBloodPressure, heartRate, newUpdate, newOverview, newPicture];
 	console.log(bioFields);
