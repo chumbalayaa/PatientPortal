@@ -107,9 +107,9 @@ var loadLeftPanel = function(fullName) {
 		success: function(response) {
 			$("#leftPanel").html(response);
 			populateBio(fullName);
+			currentPatient = fullName;
 		}
 	});
-	currentPatient = fullName;
 	var firstName = Patients[fullName]['firstName'];
 	var lastName = Patients[fullName]['lastName'];
 	$('#patientName').html(firstName+" "+lastName);
