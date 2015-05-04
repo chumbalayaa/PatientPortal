@@ -256,13 +256,14 @@ var addPatientToSideNav = function(firstName, lastName) {
 };
 
 var populateFormAssignModal = function(){
-	console.log('karson');
+	console.log('karson1');
 	$('#assignSleepForm').show();
 	$('#assignMoodForm').show();
 	$('#assignAnxietyForm').show();
 	var assignedForms = Patients[currentPatient]["forms"];
 	for (i = 0; i < assignedForms.length; i ++){
-		var currentFormType = assignedForms[i].charAt(0).toUpperCase();
+		var currentFormType = assignedForms[i];
+		currentFormType.charAt(0).toUpperCase();
 		var idString = 'assign' + currentFormType + 'Form';
 		console.log(idString);
 		$('#' + idString).hide();
