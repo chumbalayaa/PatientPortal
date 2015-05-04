@@ -5,7 +5,7 @@
 #main {
   display: flex;
   flex-direction: column;
-  overflow: auto;
+  /*overflow: auto;*/
   min-height: 100%;
 }
 
