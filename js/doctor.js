@@ -256,7 +256,6 @@ var addPatientToSideNav = function(firstName, lastName) {
 };
 
 var populateFormAssignModal = function(){
-	console.log('karson3');
 	$('#assignSleepForm').show();
 	$('#assignMoodForm').show();
 	$('#assignAnxietyForm').show();
@@ -265,7 +264,6 @@ var populateFormAssignModal = function(){
 		var currentFormType = assignedForms[i];
 		currentFormType = currentFormType.charAt(0).toUpperCase() + currentFormType.slice(1);
 		var idString = 'assign' + currentFormType + 'Form';
-		console.log(idString);
 		$('#' + idString).hide();
 	};
 	$('#assignFormModal').modal('show');
