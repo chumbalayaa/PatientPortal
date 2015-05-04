@@ -218,8 +218,12 @@
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myModalLabel">Assign a Form</h4>
           </div>
+
+
+
           <div class="modal-body">
-            <form id="assignNewForm" class="form-horizontal">
+            <div class="row-fluid">
+            <form id="assignNewForm" class="span6">
               <div class="row" id="assignSleepForm">
                 <div class="col-md-6">
                   <input type="checkbox" name="formType" id="applySleepForm">Sleep Form </input>
@@ -236,7 +240,29 @@
                 </div>
               </div>
             </form>
+            <form id="assignNewForm" class="span6">
+              <div class="row" id="assignSleepForm">
+                <div class="col-md-6">
+                  <input type="checkbox" name="formType" id="applySleepForm">Sleep Form </input>
+                </div>
+              </div>
+              <div class="row" id="assignAnxietyForm">
+                <div class="col-md-6">
+                  <input type="checkbox" name="formType" id="applyAnxietyForm">Anxiety Form </input>
+                </div>
+              </div>
+              <div class="row" id="assignMoodForm">
+                <div class="col-md-6">
+                  <input type="checkbox" name="formType" id="applyMoodForm">Mood Form </input>
+                </div>
+              </div>
+            </form>
+
+            </div>
           </div>
+
+
+
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="assignForms(); document.getElementById('assignNewForm').reset();">Save changes</button>
@@ -244,6 +270,8 @@
         </div>
       </div>
     </div>
+
+
 
 
     <!-- Annotation Modal -->

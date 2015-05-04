@@ -3,9 +3,9 @@
 }
 
 #main {
-  display: flex;
-  flex-direction: column;
+  display: inline-block;
   overflow: auto;
+  min-height: 100%;
 }
 
 #first-graph {
