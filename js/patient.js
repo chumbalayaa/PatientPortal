@@ -17,7 +17,7 @@
 
 //$(function() {
 
-	alert('update0');
+	//alert('update0');
 
 	var currentForm;
 
@@ -45,7 +45,7 @@
 				}];
 
 	var formInfo = {"anxiety":{"drinking":{"0":false,"1":true,"2":false,"3":false}},"sleep":{},"anxiety":{}};
-
+	alert(formInfo.anxiety);
 
 	
 
@@ -135,19 +135,19 @@
 		alert('reassignListeners');
 		unbindListeners();
 		assignListeners();
-		refillForm(currentForm);
+		refillForm();
 	};
 
-	var refillForm = function(formType) {
+	var refillForm = function() {
 		alert('trying to fill form');
-		alert(formType);
-		alert(formInfo.formType);
 		//$('#drinking0').attr('checked', true);
-		for(var question in formInfo.formType){
-			for(var radioButton in formInfo.formType.question){
-				alert('question radio button number: '+question+radioButton+"\nshould it be checked: "+formInfo.formType.question.radioButton);
-				$('#'+question+radioButton).attr('checked', formInfo.formType.question.radioButton);
-				//RadionButtonSelectedValueSet(question+radioButton,formInfo.formType.question.radioButton);
+		for(var formType in formInfo){
+			for(var question in formInfo.formType){
+				for(var radioButton in formInfo.formType.question){
+					alert('question radio button number: '+question+radioButton+"\nshould it be checked: "+formInfo.formType.question.radioButton);
+					$('#'+question+radioButton).attr('checked', formInfo.formType.question.radioButton);
+					//RadionButtonSelectedValueSet(question+radioButton,formInfo.formType.question.radioButton);
+				}
 			}
 		}
 	};
