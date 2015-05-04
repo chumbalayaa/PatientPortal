@@ -44,11 +44,29 @@
 					html:'<iframe src="https://docs.google.com/forms/d/1Hk_DksNNvJ-OTJFhRNiVQhMroPHMcHi9PlMlElhqpV4/viewform?embedded=true" width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>'
 				}];
 
-	var formInfo = {"anxiety":{"tele":{"0":false,"1":false,"2":false,"3":false},
-	"groups":{"0":false,"1":false,"2":false,"3":false},
-	"eating":{"0":false,"1":false,"2":false,"3":false},
-	"drinking":{"0":false,"1":false,"2":false,"3":false},
-	"authority":{"0":false,"1":false,"2":false,"3":false}},"sleep":{},"mood":{}};
+	var formInfo = {
+	"anxiety":
+		{"tele":{"0":false,"1":false,"2":false,"3":false},
+		"groups":{"0":false,"1":false,"2":false,"3":false},
+		"eating":{"0":false,"1":false,"2":false,"3":false},
+		"drinking":{"0":false,"1":false,"2":false,"3":false},
+		"authority":{"0":false,"1":false,"2":false,"3":false}
+		},
+	"sleep":
+		{"tele":{"0":false,"1":false,"2":false,"3":false},
+		"groups":{"0":false,"1":false,"2":false,"3":false},
+		"eating":{"0":false,"1":false,"2":false,"3":false},
+		"drinking":{"0":false,"1":false,"2":false,"3":false},
+		"authority":{"0":false,"1":false,"2":false,"3":false}
+		},
+	"mood":
+		{"sad":{"0":false,"1":false,"2":false,"3":false,"4":true},
+		"guilty":{"0":false,"1":false,"2":true,"3":false,"4":false},
+		"lonely":{"0":false,"1":false,"2":true,"3":false,"4":false},
+		"angry":{"0":false,"1":false,"2":true,"3":false,"4":false},
+		"embarrassed":{"0":false,"1":true,"2":false,"3":false,"4":false}
+		}
+	};
 	//alert(formInfo.anxiety);
 
 	
