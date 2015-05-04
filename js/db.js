@@ -60,7 +60,7 @@ var basicBio = {
 	"heartRate": "72",
 	"recentUpdates": "None",
 	"overview": "None",
-	"photo": "None"
+	"photo": "./images/new_user.png"
 };
 
 var sideNav = false;

@@ -327,5 +327,6 @@ var drLogIn = function(username, password){
 //################################################################################
 
 $( document ).ready(function() {
+	loadPatient("MarshallMathers");
     reassignListeners();
 });

@@ -1,12 +1,6 @@
 MIN_DATE = "20141201";
 MAX_DATE = "20141230";
 
-// $(function() {
-//   // initialize scrollable
-//   $("#main").scrollable();
-// });
-
-
 average = function(a) {
   var r = {mean: 0, variance: 0, deviation: 0}, t = a.length;
   for(var m, s = 0, l = t; l--; s += a[l]);
@@ -15,7 +9,12 @@ average = function(a) {
 }
 //patientName is all lowercase with an underscore between first and last name 
 // e.g. jane_goodall mood
-function drawGraph(firstName, lastName,  graphType, startDate, endDate, minDate, maxDate) {
+function drawGraph(fullName, graphType, startDate, endDate, minDate, maxDate) {
+    var names = fullName.match(/[A-Z][a-z]+/g);
+    firstName = names[0].toLowerCase();
+    lastName = names[1].toLowerCase();
+    console.log(firstName)
+    console.log(lastName)
     var patientName = firstName.concat('_').concat(lastName);
     var div_name = patientName.concat('_').concat(graphType);
     if ($("#".concat(div_name)).length) {
@@ -29,7 +28,7 @@ function drawGraph(firstName, lastName,  graphType, startDate, endDate, minDate,
         parseDate = formatDate.parse,
         bisectDate = d3.bisector(function(d) { return d.TimeOfDay; }).left;
     addDownloadButton(div_name);
-    addDateRange(div_name, patientName, graphType, parseDate(startDate), parseDate(endDate), parseDate(minDate), parseDate(maxDate));
+    addDateRange(div_name, fullName, graphType, parseDate(startDate), parseDate(endDate), parseDate(minDate), parseDate(maxDate));
 
     // $("#main").append('<div id="'.concat(div_name).concat('"></div>'));
 
@@ -118,9 +117,6 @@ function drawGraph(firstName, lastName,  graphType, startDate, endDate, minDate,
         .scale(main_y1)
         .orient("right");
 
-    function draw_line(data) {
-
-    }
     //blue line
     var main_line0 = d3.svg.line()
         .interpolate("linear")
@@ -562,10 +558,10 @@ function drawGraph(firstName, lastName,  graphType, startDate, endDate, minDate,
 }
 
 // Wrapper code that handles resizing the graph
-function makeGraph(firstName, lastName, graphType, startDate, endDate, minDate, maxDate) {
-  drawGraph(firstName, lastName, graphType, startDate, endDate, minDate, maxDate);
+function makeGraph(fullName, graphType, startDate, endDate, minDate, maxDate) {
+  drawGraph(fullName, graphType, startDate, endDate, minDate, maxDate);
     window.addEventListener('resize', function(event){
-        drawGraph(firstName, lastName, graphType, startDate, endDate, minDate, maxDate); // just call it again...
+        drawGraph(fullName, graphType, startDate, endDate, minDate, maxDate); // just call it again...
     });
 }
 
@@ -574,8 +570,9 @@ function addDownloadButton(div_name){
   $("#".concat(div_name)).append('<button onclick="csvExport('.concat(args).concat(')" type="button" class="download-button btn btn-default">Download CSV</button>'));
 }
 
-function addDateRange(div_name, patientName, graphType, startDate, endDate, minDate, maxDate) {
+function addDateRange(div_name, fullName, graphType, startDate, endDate, minDate, maxDate) {
   
+  console.log(div_name);
   var startdate_name = div_name.concat("_startdate");
   var enddate_name = div_name.concat("_enddate");
   var formatted_enddate = d3.time.format("%m/%d/%Y")(endDate);
@@ -596,7 +593,7 @@ function addDateRange(div_name, patientName, graphType, startDate, endDate, minD
       maxDate: endDateMinus,
       onSelect: function(selected,evnt) {
          var updatedDate = $("#".concat(startdate_name)).datepicker("getDate");
-         drawGraph(patientName, graphType, d3.time.format("%Y%m%d")(updatedDate), d3.time.format("%Y%m%d")(endDate), d3.time.format("%Y%m%d")(minDate), d3.time.format("%Y%m%d")(maxDate));
+         drawGraph(fullName, graphType, d3.time.format("%Y%m%d")(updatedDate), d3.time.format("%Y%m%d")(endDate), d3.time.format("%Y%m%d")(minDate), d3.time.format("%Y%m%d")(maxDate));
       } 
     });
   //Pass the user selected date format 
@@ -610,7 +607,7 @@ function addDateRange(div_name, patientName, graphType, startDate, endDate, minD
       maxDate: maxDate,
       onSelect: function(selected,evnt) {
          var updatedDate = $("#".concat(enddate_name)).datepicker("getDate");
-         drawGraph(patientName, graphType, d3.time.format("%Y%m%d")(startDate), d3.time.format("%Y%m%d")(updatedDate), d3.time.format("%Y%m%d")(minDate), d3.time.format("%Y%m%d")(maxDate));
+         drawGraph(fullName, graphType, d3.time.format("%Y%m%d")(startDate), d3.time.format("%Y%m%d")(updatedDate), d3.time.format("%Y%m%d")(minDate), d3.time.format("%Y%m%d")(maxDate));
          
       } 
     });
@@ -649,10 +646,18 @@ var csvExport = function(dataFile) {
         }
      });
 };
+// currentPatient
 
-makeGraph("jane", "goodall", "sleep", "20141201", "20141221", MIN_DATE, MAX_DATE);
-makeGraph("jane", "goodall", "mood", "20141201", "20141220", MIN_DATE, MAX_DATE);
-makeGraph("jane", "goodall", "anxiety", "20141201", "20141220", MIN_DATE, MAX_DATE);
+
+for (var i = 0; i < Patients[currentPatient]["forms"].length; i++){
+  console.log(Patients[currentPatient]["forms"][i])
+  makeGraph(currentPatient, Patients[currentPatient]["forms"][i], "20141201", "20141221", MIN_DATE, MAX_DATE);
+}
+
+makeGraph(currentPatient, "sleep", "20141201", "20141221", MIN_DATE, MAX_DATE);
+// makeGraph("MarshallMathers", "sleep", "20141201", "20141221", MIN_DATE, MAX_DATE);
+// makeGraph("jane", "goodall", "mood", "20141201", "20141220", MIN_DATE, MAX_DATE);
+// makeGraph("jane", "goodall", "anxiety", "20141201", "20141220", MIN_DATE, MAX_DATE);
 // makeGraph("jane_goodall", "anxiety");
 // makeGraph("marshall_mathers", "sleep");
 // makeGraph("marshall_mathers", "mood");

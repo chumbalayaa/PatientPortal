@@ -77,11 +77,11 @@ a.not-active {
 }
 
 #rightPanel {
-  position: absolute;
-  display: inline-block;
+  position: relative;
+  float: right;
   min-height: 100%;
   height: 100%;
-  width:52%;
+  width:60%;
   overflow: auto;
 }
 
