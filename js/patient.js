@@ -160,7 +160,14 @@
 	};
 
 	var updateFormInfo = function(radioButtonId) {
+		var i=0;
+		for(i; i<formInfo[currentForm][radioButtonId.substring(0,radioButtonId.length-1)].length,i++){
+			formInfo[currentForm][radioButtonId.substring(0,radioButtonId.length-1)][i]=false;
+		}
 		alert(formInfo[currentForm][radioButtonId.substring(0,radioButtonId.length-1)][radioButtonId.substring(radioButtonId.length-1,radioButtonId.length)]);
+		formInfo[currentForm][radioButtonId.substring(0,radioButtonId.length-1)][radioButtonId.substring(radioButtonId.length-1,radioButtonId.length)]=true;
+		alert(formInfo[currentForm][radioButtonId.substring(0,radioButtonId.length-1)][radioButtonId.substring(radioButtonId.length-1,radioButtonId.length)]);
+
 		//alert(typeOf(radioButtonId);
 		//formInfo[currentForm[radioButtonId]]
 	}
