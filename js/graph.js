@@ -81,11 +81,6 @@ function drawGraph(fullName, graphType, startDate, endDate, minDate, maxDate) {
     // }
     var annotations = [];//[[parseDate("20141213"), "<b>".concat(parseDate("20141213").toDateString()).concat("</b><br>Marshall started taking Xanax.")]]//[[date, html],...]
     var fullName = capitalizeFirstLetter(firstName).concat(capitalizeFirstLetter(lastName));
-    // console.log(fullName);
-    // console.log(Patients);
-    // console.log(Patients[fullName]);
-    // console.log(Patients[fullName]['annotations']);
-    // console.log(Patients[fullName]['annotations'][graphType]);
 
     var persistent_annotations = Patients[fullName]['annotations'][graphType];
     var a_date;
@@ -470,11 +465,6 @@ function drawGraph(fullName, graphType, startDate, endDate, minDate, maxDate) {
                   var annotationText = "<b>".concat(date.toDateString()).concat("</b><br>").concat($('#annotationText').val());
                   // [parseDate("20141213"), "<b>".concat(parseDate("20141213").toDateString()).concat("</b><br>")Marshall started taking Xanax.")]
                   var annotation = {'date': date, 'text': annotationText};
-                  console.log("annotationText");
-                  console.log(annotationText);
-                  
-                  console.log("annotation");
-                  console.log(annotation);
                   addAnnotation(capitalizeFirstLetter(firstName), capitalizeFirstLetter(lastName), graphType, annotation);
                   annotations.push([date, "<b>".concat(date.toDateString()).concat("</b><br>").concat($('#annotationText').val())]);
                   drawFlag(main_x(d.TimeOfDay));
@@ -565,8 +555,6 @@ function addDownloadButton(div_name){
 }
 
 function addDateRange(div_name, fullName, graphType, startDate, endDate, minDate, maxDate) {
-  
-  console.log(div_name);
   var startdate_name = div_name.concat("_startdate");
   var enddate_name = div_name.concat("_enddate");
   var formatted_enddate = d3.time.format("%m/%d/%Y")(endDate);
@@ -644,8 +632,6 @@ var csvExport = function(dataFile) {
 
 $( document ).ready(function() {
   for (var i = 0; i < Patients[currentPatient]["forms"].length; i++){
-    console.log("printing form data")
-    console.log(Patients[currentPatient]["forms"][i])
     makeGraph(currentPatient, Patients[currentPatient]["forms"][i], "20141201", "20141221", MIN_DATE, MAX_DATE);
   }
 });
