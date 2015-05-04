@@ -44,7 +44,7 @@
 					html:'<iframe src="https://docs.google.com/forms/d/1Hk_DksNNvJ-OTJFhRNiVQhMroPHMcHi9PlMlElhqpV4/viewform?embedded=true" width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>'
 				}];
 
-	var formInfo = {anxiety:{drinking:{0:false,1:true,2:false,3:false}},sleep:{},mood:{}};
+	var formInfo = {"anxiety":{"drinking":{"0":false,"1":true,"2":false,"3":false}},"sleep":{},"mood":{}};
 	//alert(formInfo.anxiety);
 
 	
@@ -143,11 +143,11 @@
 		//$('#drinking0').attr('checked', true);
 		for(var formType in formInfo){
 			alert(formType);
-			alert(formInfo.formType);
-			for(var question in formInfo.formType){
-				for(var radioButton in formInfo.formType.question){
-					alert('question radio button number: '+question+radioButton+"\nshould it be checked: "+formInfo.formType.question.radioButton);
-					$('#'+question+radioButton).attr('checked', formInfo.formType.question.radioButton);
+			alert(formInfo[formType]);
+			for(var question in formInfo[formType]){
+				for(var radioButton in formInfo[formType][question]){
+					alert('question radio button number: '+question+radioButton+"\nshould it be checked: "+formInfo[formType][question][radioButton]);
+					$('#'+question+radioButton).attr('checked', formInfo[formType[question][radioButton]);
 					//RadionButtonSelectedValueSet(question+radioButton,formInfo.formType.question.radioButton);
 				}
 			}
