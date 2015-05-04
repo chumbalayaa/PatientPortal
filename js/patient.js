@@ -71,7 +71,7 @@
 
 	});
 
-	assignListeners();
+	//reassignListeners();
 
 	//Remove form
 	var removeForm = function(form) {
