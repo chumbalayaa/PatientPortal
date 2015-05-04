@@ -35,9 +35,13 @@ var Patients = {
 			"overview": "Jane was perscribed intranasal corticosteroid medicine on 12/25/2015. She has been adhering to the medicine rigorously.",
 			"photo": "./images/janeGoodall.png"
 		},
-		"forms": ["sleep"],
+		"forms": ["sleep", "mood", "anxiety"],
 		"annotations": {
 			"sleep": [
+			],
+			"mood": [
+			],
+			"anxiety": [
 			]
 		}
 	}

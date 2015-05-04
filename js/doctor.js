@@ -192,8 +192,6 @@ var addPaitientTopNavListener = function() {
 var editBio = function(height, weight, systolicBloodPressure, diastolicBloodPressure, heartRate, newUpdate, newOverview, newPicture) {
 	var bioFieldStrings = ['height', 'weight', 'systolicBloodPressure', 'diastolicBloodPressure', 'heartRate', 'recentUpdates', 'overview', 'photo'];
 	var bioFields = [height, weight, systolicBloodPressure, diastolicBloodPressure, heartRate, newUpdate, newOverview, newPicture];
-	console.log(bioFields);
-	console.log(currentPatient);
 	for (var i = 0; i < bioFields.length; i ++){
 		if (bioFields[i] != ""){
 			Patients[currentPatient]['bio'][bioFieldStrings[i]] = bioFields[i];
@@ -258,6 +256,7 @@ var addPatientToSideNav = function(firstName, lastName) {
 };
 
 var populateFormAssignModal = function(){
+	console.log('karson');
 	$('#assignSleepForm').show();
 	$('#assignMoodForm').show();
 	$('#assignAnxietyForm').show();
