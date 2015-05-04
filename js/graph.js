@@ -452,6 +452,7 @@ function drawGraph(fullName, graphType, startDate, endDate, minDate, maxDate) {
             
              if (isFlag(main_x(d.TimeOfDay))) { // on the flag
             }  else { // if in the add annotation box
+              
                $('#annotationModal').modal('show'); 
                 // new_annotation.transition()        
                 //             .duration(200)      
@@ -467,7 +468,7 @@ function drawGraph(fullName, graphType, startDate, endDate, minDate, maxDate) {
                   var annotation = {'date': date, 'text': "<b>".concat(parseDate(date).toDateString()).concat("</b><br>").concat($('#annotationText').val())}
                   console.log(annotation);
                   addAnnotation(capitalizeFirstLetter(firstName), capitalizeFirstLetter(lastName), graphType, annotation);
-                  // annotations.push([date, "<b>".concat(date.toDateString()).concat("</b><br>").concat($('#annotationText').val())]);
+                  annotations.push([date, "<b>".concat(date.toDateString()).concat("</b><br>").concat($('#annotationText').val())]);
                 //    new_annotation.transition()        
                 //               .duration(200)      
                 //               .style("opacity", 0);
