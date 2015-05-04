@@ -464,13 +464,11 @@ function drawGraph(fullName, graphType, startDate, endDate, minDate, maxDate) {
                 var submit_annotation = document.getElementById("submit-annotation");
                 submit_annotation.onclick = function(evt){
                   onClick="document.getElementById('annotationForm').reset()"
-                  var annotation = {'date': date, 'text': $('#annotationText').val()}
-                  console.log(capitalizeFirstLetter(firstName));
-                  console.log(capitalizeFirstLetter(lastName));
-                  console.log(graphType);
+                  // [parseDate("20141213"), "<b>".concat(parseDate("20141213").toDateString()).concat("</b><br>")Marshall started taking Xanax.")]
+                  var annotation = {'date': date, 'text': "<b>".concat(parseDate(date).toDateString()).concat("</b><br>").concat($('#annotationText').val())}
                   console.log(annotation);
                   addAnnotation(capitalizeFirstLetter(firstName), capitalizeFirstLetter(lastName), graphType, annotation);
-                  annotations.push([date, "<b>".concat(date.toDateString()).concat("</b><br>").concat($('#annotationText').val())]);
+                  // annotations.push([date, "<b>".concat(date.toDateString()).concat("</b><br>").concat($('#annotationText').val())]);
                 //    new_annotation.transition()        
                 //               .duration(200)      
                 //               .style("opacity", 0);
@@ -646,14 +644,14 @@ var csvExport = function(dataFile) {
 };
 // currentPatient
 
-
-for (var i = 0; i < Patients[currentPatient]["forms"].length; i++){
-  console.log("printing form data")
-  console.log(Patients[currentPatient]["forms"][i])
-  makeGraph(currentPatient, Patients[currentPatient]["forms"][i], "20141201", "20141221", MIN_DATE, MAX_DATE);
-}
-
-makeGraph(currentPatient, "sleep", "20141201", "20141221", MIN_DATE, MAX_DATE);
+$( document ).ready(function() {
+  for (var i = 0; i < Patients[currentPatient]["forms"].length; i++){
+    console.log("printing form data")
+    console.log(Patients[currentPatient]["forms"][i])
+    makeGraph(currentPatient, Patients[currentPatient]["forms"][i], "20141201", "20141221", MIN_DATE, MAX_DATE);
+  }
+});
+//makeGraph(currentPatient, "sleep", "20141201", "20141221", MIN_DATE, MAX_DATE);
 // makeGraph("MarshallMathers", "sleep", "20141201", "20141221", MIN_DATE, MAX_DATE);
 // makeGraph("jane", "goodall", "mood", "20141201", "20141220", MIN_DATE, MAX_DATE);
 // makeGraph("jane", "goodall", "anxiety", "20141201", "20141220", MIN_DATE, MAX_DATE);
