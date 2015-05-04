@@ -44,7 +44,7 @@
 					html:'<iframe src="https://docs.google.com/forms/d/1Hk_DksNNvJ-OTJFhRNiVQhMroPHMcHi9PlMlElhqpV4/viewform?embedded=true" width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>'
 				}];
 
-	var formInfo = {"anxiety":{"drinking":{"0":false,"1":true,"2":false,"3":false}},"sleep":{},"mood":{}};
+	var formInfo = {anxiety:{drinking:{0:false,1:true,2:false,3:false}},sleep:{},mood:{}};
 	//alert(formInfo.anxiety);
 
 	
@@ -132,7 +132,7 @@
 	};
 
 	var reassignListeners = function() {
-		alert('reassignListeners');
+		//alert('reassignListeners');
 		unbindListeners();
 		assignListeners();
 		refillForm();
@@ -141,7 +141,6 @@
 	var refillForm = function() {
 		alert('trying to fill form');
 		//$('#drinking0').attr('checked', true);
-		alert(formInfo);
 		for(var formType in formInfo){
 			alert(formType);
 			alert(formInfo.formType);
