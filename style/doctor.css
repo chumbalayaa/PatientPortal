@@ -1,3 +1,9 @@
+#newPatient {
+  margin-top: 25px;
+  text-align: center;
+  margin-left: 5px;
+};
+
 .glyphicon {
   color:white;
   pointer-events:none;

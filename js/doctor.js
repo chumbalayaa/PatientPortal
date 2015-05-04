@@ -251,6 +251,14 @@ var addFormToPatient = function(firstName, lastName, formType) {
 	}
 };
 
+var assignForms = function(){
+	console.log('karson');
+	var applySleepForm = $('#applySleepForm').is(':checked');
+	var applyAnxietyForm = $('#applyAnxietyForm').is(':checked');
+	var applyMoodForm = $('#applyMoodForm').is(':checked');
+	console.log(applySleepForm, applyAnxietyForm, applyMoodForm);
+};
+
 var addPatientToSideNav = function(firstName, lastName) {
 	$('#sideNavPatientList').append('<li class="patient"><a href="#" class="patient">'+firstName+' '+lastName+'</a></li>')
 };

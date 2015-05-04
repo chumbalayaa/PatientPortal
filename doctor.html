@@ -29,11 +29,12 @@
       </ul>
       <!-- Add Patient Modal -->
       <form id="newPatient" class="form-inline " style="display:none;">
+        <h4>Add a New Patient</h4>
         <div class="form-group">
           <label for="firstName">First Name:</label>
           <input type="text" style="margin-left:7px;" class="form-control" id="firstName">
         </div></br>
-        <div class="form-group">
+        <div class="form-group" id="why">
           <label for="lastName">Last Name:</label>
           <input type="text" style="margin-left:7px;" class="form-control" id="lastName">
         </div>
@@ -221,24 +222,24 @@
             <form id="assignNewForm" class="form-horizontal">
               <div class="row" id="assignSleepForm">
                 <div class="col-md-6">
-                  <input type="checkbox" name="formType" id="assignSleepForm">Sleep Form </input>
+                  <input type="checkbox" name="formType" id="applySleepForm">Sleep Form </input>
                 </div>
               </div>
               <div class="row" id="assignAnxietyForm">
                 <div class="col-md-6">
-                  <input type="checkbox" name="formType" >Anxiety Form </input>
+                  <input type="checkbox" name="formType" id="applyAnxietyForm">Anxiety Form </input>
                 </div>
               </div>
               <div class="row" id="assignMoodForm">
                 <div class="col-md-6">
-                  <input type="checkbox" name="formType" >Mood Form </input>
+                  <input type="checkbox" name="formType" id="applyMoodForm">Mood Form </input>
                 </div>
               </div>
             </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="document.getElementById('assignNewForm').reset();">Save changes</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="assignForms(); document.getElementById('assignNewForm').reset();">Save changes</button>
           </div>
         </div>
       </div>

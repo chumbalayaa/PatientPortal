@@ -285,6 +285,7 @@ if (typeof jQuery === 'undefined') { throw new Error('Jasny Bootstrap\'s JavaScr
       
       elements.removeClass('canvas-sliding')
       slideSide()
+      $("#newPatient").hide();
       elements.add(this.$element).add('body').each(function() {
         $(this).attr('style', $(this).data('offcanvas-style')).removeData('offcanvas-style')
       })
