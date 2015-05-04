@@ -25,8 +25,7 @@ margin:5px 10px 20px 35px;
 .startdate-picker {
   position: relative;
   left: 5%;
-  pointer-events: none;
-  width: 70%;
+  width: 80%;
 }
 
 
