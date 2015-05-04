@@ -86,8 +86,9 @@ function drawGraph(firstName, lastName,  graphType, startDate, endDate, minDate,
     var fullName = capitalizeFirstLetter(firstName).concat(capitalizeFirstLetter(lastName));
     console.log(fullName);
     console.log(Patients);
-    for (var i = 0; i < Patients[fullName]['annotations'][graphType].length; i++){
-        annotations.push(Patients[fullName]['annotations'][graphType][i])
+    var persistent_annotations = Patients[fullName]['annotations'][graphType];
+    for (var i = 0; i < persistent_annotations.length; i++){
+        annotations.push(persistent_annotations[i])
     }
 
 
