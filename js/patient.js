@@ -144,6 +144,7 @@
 		alert(formInfo);
 		for(var formType in formInfo){
 			alert(formType);
+			alert(formInfo.formType);
 			for(var question in formInfo.formType){
 				for(var radioButton in formInfo.formType.question){
 					alert('question radio button number: '+question+radioButton+"\nshould it be checked: "+formInfo.formType.question.radioButton);
