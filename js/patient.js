@@ -178,6 +178,7 @@
 	};
 
 	var updateFormInfo = function(radioButtonId) {
+		alert(currentForm);
 		var i=0;
 		for(i; i<formInfo[currentForm][radioButtonId.substring(0,radioButtonId.length-1)].length;i++){
 			formInfo[currentForm][radioButtonId.substring(0,radioButtonId.length-1)][i]=false;
