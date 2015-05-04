@@ -77,7 +77,7 @@ var reassignListeners = function() {
 	unbindListeners();
 	assignNavbarXClickListener();
 	addPatientSideNavListener();
-	addPaitientTopNavListener();
+	addPatientTopNavListener();
 };
 
 //End patients in navbar stuff ---------------------------------------------------
@@ -99,6 +99,7 @@ var currentPatient = "";
 //Loading HTML into panels
 var loadLeftPanel = function(fullName) {
 	var previousPatient = $("#patientName").text();
+	console.log('here');
 	var previousPatientArray = previousPatient.split(" ");
 	previousPatient = previousPatientArray[0] + previousPatientArray[1];
 	$.ajax({
@@ -108,6 +109,7 @@ var loadLeftPanel = function(fullName) {
 			$("#leftPanel").html(response);
 			populateBio(fullName);
 			currentPatient = fullName;
+			loadRightPanel(currentPatient, previousPatient);
 		}
 	});
 	var firstName = Patients[fullName]['firstName'];
@@ -128,19 +130,25 @@ var loadLeftPanel = function(fullName) {
 	}
 };
 
-var loadRightPanel = function(file) {
-	$.ajax({
-		url: file+'.html',
-		context: document.body,
-		success: function(response) {
-			$("#rightPanel").html(response);
-		}
-	});	
+var loadRightPanel = function(currentPatient, previousPatient) {
+	//$.ajax({
+	//	url: file+'.html',
+	//	context: document.body,
+	//	success: function(response) {
+	//		$("#rightPanel").html(response);
+	//	}
+	//});
+	if (previousPatient != 'undefined') {
+		deleteAllGraphs(previousPatient);
+	}
+	for (var i = 0; i < Patients[currentPatient]["forms"].length; i++){
+      makeGraph(currentPatient, Patients[currentPatient]["forms"][i], "20141201", "20141221", MIN_DATE, MAX_DATE);
+    }
 };
 
 var loadPatient = function(fullName) {
 	loadLeftPanel(fullName);
-	loadRightPanel('graph');
+	//loadRightPanel(fullName);
 };
 
 var populateBio = function(fullName) {
@@ -173,7 +181,7 @@ var addPatientSideNavListener = function() {
 	});
 };
 //Add click listener for when we click on a patient in the top nav
-var addPaitientTopNavListener = function() {
+var addPatientTopNavListener = function() {
 	$('a.patientInNav').click(function (e) {
 		var name = e.target.text;
 		var nameArray = name.split(" ");
@@ -229,6 +237,10 @@ var editPassword = function(fullName, isDoctor, oldPassword, newPassword) {
 //################################################################################
 //Adding new patient code
 var addNewPatient = function(firstName, lastName) {
+	firstName = firstName.replace(/\s/g, '');
+	lastName = lastName.replace(/\s/g, '');
+	firstName = capitalizeFirstLetter(firstName);
+	lastName = capitalizeFirstLetter(lastName);
 	var fullName = firstName+lastName;
 	patientJSON = {
 					'firstName': firstName,
@@ -250,17 +262,40 @@ var addFormToPatient = function(fullName, formType) {
 	}
 };
 
+var removeFormFromPatient = function(fullName, formType) {
+	if (Patients[fullName]['forms'].indexOf(formType) != -1) {
+		Patients[fullName]['forms'].splice(Patients[fullName]['forms'].indexOf(formType), 1);
+		Patients[fullName]['annotations'][formType] = [];
+	} else {
+		alert(firstName+" "+lastName+" does not have the form: "+formType);
+	}
+};
+
 var assignForms = function(){
+	deleteAllGraphs(currentPatient);
 	var applySleepForm = $('#applySleepForm').is(':checked');
 	var applyAnxietyForm = $('#applyAnxietyForm').is(':checked');
 	var applyMoodForm = $('#applyMoodForm').is(':checked');
+	var deleteSleepForm = $('#deleteSleepForm').is(':checked');
+	var deleteAnxietyForm = $('#deleteAnxietyForm').is(':checked');
+	var deleteMoodForm = $('#deleteMoodForm').is(':checked');
 	var formsToApply = [applySleepForm, applyAnxietyForm, applyMoodForm];
+	var formsToDelete = [deleteSleepForm, deleteAnxietyForm, deleteMoodForm];
+	console.log(formsToApply, formsToDelete)
 	var formTypes = ['sleep', 'anxiety', 'mood'];
 	for (var i = 0; i < formsToApply.length; i ++){
 		if (formsToApply[i]){
 			addFormToPatient(currentPatient, formTypes[i])
 		};
 	};
+	for (var i = 0; i < formsToDelete.length; i ++){
+		if (formsToDelete[i]){
+			removeFormFromPatient(currentPatient, formTypes[i])
+		};
+	};
+	for (var i = 0; i < Patients[currentPatient]["forms"].length; i++){
+      makeGraph(currentPatient, Patients[currentPatient]["forms"][i], "20141201", "20141221", MIN_DATE, MAX_DATE);
+    };
 };
 
 var addPatientToSideNav = function(firstName, lastName) {
@@ -271,14 +306,25 @@ var populateFormAssignModal = function(){
 	$('#assignSleepForm').show();
 	$('#assignMoodForm').show();
 	$('#assignAnxietyForm').show();
+	$('#removeSleepForm').show();
+	$('#removeMoodForm').show();
+	$('#removeAnxietyForm').show();
 	var assignedForms = Patients[currentPatient]["forms"];
-	for (i = 0; i < assignedForms.length; i ++){
+	var formTypes = ['sleep', 'anxiety', 'mood'];
+	for (var i = 0; i < assignedForms.length; i ++){
 		var currentFormType = assignedForms[i];
+		var indexType = formTypes.indexOf(currentFormType);
+		formTypes.splice(indexType, 1);
 		currentFormType = currentFormType.charAt(0).toUpperCase() + currentFormType.slice(1);
 		var idString = 'assign' + currentFormType + 'Form';
 		$('#' + idString).hide();
 	};
-	$('#assignFormModal').modal('show');
+	for (var i = 0; i < formTypes.length; i ++){
+		var currentFormType = formTypes[i];
+		currentFormType = currentFormType.charAt(0).toUpperCase() + currentFormType.slice(1);
+		var idString = 'remove' + currentFormType + 'Form';
+		$('#' + idString).hide();
+	}
 
 }
 
@@ -297,6 +343,7 @@ var drLogIn = function(username, password){
 //Add Annotation
 var addAnnotation = function(firstName, lastName, formType, annotation) {
 	var fullName = firstName+lastName;
+	alert(fullName);
 	Patients[fullName]['annotations'][formType].push(annotation);
 };
 
@@ -322,7 +369,9 @@ var deleteAnnotation = function(firstName, lastName, formType, date) {
 	var annotations = Patients[fullName]['annotations'][formType];
 	var found = false;
 	for (var i = 0; i < annotations.length; i ++) {
-		if (annotations[i]["date"] == date) {
+		var theDate = new Date(date);
+		console.log(theDate.toString());
+		if (annotations[i]["date"].toString() == theDate.toString()) {
 			annotations.splice(i, 1);
 			found = true;
 		}
@@ -352,6 +401,7 @@ var drLogIn = function(username, password){
 //################################################################################
 
 $( document ).ready(function() {
-	loadPatient("MarshallMathers");
+	currentPatient = 'JaneGoodall';
+	loadPatient("JaneGoodall");
     reassignListeners();
 });

@@ -18,7 +18,7 @@ var Patients = {
 		"annotations": {
 			'sleep': [
 				{
-					"date": new Date("December 13, 2014 00:00:00"),
+					"date": new Date("December 13, 2014"),
 					"text": "Marshall was prescribed Xanax"
 				}
 			]

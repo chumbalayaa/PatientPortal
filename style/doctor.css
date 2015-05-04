@@ -18,6 +18,10 @@ a.not-active {
    cursor: default;
 }
 
+textarea.vert {
+  resize: vertical;
+}
+
 #bigButton {
   background-color: #f8f8f8;
   padding-left: 20px;

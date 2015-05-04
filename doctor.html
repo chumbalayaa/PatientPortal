@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+    <meta http-equiv="pragma" content="no-cache" />
     <link rel="shortcut icon" href="./assets/new-logo/logo.jpg">
 
     <title>Patient Portal</title>
@@ -13,6 +19,11 @@
     <link href="./jasny-bootstrap/css/jasny-bootstrap.min.css" rel="stylesheet">
     <link href="./style/doctor.css" rel="stylesheet">
     <link type="text/css" href="./style/patientInfo.css" rel="stylesheet" />
+    <link type="text/css" href="./libs/pickadate.js-3.5.6/lib/themes/classic.css" rel="stylesheet" />
+    <link type="text/css" href="./libs/pickadate.js-3.5.6/lib/themes/classic.time.css" rel="stylesheet" />
+    <link type="text/css" href="./libs/pickadate.js-3.5.6/lib/themes/classic.date.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <link type="text/css" href="./style/graph.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -51,7 +62,7 @@
         <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
-            <button id="sideNavToggle" type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas" href="#">
+            <button id="sideNavToggle" type="button" class="navbar-toggle" data-toggle="offcanvas" data-recalc="false" data-target=".navmenu" data-canvas=".canvas" href="#" style="color:white;">
               <span class="glyphicon glyphicon-chevron-right"></span><br>
               <span class="glyphicon glyphicon-chevron-right"></span><br>
               <span class="glyphicon glyphicon-chevron-right"></span>
@@ -84,6 +95,7 @@
         <div id="leftPanel">
         </div>
         <div id="rightPanel">
+          <div id="main" style='height:600px;'></div>
         </div>
       </div>
       <!-- END MAIN PAGE -->
@@ -157,39 +169,39 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Edit Patient Bio</h4>
+                    <h3 class="modal-title">Edit Patient Bio</h3>
                 </div>
                 <div class="modal-body">
-                  <p>Please enter new patient information</p>
-                  <form id="editBio" class="form-inline">
+                  <h4>Please enter new patient information</h4>
+                  <form id="editBio" class="">
                     <div class="form-group">
                       <label for="newHeight">Height:</label>
-                      <input type="text" style="margin-left:7px;" class="form-control" id="newHeight"></input>
-                    </div></br>
+                      <input type="text" class="form-control" id="newHeight"></input>
+                    </div>
                     <div class="form-group">
                       <label for="newWeight">Weight:</label>
-                      <input type="number" min="0" style="margin-left:7px;" class="form-control" id="newWeight"></input>
-                    </div></br>
+                      <input type="number" min="0" class="form-control" id="newWeight"></input>
+                    </div>
                     <div class="form-group">
                       <label for="newSystolicBloodPressure">Systolic Blood Pressure:</label>
-                      <input type="number" min="0" style="margin-left:7px;" class="form-control" id="newSystolicBloodPressure"></input>
-                    </div></br>
+                      <input type="number" min="0" class="form-control" id="newSystolicBloodPressure"></input>
+                    </div>
                     <div class="form-group">
                       <label for="newDiastolicBloodPressure">Diastolic Blood Pressure:</label>
-                      <input type="number" min="0" style="margin-left:7px;" class="form-control" id="newDiastolicBloodPressure"></input>
-                    </div></br>
+                      <input type="number" min="0" class="form-control" id="newDiastolicBloodPressure"></input>
+                    </div>
                     <div class="form-group">
                       <label for="newHeartRate">Heart Rate:</label>
-                      <input type="number" min="0" style="margin-left:7px;" class="form-control" id="newHeartRate"></input>
-                    </div></br>
+                      <input type="number" min="0" class="form-control" id="newHeartRate"></input>
+                    </div>
                     <div class="form-group">
                       <label for="newUpdate">New Update:</label>
-                      <textarea style="margin-left:7px;" class="form-control" id="newUpdate"></textarea>
-                    </div></br>
+                      <textarea class="form-control" id="newUpdate"></textarea>
+                    </div>
                     <div class="form-group">
                       <label for="newOverview">Overview:</label>
-                      <textarea type="textarea" style="margin-left:7px;" class="form-control" id="newOverview"></textarea>
-                    </div></br>
+                      <textarea class="form-control" id="newOverview"></textarea>
+                    </div>
                   </form>
                 </div>  
               <div class="modal-footer">
@@ -219,35 +231,45 @@
             <h4 class="modal-title" id="myModalLabel">Assign a Form</h4>
           </div>
 
-        
-
           <div class="modal-body">
             <div class="container-fluid">
               <div class="col-xs-6">
+                <h5>Assign New Forms</h5>
                 <form id="assignNewForm">
-                  <h5>Assign New Forms</h5>
-                  <div class="row" id="assignSleepForm">
-                    <input type="checkbox" name="formType" id="applySleepForm">Sleep Form </input>
+                  <div class="checkbox" id="assignSleepForm">
+                    <label>
+                      <input type="checkbox" name="formType" id="applySleepForm"> Sleep Form 
+                    </label>
                   </div>
-                  <div class="row" id="assignAnxietyForm">
-                    <input type="checkbox" name="formType" id="applyAnxietyForm">Anxiety Form </input>
+                  <div class="checkbox" id="assignAnxietyForm">
+                    <label>
+                      <input type="checkbox" name="formType" id="applyAnxietyForm"> Anxiety Form 
+                    </label>
                   </div>
-                  <div class="row" id="assignMoodForm">
-                    <input type="checkbox" name="formType" id="applyMoodForm">Mood Form </input>
+                  <div class="checkbox" id="assignMoodForm">
+                    <label>
+                      <input type="checkbox" name="formType" id="applyMoodForm"> Mood Form 
+                    </label>
                   </div>
                 </form>
               </div>
               <div class="col-xs-6">
                 <h5>Remove Previously Assigned Forms</h5>
-                <form id="assignNewForm">
-                  <div class="row" id="assignSleepForm">
-                    <input type="checkbox" name="formType" id="applySleepForm">Sleep Form </input>
+                <form id="removeForm">
+                  <div class="checkbox" id="removeSleepForm">
+                    <label>
+                      <input type="checkbox" name="formType" id="deleteSleepForm"> Sleep Form 
+                    </label>
                   </div>
-                  <div class="row" id="assignAnxietyForm">
-                    <input type="checkbox" name="formType" id="applyAnxietyForm">Anxiety Form </input>
+                  <div class="checkbox" id="removeAnxietyForm">
+                    <label>
+                      <input type="checkbox" name="formType" id="deleteAnxietyForm"> Anxiety Form 
+                    </label>
                   </div>
-                  <div class="row" id="assignMoodForm">
-                    <input type="checkbox" name="formType" id="applyMoodForm">Mood Form </input>
+                  <div class="checkbox" id="removeMoodForm">
+                    <label>
+                      <input type="checkbox" name="formType" id="deleteMoodForm"> Mood Form 
+                    </label>  
                   </div>
                 </form>
               </div>
@@ -258,7 +280,7 @@
 
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="assignForms(); document.getElementById('assignNewForm').reset();">Save changes</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="assignForms(); document.getElementById('assignNewForm').reset(); document.getElementById('removeForm').reset();">Save changes</button>
           </div>
         </div>
       </div>
@@ -276,33 +298,56 @@
                     <h4 class="modal-title">Add an Annotation</h4>
                 </div>
                 <div class="modal-body">
-                  <form class="form-inline" id="annotationForm">
-                    <div class="form-group">
-                      <textarea class="form-control" id="annotationText" required></textarea>
+                  <form class="" id="annotationForm">
+                    <div class="">
+                      <textarea class="form-control vert" id="annotationText" rows="5" required></textarea>
                     </div>
                   </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" id="submit-annotation" class="btn btn-primary" data-dismiss="modal">Apply Annotation</button>
-                    <button type="button" id="submit-annotation" class="btn btn-primary" data-dismiss="modal">Apply Annotation to All Graphs</button>
                 </div>
             </div>
         </div>
     </div>
     
+    <!-- Annotation Delete Modal -->
+    <div id="annotationDeleteModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" style="color:red;">Delete Annotation</h4>
+                </div>
+                <div class="alert alert-danger" role="alert">
+                  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                  <span class="sr-only">Error:</span>
+                  This will delete this annotation!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" id="delete-annotation" class="btn btn-danger" onclick="deleteAnnotation()" data-dismiss="modal">Delete Annotation</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <script src="http://code.jquery.com/jquery-1.11.0.js"></script>
     <script src="http://code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
     <script src="./bootstrap/js/bootstrap.min.js"></script>
     <script src="./js/db.js"></script>
     <script type="text/javascript" src="./js/patientPage.js"></script>
     <script src="./jasny-bootstrap/js/jasny-bootstrap.js"></script>
     <script src="./js/doctor.js"></script>
-    <script src="./js/graph.js"></script>
+    <script type="text/javascript" src="./libs/d3/d3.min.js"></script>
+    <script type="text/javascript" src="./libs/pickadate.js-3.5.6/lib/picker.js"></script>
+    <script type="text/javascript" src="./libs/pickadate.js-3.5.6/lib/picker.date.js"></script>
+    <script type="text/javascript" src="./js/graph.js"></script>
   </body>
 </html>
 

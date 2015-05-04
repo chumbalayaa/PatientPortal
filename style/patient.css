@@ -6,9 +6,17 @@ body {
   text-align: center;
 }
 
+.currentForm {
+  border:3px solid black;
+}
+
+.notCurrentForm {
+  border:1px solid lightgray;
+}
+
 .row_group {
   background-color: lightgreen;
-  border: 1px solid lightgray;
+  /*border: 1px solid lightgray;*/
   margin: 3px;
 }
 
@@ -17,6 +25,7 @@ body {
   /*width:450px;*/
 
   overflow: scroll;
+  overflow-x:hidden;
 }
 
 .completedForm{

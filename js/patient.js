@@ -17,7 +17,7 @@
 
 //$(function() {
 
-	//alert('update0');
+	//alert('update2');
 
 	var currentForm;
 
@@ -53,11 +53,10 @@
 		"authority":{"0":false,"1":false,"2":false,"3":false}
 		},
 	"sleep":
-		{"tele":{"0":false,"1":false,"2":false,"3":false},
-		"groups":{"0":false,"1":false,"2":false,"3":false},
-		"eating":{"0":false,"1":false,"2":false,"3":false},
-		"drinking":{"0":false,"1":false,"2":false,"3":false},
-		"authority":{"0":false,"1":false,"2":false,"3":false}
+		{"bed":{"0":false,"1":false,"2":false,"3":false},
+		"sleep":{"0":false,"1":false,"2":false,"3":false},
+		"wake":{"0":false,"1":false,"2":false,"3":false},
+		"nightmare":{"0":false,"1":false}
 		},
 	"mood":
 		{"sad":{"0":false,"1":false,"2":false,"3":false,"4":false},
@@ -74,7 +73,11 @@
 	$("#sleepForm").click(function(){
 		// $("#form").html(forms[1].html);
 		// $("#formName").html(forms[1].type);
+		// $("#sleepFormDiv").removeClass('notCurrentForm');
+		// $("#sleepFormDiv").addClass('currentForm');
 		loadRightPanel('sleep',reassignListeners);
+		
+
 
 	});
 
@@ -82,6 +85,8 @@
 		// $("#form").html(forms[0].html);
 		// $("#formName").html(forms[0].type);
 		loadRightPanel('anxiety',reassignListeners);
+		// $("#anxietyFormDiv").removeClass('notCurrentForm');
+		// $("#anxietyFormDiv").addClass('currentForm');
 
 	});
 
@@ -90,6 +95,8 @@
 		// $("#formName").html(forms[2].type);
 		//alert('sorry, havent gotten around making the correct form quite yet 8===D');
 		loadRightPanel('mood',reassignListeners);
+		// $("#moodFormDiv").removeClass('notCurrentForm');
+		// $("#moodFormDiv").addClass('currentForm');
 		//reassignListeners();
 
 	});
@@ -141,6 +148,10 @@
 		$('#'+currentForm+'FormDiv').removeClass("dueForm");		
 		$('#'+currentForm+'FormText').removeClass("urgentForm");	
 		$('#'+currentForm+'FormDiv').addClass("completedForm");
+		// $("#"+currentForm+'FormDiv').removeClass("currentForm");
+		// $("#"+currentForm+'FormDiv').addClass("notCurrentForm");
+
+
 	
 		if(unfinishedForms.length>1){
 			removeForm(currentForm);
@@ -157,35 +168,51 @@
 		//alert('reassignListeners');
 		unbindListeners();
 		assignListeners();
-		refillForm();
+		refillForm(currentForm);
+		//$('#wake0').attr('checked', true);
 	};
 
-	var refillForm = function() {
+	var refillForm = function(formType) {
+		//alert(formType);
+		//alert(formInfo[formType]);
 		//alert('trying to fill form');
 		//$('#drinking0').attr('checked', true);
-		for(var formType in formInfo){
+		//for(var formType in formInfo){
 			// alert(formType);
 			// alert(formInfo[formType]);
 			for(var question in formInfo[formType]){
 				for(var radioButton in formInfo[formType][question]){
 					//alert('question radio button number: '+question+radioButton+"\nshould it be checked: "+formInfo[formType][question][radioButton]);
 					//alert(question+radioButton+", "+formInfo[formType][question][radioButton])
-					$('#'+question+radioButton).attr('checked', formInfo[formType][question][radioButton]);
+					$('#'+question+radioButton).prop('checked', formInfo[formType][question][radioButton]);
 					//RadionButtonSelectedValueSet(question+radioButton,formInfo.formType.question.radioButton);
 				}
 			}
-		}
+		//}
 	};
 
+	var sizeOfJSON = function (obj) {
+		var key, count = 0;
+		for(key in obj) {
+		  if(obj.hasOwnProperty(key)) {
+		    count++;
+		  }
+		}	
+		return count;	
+	}
+
+
 	var updateFormInfo = function(radioButtonId) {
-		alert(currentForm);
+		//alert(currentForm);
 		var i=0;
-		for(i; i<formInfo[currentForm][radioButtonId.substring(0,radioButtonId.length-1)].length;i++){
+		//console.log(sizeOfJSON(formInfo[currentForm][radioButtonId.substring(0,radioButtonId.length-1)]));
+		for(i; i<sizeOfJSON(formInfo[currentForm][radioButtonId.substring(0,radioButtonId.length-1)]);i++){
+			//alert(formInfo[currentForm][radioButtonId.substring(0,radioButtonId.length-1)][i]);
 			formInfo[currentForm][radioButtonId.substring(0,radioButtonId.length-1)][i]=false;
 		}
-		alert(formInfo[currentForm][radioButtonId.substring(0,radioButtonId.length-1)][radioButtonId.substring(radioButtonId.length-1,radioButtonId.length)]);
+		//alert(formInfo[currentForm][radioButtonId.substring(0,radioButtonId.length-1)][radioButtonId.substring(radioButtonId.length-1,radioButtonId.length)]);
 		formInfo[currentForm][radioButtonId.substring(0,radioButtonId.length-1)][radioButtonId.substring(radioButtonId.length-1,radioButtonId.length)]=true;
-		alert(formInfo[currentForm][radioButtonId.substring(0,radioButtonId.length-1)][radioButtonId.substring(radioButtonId.length-1,radioButtonId.length)]);
+		//alert(formInfo[currentForm][radioButtonId.substring(0,radioButtonId.length-1)][radioButtonId.substring(radioButtonId.length-1,radioButtonId.length)]);
 
 		//alert(typeOf(radioButtonId);
 		//formInfo[currentForm[radioButtonId]]
@@ -194,8 +221,7 @@
 	//Add this function to the listeners on the left
 	var assignListeners = function() {
 
-		console.log(formInfo);
-
+		//console.log(formInfo);
 
 		$("#ss-submit").click(function(){
 			//alert('submit');
