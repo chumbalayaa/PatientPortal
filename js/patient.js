@@ -189,6 +189,7 @@
 
 		//alert(typeOf(radioButtonId);
 		//formInfo[currentForm[radioButtonId]]
+		console.log(formInfo);
 	}
 
 	//Add this function to the listeners on the left
