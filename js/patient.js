@@ -60,11 +60,11 @@
 		"authority":{"0":false,"1":false,"2":false,"3":false}
 		},
 	"mood":
-		{"sad":{"0":false,"1":false,"2":false,"3":false,"4":true},
-		"guilty":{"0":false,"1":false,"2":true,"3":false,"4":false},
-		"lonely":{"0":false,"1":false,"2":true,"3":false,"4":false},
-		"angry":{"0":false,"1":false,"2":true,"3":false,"4":false},
-		"embarrassed":{"0":false,"1":true,"2":false,"3":false,"4":false}
+		{"sad":{"0":false,"1":false,"2":false,"3":false,"4":false},
+		"guilty":{"0":false,"1":false,"2":false,"3":false,"4":false},
+		"lonely":{"0":false,"1":false,"2":false,"3":false,"4":false},
+		"angry":{"0":false,"1":false,"2":false,"3":false,"4":false},
+		"embarrassed":{"0":false,"1":false,"2":false,"3":false,"4":false}
 		}
 	};
 	//alert(formInfo.anxiety);
