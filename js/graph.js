@@ -195,7 +195,7 @@ function drawGraph(fullName, graphType, startDate, endDate, minDate, maxDate) {
     result[1] = average(stat_array[1]);
     result[2] = average(stat_array[2]);
 
-    var labels = ["Wake Up Time Avg: ".concat(Math.round(result[2].mean)), "Time in Bed Avg: ".concat(Math.round(result[1].mean)), "Fell Asleep Avg: ".concat(Math.round(result[0].mean))]
+    var labels = ["Wake Up Time Avg: ".concat(Math.round(result[0].mean)), "Time in Bed Avg: ".concat(Math.round(result[1].mean)), "Fell Asleep Avg: ".concat(Math.round(result[2].mean))]
     if (graphType == "mood") {
       labels = ["Low Mood Avg: ".concat(Math.round(result[0].mean)), "High Mood Avg: ".concat(Math.round(result[1].mean)), "Irritability Avg: ".concat(Math.round(result[2].mean))];
     } else if (graphType == "anxiety") {

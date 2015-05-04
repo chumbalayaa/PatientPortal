@@ -161,7 +161,7 @@
 
 	var updateFormInfo = function(radioButtonId) {
 		alert(radioButtonId);
-		alert(typeOf radioButtonId);
+		alert(typeOf(radioButtonId);
 		//formInfo[currentForm[radioButtonId]]
 	}
 
