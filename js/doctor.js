@@ -251,7 +251,6 @@ var addFormToPatient = function(fullName, formType) {
 };
 
 var assignForms = function(){
-	console.log('karson1');
 	var applySleepForm = $('#applySleepForm').is(':checked');
 	var applyAnxietyForm = $('#applyAnxietyForm').is(':checked');
 	var applyMoodForm = $('#applyMoodForm').is(':checked');
@@ -262,7 +261,6 @@ var assignForms = function(){
 			addFormToPatient(currentPatient, formTypes[i])
 		};
 	};
-	console.log(Patients[currentPatient]["forms"]);
 };
 
 var addPatientToSideNav = function(firstName, lastName) {
