@@ -17,7 +17,7 @@
 
 //$(function() {
 
-	alert('update2');
+	alert('update7');
 
 	var currentForm;
 

@@ -257,7 +257,7 @@ var addPatientToSideNav = function(firstName, lastName) {
 
 var populateFormAssignModal = function(){
 	console.log('karson');
-	$('#assignSleepForm').show();
+	$('#assignSleepForm').hide();
 	$('#assignMoodForm').show();
 	$('#assignAnxietyForm').show();
 	var assignedForms = Patients[currentPatient]["forms"];
