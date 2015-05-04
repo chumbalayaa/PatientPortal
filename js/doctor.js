@@ -241,8 +241,7 @@ var addNewPatient = function(firstName, lastName) {
 	reassignListeners();
 };
 
-var addFormToPatient = function(firstName, lastName, formType) {
-	var fullName = firstName+lastName;
+var addFormToPatient = function(fullName, formType) {
 	if (Patients[fullName]['forms'].indexOf(formType) == -1) {
 		Patients[fullName]['forms'].push(formType);
 		Patients[fullName]['annotations'][formType] = [];
@@ -252,11 +251,18 @@ var addFormToPatient = function(firstName, lastName, formType) {
 };
 
 var assignForms = function(){
-	console.log('karson');
+	console.log('karson1');
 	var applySleepForm = $('#applySleepForm').is(':checked');
 	var applyAnxietyForm = $('#applyAnxietyForm').is(':checked');
 	var applyMoodForm = $('#applyMoodForm').is(':checked');
-	console.log(applySleepForm, applyAnxietyForm, applyMoodForm);
+	var formsToApply = [applySleepForm, applyAnxietyForm, applyMoodForm];
+	var formTypes = ['sleep', 'anxiety', 'mood'];
+	for (var i = 0; i < formsToApply.length; i ++){
+		if (formsToApply[i]){
+			addFormToPatient(currentPatient, formTypes[i])
+		};
+	};
+	console.log(Patients[currentPatient]["forms"]);
 };
 
 var addPatientToSideNav = function(firstName, lastName) {
