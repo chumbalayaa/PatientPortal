@@ -257,13 +257,14 @@ var addPatientToSideNav = function(firstName, lastName) {
 
 var populateFormAssignModal = function(){
 	console.log('karson');
-	$('#assignSleepForm').hide();
+	$('#assignSleepForm').show();
 	$('#assignMoodForm').show();
 	$('#assignAnxietyForm').show();
 	var assignedForms = Patients[currentPatient]["forms"];
 	for (i = 0; i < assignedForms.length; i ++){
 		var currentFormType = assignedForms[i].charAt(0).toUpperCase();
 		var idString = 'assign' + currentFormType + 'Form';
+		console.log(idString);
 		$('#' + idString).hide();
 	};
 	$('#assignFormModal').modal('show');
