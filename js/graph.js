@@ -13,8 +13,6 @@ function drawGraph(fullName, graphType, startDate, endDate, minDate, maxDate) {
     var names = fullName.match(/[A-Z][a-z]+/g);
     firstName = names[0].toLowerCase();
     lastName = names[1].toLowerCase();
-    console.log(firstName)
-    console.log(lastName)
     var patientName = firstName.concat('_').concat(lastName);
     var div_name = patientName.concat('_').concat(graphType);
     if ($("#".concat(div_name)).length) {
@@ -83,11 +81,11 @@ function drawGraph(fullName, graphType, startDate, endDate, minDate, maxDate) {
     // }
     var annotations = [[parseDate("20141213"), "<b>".concat(parseDate("20141213").toDateString()).concat("</b><br>Marshall started taking Xanax.")]]//[[date, html],...]
     var fullName = capitalizeFirstLetter(firstName).concat(capitalizeFirstLetter(lastName));
-    console.log(fullName);
-    console.log(Patients);
-    console.log(Patients[fullName]);
-    console.log(Patients[fullName]['annotations']);
-    console.log(Patients[fullName]['annotations'][graphType]);
+    // console.log(fullName);
+    // console.log(Patients);
+    // console.log(Patients[fullName]);
+    // console.log(Patients[fullName]['annotations']);
+    // console.log(Patients[fullName]['annotations'][graphType]);
 
     var persistent_annotations = Patients[fullName]['annotations'][graphType];
 
@@ -650,6 +648,7 @@ var csvExport = function(dataFile) {
 
 
 for (var i = 0; i < Patients[currentPatient]["forms"].length; i++){
+  console.log("printing form data")
   console.log(Patients[currentPatient]["forms"][i])
   makeGraph(currentPatient, Patients[currentPatient]["forms"][i], "20141201", "20141221", MIN_DATE, MAX_DATE);
 }
