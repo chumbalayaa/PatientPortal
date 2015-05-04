@@ -160,8 +160,8 @@
 	};
 
 	var updateFormInfo = function(radioButtonId) {
-		alert(radioButtonId);
-		alert(typeOf(radioButtonId);
+		alert(formInfo[currentForm][radioButtonId.substring(0,radioButtonId.length-1)][radioButtonId.substring(radioButtonId.length-1,radioButtonId.length)]);
+		//alert(typeOf(radioButtonId);
 		//formInfo[currentForm[radioButtonId]]
 	}
 
