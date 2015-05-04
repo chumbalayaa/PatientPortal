@@ -85,6 +85,7 @@ function drawGraph(firstName, lastName,  graphType, startDate, endDate, minDate,
     var annotations = [[parseDate("20141213"), "<b>".concat(parseDate("20141213").toDateString()).concat("</b><br>Marshall started taking Xanax.")]]//[[date, html],...]
     var fullName = capitalizeFirstLetter(firstName).concat(capitalizeFirstLetter(lastName));
     console.log(fullName);
+    console.log(Patients);
     for (var i = 0; i < Patients[fullName]['annotations'][graphType].length; i++){
         annotations.push(Patients[fullName]['annotations'][graphType][i])
     }
