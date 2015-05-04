@@ -44,7 +44,8 @@
 					html:'<iframe src="https://docs.google.com/forms/d/1Hk_DksNNvJ-OTJFhRNiVQhMroPHMcHi9PlMlElhqpV4/viewform?embedded=true" width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>'
 				}];
 
-	var formInfo = {mood:{"drinking":{"0":false,"1":true,"2":false,"3":false}},sleep:{},anxiety:{}};
+	var formInfo = {"anxiety":{"drinking":{"0":false,"1":true,"2":false,"3":false}},"sleep":{},"anxiety":{}};
+
 
 	
 
@@ -131,13 +132,14 @@
 	};
 
 	var reassignListeners = function() {
-		//alert('reassignListeners');
+		alert('reassignListeners');
 		unbindListeners();
 		assignListeners();
-		refillForm();
+		refillForm(currentForm);
 	};
 
 	var refillForm = function(formType) {
+		alert('trying to fill form');
 		for(var question in formInfo.formType){
 			for(var radioButton in formInfo.formType.question){
 				$('#'+question+radioButton).attr('checked', formInfo.formType.question.radioButton);
