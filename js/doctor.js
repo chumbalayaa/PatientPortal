@@ -257,6 +257,20 @@ var addPatientToSideNav = function(firstName, lastName) {
 	$('#sideNavPatientList').append('<li class="patient"><a href="#" class="patient">'+firstName+' '+lastName+'</a></li>')
 };
 
+var populateFormAssignModal = function(){
+	$('#assignSleepForm').show();
+	$('#assignMoodForm').show();
+	$('#assignAnxietyForm').show();
+	var assignedForms = Patients[currentPatient]["forms"];
+	for (i = 0; i < assignedForms.length; i ++){
+		var currentFormType = assignedForms[i].charAt(0).toUpperCase();
+		var idString = 'assign' + currentFormType + 'Form';
+		$('#' + idString).hide();
+	};
+	$('#assignFormModal').modal('show');
+
+}
+
 //--------------------------------------------------------------------------------
 //--------------------------------------------------------------------------------
 //################################################################################

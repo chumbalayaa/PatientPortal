@@ -54,7 +54,6 @@
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="#passwordModal" role="button" data-toggle="modal">Change Password</a></li>
                   <li><a href="#helpModal" role="button" data-toggle="modal">Help</a></li>
-                  <li><a href="#annotationModal" role="button" data-toggle="modal">annotation</a></li>
                 </ul>
               </li>
             </ul>
@@ -243,16 +242,18 @@
             <form id="assignNewForm" class="form-horizontal">
               <div class="row">
                 <div class="col-md-6">
-                  <input type="checkbox" name="formType"> Sleep Form</input>
+                  <input type="checkbox" name="formType" id="assignSleepForm"> Sleep Form</input>
                 </div>
               </div>
               <div class="row">
                 <div class="col-md-6">
-                  <input type="checkbox" name="formType"> Anxiety Form</input>
+                  <input type="checkbox" name="formType" id="assignAnxietyForm"> Anxiety Form</input>
                 </div>
               </div>
               <div class="row">
-                  <input type="checkbox" name="formType"> Mood Form</input>
+                <div class="col-md-6">
+                  <input type="checkbox" name="formType" id="assignMoodForm"> Mood Form</input>
+                </div>
               </div>
             </form>
           </div>
