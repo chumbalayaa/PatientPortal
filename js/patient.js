@@ -147,7 +147,7 @@
 			for(var question in formInfo[formType]){
 				for(var radioButton in formInfo[formType][question]){
 					alert('question radio button number: '+question+radioButton+"\nshould it be checked: "+formInfo[formType][question][radioButton]);
-					$('#'+question+radioButton).attr('checked', formInfo[formType[question][radioButton]);
+					$('#'+question+radioButton).attr('checked', formInfo[formType][question][radioButton]);
 					//RadionButtonSelectedValueSet(question+radioButton,formInfo.formType.question.radioButton);
 				}
 			}
