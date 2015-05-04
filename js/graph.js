@@ -88,9 +88,12 @@ function drawGraph(fullName, graphType, startDate, endDate, minDate, maxDate) {
     // console.log(Patients[fullName]['annotations'][graphType]);
 
     var persistent_annotations = Patients[fullName]['annotations'][graphType];
-
+    var a_date;
+    var a_txt;
     for (var i = 0; i < persistent_annotations.length; i++){
-        annotations.push(persistent_annotations[i])
+        a_date = persistent_annotations[i]["date"];
+        a_txt = persistent_annotations[i]["text"];
+        annotations.push([a_date, a_txt]);
     }
 
 
@@ -452,7 +455,7 @@ function drawGraph(fullName, graphType, startDate, endDate, minDate, maxDate) {
             
              if (isFlag(main_x(d.TimeOfDay))) { // on the flag
             }  else { // if in the add annotation box
-              
+
                $('#annotationModal').modal('show'); 
                 // new_annotation.transition()        
                 //             .duration(200)      
@@ -464,8 +467,13 @@ function drawGraph(fullName, graphType, startDate, endDate, minDate, maxDate) {
                 var submit_annotation = document.getElementById("submit-annotation");
                 submit_annotation.onclick = function(evt){
                   onClick="document.getElementById('annotationForm').reset()"
+                  var annotationText = "<b>".concat(date.toDateString()).concat("</b><br>").concat($('#annotationText').val());
                   // [parseDate("20141213"), "<b>".concat(parseDate("20141213").toDateString()).concat("</b><br>")Marshall started taking Xanax.")]
-                  var annotation = {'date': date, 'text': "<b>".concat(parseDate(date).toDateString()).concat("</b><br>").concat($('#annotationText').val())}
+                  var annotation = {'date': date, 'text': annotationText};
+                  console.log("annotationText");
+                  console.log(annotationText);
+                  
+                  console.log("annotation");
                   console.log(annotation);
                   addAnnotation(capitalizeFirstLetter(firstName), capitalizeFirstLetter(lastName), graphType, annotation);
                   annotations.push([date, "<b>".concat(date.toDateString()).concat("</b><br>").concat($('#annotationText').val())]);
