@@ -44,6 +44,10 @@
 					html:'<iframe src="https://docs.google.com/forms/d/1Hk_DksNNvJ-OTJFhRNiVQhMroPHMcHi9PlMlElhqpV4/viewform?embedded=true" width="100%" height="400" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>'
 				}];
 
+	var formInfo = {mood:{"drinking":{"0":false,"1":true,"2":false,"3":false}},sleep:{},anxiety:{}};
+
+	
+
 	$("#sleepForm").click(function(){
 		// $("#form").html(forms[1].html);
 		// $("#formName").html(forms[1].type);
@@ -67,15 +71,7 @@
 
 	});
 
-	$("#ss-submit").click(function(){
-		alert('submit');
-		updateRightPanel();
-	});
-
-
-	$('input.ss-q-radio').click(function(){
-		alert('selection');
-	});
+	assignListeners();
 
 	//Remove form
 	var removeForm = function(form) {
@@ -138,18 +134,33 @@
 		//alert('reassignListeners');
 		unbindListeners();
 		assignListeners();
+		refillForm();
 	};
+
+	var refillForm = function(formType) {
+		for(var question in formInfo.formType){
+			for(var radioButton in formInfo.formType.question){
+				$('#'+question+radioButton).attr('checked', formInfo.formType.question.radioButton);
+				//RadionButtonSelectedValueSet(question+radioButton,formInfo.formType.question.radioButton);
+			}
+		}
+	};
+
+	function RadionButtonSelectedValueSet(id, SelectdValue) {
+	    $('input[id="' + id+ '"][value="' + SelectdValue + '"]').prop('checked', true);
+	}
 
 	//Add this function to the listeners on the left
 	var assignListeners = function() {
 
 		$("#ss-submit").click(function(){
-			alert('submit');
+			//alert('submit');
 			updateRightPanel();
 		});
 
 		$('input.ss-q-radio').click(function(){
-			alert('selection');
+			//alert('selection');
+			var parentId = $(this).parent().attr('id');
 		});
 	};
 
