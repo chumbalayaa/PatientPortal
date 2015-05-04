@@ -452,7 +452,6 @@ function drawGraph(fullName, graphType, startDate, endDate, minDate, maxDate) {
             
              if (isFlag(main_x(d.TimeOfDay))) { // on the flag
             }  else { // if in the add annotation box
-                console.log('er')
                $('#annotationModal').modal('show'); 
                 // new_annotation.transition()        
                 //             .duration(200)      
