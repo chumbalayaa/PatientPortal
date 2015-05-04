@@ -189,11 +189,13 @@
 
 		//alert(typeOf(radioButtonId);
 		//formInfo[currentForm[radioButtonId]]
-		console.log(formInfo);
 	}
 
 	//Add this function to the listeners on the left
 	var assignListeners = function() {
+
+		console.log(formInfo);
+
 
 		$("#ss-submit").click(function(){
 			//alert('submit');

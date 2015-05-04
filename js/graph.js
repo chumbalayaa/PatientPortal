@@ -566,6 +566,7 @@ function addDateRange(div_name, fullName, graphType, startDate, endDate, minDate
   var startDatePlus = new Date(startDate);
   startDatePlus.setDate(startDate.getDate()+1);
 
+  $("#".concat(startdate_name)).removeClass('hasDatepicker').datepicker(); 
   $(function(){
     $( "#".concat(startdate_name) ).datepicker({ 
       minDate: minDate, 
