@@ -79,7 +79,7 @@ function drawGraph(fullName, graphType, startDate, endDate, minDate, maxDate) {
             return d.Third;
           } };
     // }
-    var annotations = [[parseDate("20141213"), "<b>".concat(parseDate("20141213").toDateString()).concat("</b><br>Marshall started taking Xanax.")]]//[[date, html],...]
+    var annotations = [];//[[parseDate("20141213"), "<b>".concat(parseDate("20141213").toDateString()).concat("</b><br>Marshall started taking Xanax.")]]//[[date, html],...]
     var fullName = capitalizeFirstLetter(firstName).concat(capitalizeFirstLetter(lastName));
     // console.log(fullName);
     // console.log(Patients);
@@ -477,18 +477,8 @@ function drawGraph(fullName, graphType, startDate, endDate, minDate, maxDate) {
                   console.log(annotation);
                   addAnnotation(capitalizeFirstLetter(firstName), capitalizeFirstLetter(lastName), graphType, annotation);
                   annotations.push([date, "<b>".concat(date.toDateString()).concat("</b><br>").concat($('#annotationText').val())]);
-                //    new_annotation.transition()        
-                //               .duration(200)      
-                //               .style("opacity", 0);
                   drawFlag(main_x(d.TimeOfDay));
                 }; 
-                // // functionality in the cancel annotation button
-                // var cancel_annotation = document.getElementById("cancel_annotation");
-                // cancel_annotation.onclick = function(evt){
-                //    new_annotation.transition()        
-                //               .duration(200)      
-                //               .style("opacity", 0);
-                // }; 
             } 
       }
 
