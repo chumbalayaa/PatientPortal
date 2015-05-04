@@ -151,7 +151,7 @@
 			for(var question in formInfo[formType]){
 				for(var radioButton in formInfo[formType][question]){
 					//alert('question radio button number: '+question+radioButton+"\nshould it be checked: "+formInfo[formType][question][radioButton]);
-					alert(question+radioButton+", "+formInfo[formType][question][radioButton])
+					//alert(question+radioButton+", "+formInfo[formType][question][radioButton])
 					$('#'+question+radioButton).attr('checked', formInfo[formType][question][radioButton]);
 					//RadionButtonSelectedValueSet(question+radioButton,formInfo.formType.question.radioButton);
 				}
@@ -159,8 +159,9 @@
 		}
 	};
 
-	function RadionButtonSelectedValueSet(id, SelectdValue) {
-	    $('input[id="' + id+ '"][value="' + SelectdValue + '"]').prop('checked', true);
+	var updateFormInfo = function(radioButtonId) {
+		alert(radioButtonId);
+		//formInfo[currentForm[radioButtonId]]
 	}
 
 	//Add this function to the listeners on the left
@@ -173,7 +174,8 @@
 
 		$('input.ss-q-radio').click(function(){
 			//alert('selection');
-			var parentId = $(this).parent().attr('id');
+			updateFormInfo($(this).attr('id'));
+			//var parentId = $(this).attr('id');
 		});
 	};
 
