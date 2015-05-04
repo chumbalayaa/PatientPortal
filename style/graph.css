@@ -24,14 +24,9 @@ margin:5px 10px 20px 35px;
 }*/
 .startdate-picker {
   position: relative;
-  left: 10%;
+  left: 5%;
 }
 
-.enddate-picker {
-  position: relative;
-  left: 50%;
-  
-}
 
 .sleep-graph {
   order: 1;
